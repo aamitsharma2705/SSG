@@ -1,0 +1,1066 @@
+Situational Scene Graph for Structured Human-centric
+Situation Understanding
+Chinthani Sugandhika1,2,3, Chen Li2,3, Deepu Rajan1, and Basura Fernando2,3,1
+1College of Computing and Data Science, Nanyang Technological University,
+Singapore.
+2Centre for Frontier AI Research, Agency for Science, Technology and Research,
+Singapore
+3Institute of High-Performance Computing, Agency for Science, Technology and
+Research, Singapore
+Abstract
+Graph based representation has been widely used in modelling spatio-temporal relationships
+in video understanding. Although effective, existing graph-based approaches focus on capturing
+the human-object relationships while ignoring fine-grained semantic properties of the action
+components. These semantic properties are crucial for understanding the current situation,
+such as where does the action takes place, what tools are used and functional properties of the
+objects. In this work, we propose a graph-based representation called Situational Scene Graph
+(SSG) to encode both human-object relationships and the corresponding semantic properties.
+The semantic details are represented as predefined roles and values inspired by situation frame,
+which is originally designed to represent a single action. Based on our proposed representation,
+we introduce the task of situational scene graph generation and propose a multi-stage pipeline
+Interactive and Complementary Network (InComNet) to address the task. Given that the existing
+datasets are not applicable to the task, we further introduce a SSG dataset whose annotations
+consist of semantic role-value frames for human, objects and verb predicates of human-object
+relations. Finally, we demonstrate the effectiveness of our proposed SSG representation by testing
+on different downstream tasks. Experimental results show that the unified representation can
+not only benefit predicate classification and semantic role-value classification, but also benefit
+reasoning tasks on human-centric situation understanding. Code and data are available at
+https://github.com/LUNAProject22/SSG.
+1 Introduction
+Human-centric visual understanding has traditionally focused on identifying actions occurring in
+an image or video input [ 54, 24, 6]. Although superior performance has been achieved [ 52, 32, 64],
+these studies fail to capture the relationships between human and objects, which may be essential for
+human behavior understanding. More recently, graph based representations such as spatio-temporal
+scene graph (ST scene graph) [ 27] has been proposed to represent action in a structured manner.
+The graph based representation encodes human and objects as nodes connected together by pairwise
+relationships (as shown in Fig. 1a), and can support high-level inference tasks such as visual question
+1
+arXiv:2410.22829v2  [cs.CV]  13 Jan 2025
+Figure 1: This video frame depicts a human-centric situation of the two concurrent actions ”sitting
+on bed” and ”holding shoes”. Different structured action representation methods include, (a) Scene
+graph, (b) situation frame, (c) Situational scene graph (ours) : encompasses the person, objects,
+and verb predicate of human-object relations and their semantic role-values, providing a detailed
+schema with precisely defined structures to elaborate the components of one or more concurrent
+actions.
+answering (VQA) [ 47, 16, 67, 25, 30, 57, 23], image captioning [ 75, 75], referring expressions [ 73]
+image grounded dialog [ 15] and image retrieval [ 31] etc. However, the ST scene graph falls short
+of capturing the fine-grained properties of the relationship components, such as where the action
+takes place, functional properties of the objects (e.g. affordance) or any tools used by the person to
+perform the actions etc. Such fine-grain properties of human, objects and their pair-wise relationships
+are crucial in real-world applications, such as in robotics where the robot needs to understand not
+only the human behavior but also the properties of the objects (e.g. affordance) in order to interact
+with them.
+Another line of research [ 77, 76] based on situation frames offer a well-structured schema to
+represent these semantic properties in terms of predefined roles and values, providing richer context (as
+shown in Fig. 1b). However, they are limited to representing a single action, which is not applicable
+to scenarios with multiple simultaneous actions. In view of the limitations of existing approaches,
+we propose Situational Scene Graph (SSG) to represent both human-object relations and the
+corresponding semantic properties in a unified representation. As shown in Fig. 1c, we leverage the
+well-structured semantic role-value (SR V) pairs to encode the properties of the components within
+verb relationships (i.e. person, object and verb predicate) of a spatio-temporal scene graph. Our
+2
+SSG is beneficial for Human-centric situation understanding where we aim to understand the
+actions, human-object relations as well as semantic properties of each entity involved in the current
+situation. Moreover, another advantage of SSG is its ability to jointly model the human-object
+relations and the semantic properties which could benefit both semantic role-value prediction and
+predicate prediction. Take the scene of a person holding a cup as an example. The relationship
+between the person and the cup (i.e., ‘holding’) implies that the person is likely engaging in an
+action related to the cup such as drinking. Additionally, knowing the semantic properties of the
+cup (e.g., affordance) narrows down the possible actions or relations, and the relationship ‘holding’
+also provides cues for the semantic properties of the cup. This mutual reinforcement enhances the
+performance of both semantic role-value prediction and predicate prediction.
+Based on our proposed representation, we introduce the task of SSG generation and introduce
+a new framework named Interactive and Complementary Network (InComNet). Our InComNet
+can be factorized into four stages: (I) object SR V classification (II) verb predicate classification (III)
+verb predicate SR V classification and (IV) person SR V classification. Stage (II) classifies the verb
+predicates while stage (I), (III) and (IV) classify the semantic role-value of each semantic role of
+object, verb predicate of the relation instances and person respectively. Given that existing datasets
+are not applicable to this task, we further introduce a SSG dataset based on the Action Genome [ 27]
+annotations by manually collecting 562K+ situation frames.
+In summary, our key contributions can be listed as follows. Firstly, we introduce a unified SSG
+representation to encode both human-object relations and the corresponding semantic properties.
+Secondly, we introduce the challenging task of SSG generation and propose the InComNet baseline.
+Thirdly, we introduce the SSG dataset, which consists of 2.5K video clips with human-generated
+annotations for 25.5K human-centric situations encompassing 25.5K person SR V frames, 61K
+object SR V frames, 52K verb predicate SR V frames. Lastly, we demonstrate the effectiveness of our
+proposed SSG representation by testing on different downstream tasks. Experimental results show
+that the unified representation can not only benefit semantic role-value and predicate prediction, but
+also benefit reasoning tasks on human-centric situation understanding.
+2 Previous work
+Structured visual representation methods: Classical structured scene representation methods
+include scene graphs [ 31] and situation frames [ 77]. Recent advancements such as spatio-temporal
+scene graphs [ 27] and spatio-temporal situations [ 53] leveraged the principles laid down by these
+classical methods to enhance video understanding. Other methods that build on them include STAR
+[67], scene graphs fusion [ 68], panoptic scene graph [ 71] and Panoptic Video Scene Graph (PVSG)
+[72]. Some notable advancements brought by the above methods include, improving the pixel level
+accuracy in localization [ 71, 72] and sub-scene graph fusion [ 68]. In contrast, situational scene graph
+takes a unique approach by seeking to leverage the strengths of both scene graph and situation
+frame to construct a more detailed schema with properly defined structures for representing and
+encoding components within action while also enabling to capture situations with multiple concurrent
+actions. Prior work have introduced problem tasks paired with the above representations such
+as, spatio-temporal/panoptioc scene graph generation [ 27, 71], situation recognition [ 77] and video
+semantic role-labelling [ 53]. Similarly, based on our representation we also introduce a challenging
+problem task called situational scene graph generation.
+Existing datatsets: Table 1 provides some popular video understanding benchmarks that are
+related to us. One major trend in the early stage is the provision of a large number of video clips with
+single action labels. Around year 2020, the community started focusing on action decomposition to
+3
+Dataset # videos# hours# actions Objects Verb predicates# personsObject SRVerb predicate SRPerson SR# categories# instances# categories# instances # roles# instances# roles# instances# roles# instancesActivityNet (2015) [6]28K 648 200 - - - - - - - - - - -DALY (2016) [66]8k 31 10 41 3.6K - - - - - - - - -Charades (2016) [54]10K 82 157 37 - - - - - - - - - -A V A (2018) [24]504K 108 80 - - 49 - - - - - - - -EPIC-Kitchen (2018) [14]- 55 125 331 - - - - - - - - - -HACS Clips (2019) [82]0.4K 833 200 - - - - - - - - - - -Kinetics-700 (2019)[7]650K 1794 700 - - - - - - - - - - -CAD120++ (2019) [83]0.5K 0.57 10 13 64K 6 32K - - - - - - -Action Genome (2020) [27]10k 82 157 35 0.4M 25 1.7M 220K - - - - - -VidSitu (2021) [53]29.2K 83 - 5.6K - 1.5K 397K - - - 5 202K - -STAR (2021) [67]22K 80 - 37 - 24 - - - - - - - -PVSG (2023) [72]0.4K 9 - 257 7.5K 57 4.1K 1.1K - - - - - -SSG (ours) 2.5K 22 157 35 61K 16 52K 25.5K 16 271K 12 164K 5 127K
+Table 1: An analysis of SSG in comparison to other publicly available video understanding benchmarks.
+SR refers to semantic roles.
+delve into dynamics within actions. Although these decompositions offer somewhat holistic schemas
+for representing actions—such as person, object, and relationships, they often fall short in providing
+structured methods for encoding the properties of those decomposed elements (refer to Section 7.1
+for a comparison of existing action representations and their required annotations). Following this
+trajectory, we introduce the SSG benchmark, which further decomposes these action elements into
+their sub-semantic properties by utilizing semantic roles and values. The benchmark includes a total
+of 562K human-generated semantic role-value annotations.
+Visual representational models: To generate scene graphs and situation frames from images,
+the approaches explored include Conditional Random Field models [ 31, 77, 76], Recurrent Neural
+Networks [69, 44, 46], Graph Neural Networks [ 70, 34, 48, 33], few-shot learning [ 8] and transformers
+[12, 10, 65, 9]. For video data, transformers have been widely used to generate the spatio-temporal
+scene graphs and spatio-temporal situation frames [ 11, 36, 43, 72, 58, 53]. Meanwhile, Large
+Vision Language Models (L VLMs) like CLIP [50], ALIGN [ 28], LLaVa [41] and VILA [ 37] have been
+instrumental in developing powerful joint semantic representations of vision and language. Different
+vision tasks try to leverage these L VLMs in various ways. For example, recent methods have employed
+the CLIP embeddings for situation recognition [ 51] and action recognition [ 29] attaining excellent
+results in respective problems. Inspired by this line of research, we also utilize CLIP embedding to
+solve our new problem situational scene graph generation.
+3 Situational Scene Graph
+A Situational Scene Graph (SSG) is formed by a set of semantic role-value pairs that elaborates
+several important semantic entities in a situation(s). As shown in Fig. 2, these semantic entities
+include the actor or the person, the object instances the person interacts with, and the verb predicate
+of human-object relation instances. Furthermore, the overall situation may comprise the execution of
+one or more high-level human actions.
+Formally, let us define the set of object classes asO = {O1, · · ·, On}, and the person category by P .
+Person instance in a video frame forms relations with object instances where each relation is represented
+by a triplet of the form ⟨Person, Predicate, Object⟩, e.g., 〈person, holding, dish〉 in Fig. 2. In the SSG,
+verb predicates like ”holding,” ”drinking from,” and ”sitting on” are used to describe human-object
+interactions because they provide more detailed information about actions than spatial predicates like
+”in,” ”under,” or ”beneath” [ 22]. The set of verb predicate classes is denoted by R = {R1, · · ·, Rm}.
+The novelty in the SSG constructs lies in the fact that we annotate the semantic role-value pairs for
+each entity category and instance (person, object and verb predicates) in a scene graph of a person
+performing one or more high-level actions. The semantic role-value pair structure, known as the
+Frame Structure, is predefined based on the literature [ 77, 46]. The set of semantic roles for person
+4
+Figure 2: This video frame illustrates a situation of the action ’holding a dish’. Tables, employing
+color codes green, blue and red depict the semantic roles and their associated values for the semantic
+entities person, object and verb predicate of the relation instance.
+class is predefined and is denoted by S(P ) = {S1(P ), S2(P ), · · · }. Similarly, the semantic roles of
+each object category are also predefined and denoted by S(Ok) = {S1(Ok), S2(Ok), S3(Ok), · · · }for
+each object category Ok. Finally, the semantic roles of each verb predicate category are denoted by
+S(Rk) = {S1(Rk), S2(Rk), S3(Rk), · · · }for each verb predicate category Rk. The associated values v
+of each semantic role (i.e. S(P ), S(O), S(R)) depend on the specifics of the person, object and verb
+predicate of the relation instances in a given frame (e.g. SP lace(Holding ) = Kitchen). The set of all
+distinct semantic-role values is denoted by V = {v1, v2, · · · }. In each video frame, there is one person
+instance executing one or more high-level human actions forming relations with object instances.
+Each person, object, or relation instance’s semantic role is associated with a value
+S(A) = v. (1)
+where A ∈ {P, O, R} and v ∈ V.
+3.1 Situational scene graph generation
+For a given video frame, the SSG generation task requires the classification of the (1) verb predicate
+classes and (2) semantic role-values of the person, object instances, and verb predicate of the relation
+instances as follows.
+(1) Verb predicate (VP) classification: Given a video frame consisting of a person and class
+labels of object instances with their bounding boxes as inputs, a model is required to recognise the
+verb predicate class R of the relation instances between person and object instances.
+(2) Semantic role-value (SR V) classification: Here the model is required to recognize the
+role-value v of each semantic role of person, object, and verb predicate of relation instances in a given
+frame as shown in Eq. 1. As mentioned earlier, while semantic roles are shared across a category, the
+values depend on the specific instance of that category.
+5
+Figure 3: The pipeline of our proposed InComNet. Given a set of video frames, our model uses
+CLIP to extract necessary feature embeddings from each frame and then classifies SR V of objects,
+verb predicates, SR V of verb predicates and SR V of person. Finally, the situational scene graph is
+obtained on the right side. The InComNet stage (II) correspond to the SSG sub-task (1) and stages
+(I), (III) and (IV) correspond to the SSG sub-task (2).
+3.2 Proposed SSG model: InComNet
+We hypothesize that semantic role-value classification helps predicate classification (in scene graph)
+and vice versa. Based on this, we introduce the InComNet, Interactive and Complementary Network,
+a framework designed for Situational Scene Graph (SSG) generation, which also demonstrates the
+dataset’s utility for this task. As shown in Fig. 3, InComNet has four stages: (I) object SR V
+classification, (II) verb predicate classification (III), verb predicate SR V classification, and (IV)
+person SR V classification. The stage (II) classifies the verb predicates in the relation instances
+between person and object instances while stages (I), (III) and (IV) classify the semantic role-value
+of each semantic role of object, verb predicate of the relation instances and person respectively as
+in Eq. 1. In InComNet, we use transformer encoders with cross attention, where learnable query
+vectors serve as queries, and a sequence of input features act as keys and values. During training,
+these learnable queries interact with the features in the input sequence and construct useful learned
+query representations that can be used for the classifications. Accordingly, we employ four such
+encoders, namely, object SR V encoder, verb predicate encoder, verb predicate SR V encoder and
+persons SR V encoder corresponding to the InComNet stages (I), (II), (III) and (IV), respectively.
+The verb predicate encoder’s detailed architecture is presented in Fig. 4a. Object, verb predicate
+and person SR V encoders follow the same architecture as shown in Fig. 4b with the exception that
+person SR V encoder does not include an intermediate input for learned object queries.
+Leveraging the effectiveness of CLIP [50] embeddings, we derive visual and semantic representations
+using CLIP’s vision ( ψv()) and text ( ψt()) encoders. Additionally, we use a visually prompted frame
+embedding, employing a new visual prompt named a translucent background prompt. In this
+prompt, we applied a translucent pink overlay to the non-interested regions in the video frame,
+allowing the model to pay more attention to the interested region. Here the interested region refers to
+the bounding box region (e.g. in object SR V classification, the prompt is applied to the non-bounding
+box region of the object while retaining the bounding box region in its original state. Refer to Section
+7.6 for more details). Let us denote the prompted frame by f pr and the corresponding visual feature
+by Uf pr = ψv(f pr). Similarly, text embedding of the object class name UOi where Oi ∈ O, and text
+embeddings of the object semantic role names {US1(Oi), US2(Oi), · · · }are obtained from the CLIP
+text encoder ψt.
+6
+Figure 4: Architectures of verb predicate and SR V encoders.
+Object SR V classification: In the first iteration, the object SR V encoder receives a sequence of
+key/values KV = {Uf pr , UOi , US1(Oi), · · ·, USx(Oi)}, where x is the maximum number of semantic
+roles for an object in the SSG dataset. For objects with fewer than x roles, the remaining embeddings
+are zero-padded. Queries are formed by x learnable query vectors, producing x role query embeddings
+QO
+r = {qO
+r1 , · · ·, qO
+rx }. A linear classifier predicts the correct role-values using QO
+r . In our semantic
+frame definition, the positions of roles for objects, verb predicates and person remain consistent across
+the dataset. Hence, only the output embedding corresponding to the appropriate role is utilized
+during loss calculation.
+Verb predicate classification: We hypothesize that object semantic roles and values enhance
+the classification of verb predicates in the relation between a person and object. Thus, the output
+of the object SR V encoder from stage (I) is used as additional input for classifying verb predicates
+Ri in stage (II). The input sequence for stage (II) includes the prompted frame Uf pr , object class
+embedding UOi , and the learned object role query embeddings QO
+r forming the keys and values
+KV = {Uf pr , UOi , QO
+r }. A learnable verb predicate query vector is then used to generate the verb
+predicate query embedding QR.
+Verb predicate SR V classification: The verb predicate SR V encoder receives an input se-
+quence comprising the prompted frame (verb visual features) Uf pr , the learned verb predicate
+query embedding QR, the object class name embedding UOi associated with the verb predicate,
+and the role name embeddings {US1(Ri), · · ·, USy(Ri)}. This sequence forms the keys and values
+KV = {Uf pr , QR, UOi , US1(Ri), · · ·, USy(Ri)}, while y learnable verb predicate role query vectors
+generate the corresponding role query embeddings QR
+r . From the second iteration onward, the
+learned verb predicate query embedding QR from the predicted verb predicate instances is used as an
+additional input to stage (I), complementing the object SR V classification, based on the hypothesis
+that verb predicates assist in classifying object semantic role-values. Consequently, in iteration 2, the
+input sequence for stage (I) becomes KV = {Uf pr , UOi , QR, US1(Oi), · · ·, USx(Oi)}.
+Person SR V classification: The input sequence for stage (IV) includes the prompted frame
+(person visual features) Uf pr , the text embedding of the person name 1 UP , and role name embeddings
+1in all cases we use term ”person”.
+7
+{US1(P ), US2(P ), · · ·, USz(P )}, forming the keys and values KV = {Uf pr , UP , US1(P ), · · ·, USz(P )} for
+the person SR V encoder. Queries are generated by z learnable person role query vectors, producing
+z learned person role query embeddings QP
+r . The learned query embeddings QO
+r , QR, QR
+r and
+QP
+r of stages (I), (II), (III) and (IV) are passed through four linear classifiers to generate the final
+situational scene graph by classifying object semantic role-values, verb predicates, verb predicate
+semantic role-values and person semantic role-values respectively.
+Stages (I), (II), and (III) are iterated d times, with their losses calculated by summing cross-
+entropy losses across all iterations. The loss for stage (IV) is computed using cross-entropy loss
+between predicted and ground truth role-values.
+3.3 SSG dataset
+We introduce Situational Scene Graph (SSG) dataset to facilitate the proposed human-action
+representation of situational scene graphs. SSG dataset is built on Action Genome’s [ 27] spatio-
+temporal scene graphs and Action Genome is built on Charades [ 54]. However, unlike the Action
+Genome whose goal is to decompose Charades’ video-level actions by annotating person, objects
+and their pairwise relationships, SSG’s goal is to provide precise structures to further elaborate
+these action partonomies using semantic roles and role-values. Moreover, unlike VidSitu [ 53] which
+annotates a single action with semantic roles for every 2-second clip, SSG dataset provides frame-level
+situations in a more granular way than VidSitu. An analysis of it in comparison to other publicly
+available video understanding datasets is given in Table 1. Among the main components of situational
+scene graphs, persons, object instances and verb predicates of the relation instances are already
+annotated in the Action Genome. We provide additional annotations for semantic roles and values
+for the above semantic entities.
+Composing the dataset: In the Action Genome, each person-object instance has three types of
+relationships: attention, spatial and contacting. We provide semantic role-values for verb relationships
+which we refer as verb predicates because these verb predicates describe various ways that a person
+interacts with an object to execute a higher-level action as shown in 2. Out of its 17 verb predicate
+classes, we decided to remove other relationship as it is too vague to represent an action as well as
+is particularly challenging to decompose into specific semantic roles and values. The remaining 16
+verb predicates, however, effectively represent situations involving ongoing actions when combined
+with semantic roles and values. We did not perform any filtration to the Action Genome objects
+and thus it contains 35 object classes and a person class. Next, following the concept of semantic
+roles in FrameNet [ 20] and previous work [ 77], we assigned semantic roles for the person, object
+and verb predicate classes. The raw semantic roles, particularly those related to objects and person,
+were further refined to ensure their applicability in visually describing a scene. We developed a
+web-based application software called Semantic Role Labelling Tool to facilitate the annotation
+process. Annotations were carried out over a period of three months by students with a Computer
+Science background. Refer Section 7.1 for more details about the annotation process, the labelling
+tool, distribution of the dataset and further dataset statistics.
+4 Experiments
+Experimental settings: We use our SSG dataset for the SSG generation task. We use the translucent
+background prompt in all the visual prompt-related experiments and trained the InComNet with a
+learning rate of 0.001, and ExponentialLR scheduler with Adamax optimizer, on a 49 GB NVIDIA
+RTX 6000 GPU.
+8
+Evaluation metrics: For the verb predicate classification task, we use the metric accuracy (Acc)
+[77] under ”with constraint” predicate classification (PREDcls) [ 27] setting. Further, since semantic
+role-value classification is similar to the semantic role labelling in conventional verb-based situation
+frames, we adapt existing metrics value and value-all [46] along with a new metric called value-two.
+However, unlike in [77, 46], we have only single annotation per record. Therefore, we assess the value
+by determining whether the model accurately predicts at least one role-value for a given role out of
+all the roles associated with that particular semantic entity. The value-all metric evaluates if the
+model can accurately predict all the semantic role-values, while the value-two metric checks if at
+least two semantic role-values are correctly predicted out of all the roles. We use top-1 setting for
+verb predicate SR V classification where semantic role-values are considered incorrect if the predicted
+verb is incorrect. Since we do not perform object detection, we use the ground truth setting for
+object and person SR V classifications assuming ground truth object/person to be known [ 77, 46].
+For SR V classification, we also introduce a new metric called role-based accuracy (role-based acc.)
+to understand the role-based performance. It is calculated by first determining the accuracy for each
+role separately, and then averaging across all roles.
+4.1 Situational Scene Graph Generation
+Baselines: We compare the performance of InComNet over six baselines under three categories:
+(1) CLIP zero-shot inference [ 50], (2) CLIP linear probing [ 50] and (3) VILA inference [ 37]. In CLIP
+linear probing [ 50], we attach a linear classifier on top of the frozen CLIP vision encoder for each
+object SR V, verb predicate, verb predicate SR V and person SR V classifications. In VILA inference,
+we prompt VILA-1.5-3B model in interleaved image-text VQA MCQ style with MCQ questions
+generated using the SSG annotations. Under this category we showcase both zero-shot and impact of
+fully fine-tuning an L VLM like VILA on the SSG task. The option space for verb predicate and SR V
+MCQ questions includes the set of verb predicate classes and unique set of role-values associated
+with each semantic role in the SSG dataset respectively. More details about fine-tuning settings for
+VILA, including the prompts used are given in the Section 7.2.
+InComNet models: We have three InComNet variants as (1) InComNet-224 (base model), (2)
+InComNet-336-Frozen and (3) InComNet-336-FT. We use ViT-B-32 and ViT-L-14-336 CLIP vision
+and text encoders to extract image and text feature embeddings in (1) and (2) respectively, while in
+(3), we fine-tune ViT-L-14-336 CLIP model on SSG dataset and then use this model to extract the
+required embeddings. We perform all ablation studies and hyper-parameter analysis etc. using the
+InComNet-224 base model. When fine-tuning the Clip ViT-L-14-336 model on our SSG dataset, we
+created a detailed description about each video frame with the SSG annotations. Refer 7.3 for more
+details about CLIP fine-tuning on SSG dataset. We refer InComNet’s individual tasks as the scenario
+where its sub-tasks- object SR V, verb predicate and verb predicate SR V are trained independently
+without inter-task communication.
+Table 2 shows the performance comparison of InComNet with baselines over the SSG dataset.
+Our analysis reveals following key insights: (1) Superior performance of InComNet-336-FT :
+InComNet-336-FT outperforms VILA1.5-3b-FT by an average margin of 15.5% and CLIP linear
+probing-336-FT model by an average margin of 34.3%; (2) Enhances performance through joint
+and iterative training: Overall performance of object SR V, verb predicate and verb predicate SR V
+classifications improves by 4% when they are iteratively and jointly trained with complementary
+exchange of input-output information from other sub-tasks than training each sub-task individually.
+This demonstrates the synergistic benefits of our approach, which validates our hypothesis that
+semantic role-value classification and predicate classification mutually enhance each other; (3)
+9
+Method Object SR V classificationVerb predicateclassification acc.Verb predicate SR V classificationPerson SR V classificationRole-based acc.ValueValue-twoValue-all Role-based acc.ValueValue-twoValue-allRole-based acc.ValueValue-twoValue-allCLIP-ViT-B-32 zero-shot inference [50]1.5 6.9 0.2 0.0 8.9 0.4 0.1 0.0 0.0 0.1 0.2 0.0 0.0CLIP linear probing-224 [50]11.0 52.7 2.9 1.1 40.4 3.3 39.0 0.0 0.0 17.3 83.2 3.3 0.0CLIP linear probing-336-Frozen [50]11.2 54.4 3.5 1.1 40.1 3.4 38.5 0.0 0.0 19.1 89.7 3.6 0.0CLIP linear probing-336-FT [50]11.2 54.5 3.6 1.8 47.5 3.8 46.1 0.0 0.0 19.2 90.3 4.9 0.0VILA1.5-3b-z-shot (MCQ all options) [37]11.2 40.4 8.8 0.0 19.6 14.1 19.1 13.0 1.7 35.0 88.2 57.2 0.0VILA1.5-3b-FT (Instruction-tuned MCQ all options) [37]21.0 69.2 26.4 0.2 61.3 35.3 59.6 35.4 3.2 44.4 95.7 74.6 1.0InComNet’s individual tasks (no iterations/feedback)45.5 86.2 54.0 5.7 66.9 26.9 65.3 63.4 28.3 - - -InComNet-224 46.8 86.6 55.0 5.9 67.8 29.4 66.2 64.7 32.0 39.8 97.4 77.4 1.6InComNet-336-Frozen 47.4 87.6 58.3 6.8 68.5 36.3 66.7 64.8 32.6 42.2 98.0 77.7 1.8InComNet-336-FT 49.6 89.562.1 7.8 70.8 38.4 69.067.4 38.7 49.3 98.585.8 1.9
+Table 2: Performance of InComNet for SSG generation task on SSG dataset. The bold and underlined
+font show the best and the second best result respectively.
+Impact of higher image resolution : Increasing the image resolution from 224 to 336 pixels in
+the InComNet-336-Frozen model significantly enhances its capability to capture fine-grained details,
+resulting in an average performance improvement of 5.6% over the InComNet-224. This underscores
+the importance of higher resolution for improved model performance in detailed image analysis; (4)
+Benefits of finetuning CLIP features: Finetuning CLIP vision and text encoders for specific tasks
+like ours would lead to notable performance gains. Specifically, the ViT-L-14-336-FT model shows
+a 7.2% improvement over the ViT-L-14-336-Frozen model; (5) Challenges and opportunities
+with SSG: SSG task presents a notable challenge to foundational models like VILA when prompted
+with large option space. While the value and value-two metrics suggest that the model is capable of
+identifying one or two dominant properties, the lower performance in the value-all metric highlights
+that it struggles to accurately identify the majority of the properties associated with people, objects,
+and verb relationships. This underscores the potential for continued research, positioning SSG as a
+promising area for exploration by L VLMs.
+CLIP inference results are sub-optimal, likely due to its training focus on tasks like image
+classification, which may introduce a bias towards salient objects within the image. Furthermore,
+the CLIP model is not tailored for structured prediction similar to our InComNet. In contrast, SSG
+requires classifying multiple objects, verb predicates, the person and their semantic role-values in
+a single video frame , making the accurate mapping of these elements more challenging. Further
+ablation studies about InComNet, its iterative refinement of the results including visualizations,
+per-class and per-role performances of verb predicate and SR V classification can be found in Section
+7.4. Implementation details and hyper-parameter analysis of the InComNet are given in Section
+7.5. Translucent background prompt proved to be the most effective visual prompt for the SSG task
+compared to existing visual prompts [ 79, 5] and more details about prompt evaluation can be found
+in Section 7.6.
+4.2 Applications of situational scene graphs
+We now demonstrate how our unified SSG representation can benefit both situation recognition and
+predicate classification tasks in complementary ways. These tasks are paired with the key building
+blocks of our representation i.e. situation frames [77] and ST scene graphs [27] respectively.
+(1) Situation recognition on SSG dataset: Since situation frame is a key foundational component
+of our SSG representation, situation recognition task could also be tested on the SSG dataset. The
+only difference between typical situation recognition problem on datasets such as imSitu [ 77] and
+situation recognition on SSG dataset is that, in imSitu there is only one activity verb and its
+associated semantic roles and values whereas, the SSG dataset includes multiple activity verbs, each
+paired with semantic roles and values corresponding to multiple concurrent actions within a single
+video frame. Therefore, in SSG situation recognition problem, the models should be able to classify
+10
+Method Top-1 verbaccuracy
+Top-1 verb predicate SR V classificationGT verb predicate SR V classification
+Value Value-two Value-all Value Value-two Value-all
+Clipsitu MLP [51]
+41.5
+40.1 30.7 0.8 97.1 55.3 9.0
+Clipsitu TF [51] 40.0 33.0 2.5 97.1 57.0 8.5
+Clipsitu XTF [51] 39.9 33.0 2.2 97.1 54.9 6.2
+VILA1.5-3b-z-shot [37] 19.6 19.1 13.0 1.7 96.8 54.3 5.5
+VILA1.5-3b-FT [37] 61.3 59.6 35.4 3.2 98.2 82.0 30.4
+InComNet-224 67.8 66.2 64.7 34.0 97.2 94.0 51.9
+InComNet-336-Frozen 68.5 66.7 64.8 32.6 97.3 92.7 38.5
+InComNet-336-FT 69.8 68.2 66.9 41.2 98.2 94.8 58.1
+Table 3: Performance of SOTA task-specific situation recognition models and foundation models on
+SSG dataset for situation recognition. The bold and underlined font show the best and the second
+best result respectively.
+all the verb predicates and their associated semantic role-values in a video frame which adds another
+layer of complexity. Accordingly, we purpose the SOTA situation recognition models i.e. Clipsitu
+also to predict all the verb predicates and their semantic role-values.
+Thanks to our SSG representation, as shown in Table 3, our InComNet models consistently
+outperform clipsitu models and VILA models, achieving average performance improvements of
+31.1% and 18.2%, respectively, across all metrics. Furthermore, it should be noted that, our unified
+representation enables the simultaneous prediction of verbs and their semantic role-values within a
+single pipeline, fostering a complementary exchange of information and inter-task communication on
+verb predicate and SR V classification. In contrast, both the Clipsitu and VILA models depend on a
+two-stage prediction approach, where the two tasks are handled separately.
+(2) Predicate classification with situational scene graphs on Action Genome dataset:
+In our SSG dataset, we provided annotations for only 8% of the Action Genome dataset. In this
+experiment, we trained the InComNet model for predicate classification (under PredCLS setting
+and with-constraint strategy) on this limited 8% and used transfer learning to infer object and verb
+predicate semantic role-value annotations for the entire Action Genome test set during inference. This
+approach enabled effective evaluation of the predicate classification problem across the entire Action
+Genome dataset with the help of its 8% SSG annotations. It is worth to mention that, while others
+have used the entire Action Genome dataset during training, our model has used only 8% Action
+Genome frames for which we have provided the SSG annotations. We attach three linear classifiers
+for the InComNet’s verb predicate encoder for the three relationship types in Action Genome. The
+results in Table 4 demonstrate that we can achieve comparable performance with SOTA methods
+with just 8% data.
+4.3 Reasoning on human-centric situations
+Next, we evaluate the usability of our SSG representation for human-centric situation understanding
+by leveraging the zero-shot image-text interleaved MCQ inference capabilities of the VILA 1.5-3B
+model [ 37]. For this experiment, we generate 139K+ MCQ questions using the annotations in
+the SSG test set each having four options. Thus, the test questions set comprises of 12K verb
+predicate questions, 38K verb predicate SR V questions, 64K object SR V questions and 25K person
+SR V questions. Performance is measured using accuracy. The results are shown in Table 5. In (3)
+and (4) the predicted/ GT SSG graph in text format is incorporated as an in-context reference. The
+results demonstrate that, incorporating the predicted SSG graph as an in-context yields an average of
+11
+Method R@10 R@20 R@50
+VRD [42] 51.7 54.7 54.7
+M-FREQ [78] 62.4 65.1 65.1
+MSDN [35] 65.5 68.5 68.5
+VCTree [56] 66.0 69.3 69.3
+RelDN [80] 66.3 69.5 69.5
+GBS-Net [38] 66.8 69.9 69.9
+STTran TPI [62] 69.7 72.6 72.6
+APT [36] 69.4 73.8 73.8
+TD2-Net(P) [39] 70.1 - 73.1
+STTran [11] 68.6 71.8 71.8
+DSG-DETR [19] 68.4 71.7 71.7
+TR2 [61] 70.9 73.8 73.8
+TEMPURA [45] 68.8 71.5 71.5
+CLIP zero-shot [50] 19.4 20.9 20.9
+InComNet-224 69.1 69.2 69.2
+InComNet-336-Frozen67.8 70.8 70.9
+InComNet-336-FT 69.4 72.7 72.7
+Table 4: Performance of SOTA predicate classification models on Action Genome dataset. Our
+method uses only 8% AG frames for training . The bold and underlined font show the best
+and the second best result respectively.
+Input
+Obj SR V
+questions
+Verb predicate
+questions
+Verb predicate
+SR V questions
+Person SR V
+questions
+(1) Question 51.1 54.1 60.3 25.1
+(2) Image + question 53.9 60.1 70.6 46.2
+(3) Image + predicted graph + question60.0 70.8 75.1 50.0
+(4) Image + GT graph + question 76.9 85.5 78.5 71.8
+Table 5: SSG VQA on VILA [ 37]. The bold and underlined font show the best and the second best
+result respectively.
+10% improvement in accuracy while GT SSG graph leads to 24% marking a certain upper bound on
+performance when using graph data. This underscores the value of explicitly representing the elements
+in situations using the SSG graph structure for improved human-centric situated understanding and
+reasoning. Additionally, it highlights the potential avenues for enhancing future SSG models on this
+area.
+5 Challenges and outlook
+Challenges The SSG tasks are particularly challenging due to the need for (1) strong visual
+cues to identify the attributes of smaller objects (e.g., the material of a dish), subtle variations in
+human poses (e.g., sitting vs. leaning), precise object locations (e.g., a laptop on a table or on
+someone’s lap), recognizing specific body parts involved in actions, and the tools used to perform
+those actions. Additionally, (2) situational common sense is essential for understanding semantic
+role-values for certain roles, such as object affordances (e.g., a doorknob’s affordance when opening
+a door is unlocking, while it is locking when closing). Finally, (3) unlike problems such as typical
+situation recognition which requires recognising one salient activity verb and its semantic role-values,
+the SSG task particularly requires recognising multiple verb predicates, multiple objects, the person
+and their semantic role-values from a single video frame that correspond to multiple concurrent
+12
+actions.
+Outlook SSG dataset has shown potential to enhance performance in existing vision tasks such as
+situation recognition, predicate classification and human-centric situation reasoning by leveraging its
+detailed annotations. Beyond these tasks, we also foresee the potential of SSG in pushing the current
+VLMs towards a more granular level of video perception and reasoning specially in the following
+areas: (1) Video QA : While current video questions answering datasets such as STAR [ 67] and
+AGQA [23] lack fine-grain details about entities involved in the situations, the inclusion of semantic
+roles and values of those entities could be crucial for enhancing the situated reasoning capabilities of
+the VLMs, which we list as a future work; (2) Dense video captioning : SSG annotations can also
+be utilized for dense video captioning and serve as a benchmark for video-description pre-training
+and evaluation. We also list this as a potential future direction; (3) Video generation : recent
+work explores image/video generation from structured representations [ 13]. Given the fine-grained
+semantic properties embedded in situational scene graphs, we anticipate that future SSG models
+could enable the generation of videos from situational scene graphs, opening new avenues in video
+synthesis.
+6 Conclusion
+We introduce situational scene graphs, a unified graph representation which can represent both
+human-object relations and semantic properties of the entities involved in a human centric situation.
+In doing so, we also introduce a new task called situational scene graph generation accompanied by a
+new dataset, SSG and a new model to address this task. Finally we demonstrate the utility of our
+SSG representation for situation recognition, predicate classification and human-centric situation
+understanding. The need for extensive annotations to construct SSG representation may be seen
+as a limitation. Yet, the advancement of structured semi-supervised learning approaches may allow
+us to generate better annotations unleashing the full potential of SSGs for human-centric situation
+understanding and reasoning.
+Acknowledgment This research/project is supported by the National Research Foundation, Singa-
+pore, under its NRF Fellowship (Award# NRF-NRFF14-2022-0001). This research is also supported
+by funding allocation to B.F. by the Agency for Science, Technology and Research (A*STAR) under
+its SERC Central Research Fund (CRF), as well as its Centre for Frontier AI Research (CF AR).
+7 Supplementary material
+This supplementary material provides further details about the SSG dataset in Section 7.1, fine-tuning
+settings of VILA [37] for SSG dataset in Section 7.2, fine-tuning settings of CLIP [ 50] for SSG dataset
+in Section 7.3, detailed settings and further experiments on InComNet including performance of
+InComNet across iterations, visualizations for InComNet’s situational scene graph predictions and
+per-class and per-role performance of InComNet in Section 7.4, hyper-parameters of InComNet in
+Section 7.5, evaluation of different visual prompts for situational scene graph generation task in
+Section 7.6, predicate classification related further experiments in Section 7.7, and action recognition
+with situational scene graphs in Section 7.8 which could not be included in the main paper due to
+the limited space.
+Human-centric vs non-human-centric situations
+In situation recognition literature, a situation can involve either a human or an animal as agent
+13
+Representation Annotations DatasetSpatio-temporal scene graph (2020)Actions, persons, objects, relationships, bounding boxes (bboxes)Action Genome [27]3D semantic scene graph (2020)Relationships, attributes, object class hierarchies 3DSSG [60]Video semantic role labeling (2021)Verbs,verb SR frames,verb SR V pairs, co-referencing, event relations, temporal segmentsVidSitu [53]Situation abstraction and reasoning (2021)Actions, objects, relationships, questions, options, answers, bboxesSTAR [67]Panoptic video scene graph (2023)Objects and relationships with panoptic segmentation PVSG [72]
+Situational scene graph (ours)Actions, persons, objects, verb predicates,person SR frames,object SR frames SSG (ours)verb predicate SR frames,person SR V pairs,objects SR V pairs,verb predicate SR V pairs, bboxes
+Table 6: A non-exhaustive summary of video representations, required annotations and benchmarks.
+SR V pairs refers to semantic role-value pairs.
+performing the action such as bear [ 77]. We define Human-centric situations as those where
+a human is the central figure encompassing multiple concurrent actions performed by the human,
+human-object relationships, and the semantic properties of the involved entities. Therefore, in
+our situational scene graphs, we always focus on scenarios involving a person, thus making these
+situations human-centric by definition.
+We will make the code and our SSG dataset publicly available upon the acceptance of this
+paper.
+7.1 SSG dataset
+Existing video representations and required annotations: Table 6 outlines the existing
+video representations, required annotations and related benchmarks. In our SSG representation,
+we leverage the strengths of both spatio-temporal scene graphs and situation frames to introduce
+a unified graph representation which can represent both human-object relations and the semantic
+properties of the entities involved in a human-centric situation with multiple concurrent actions.
+SSG dataset annotation process: We developed a web-based application software called Semantic
+Role Labeling Tool to facilitate the annotation process. Annotators were asked to discard the low-
+quality videos, videos that include more than one person, and frames with incorrectly bounded
+objects. Videos with more than one person were discarded because in such videos the bounding box
+of the person who performs the action might shift to other visible person instances in the video. It is
+noted that, Action Genome has Faster R-CNN detected person bounding boxes. Further, objects
+which have been incorrectly bounded (probably due to annotation errors) were also eliminated. Since
+the semantic roles are predefined, annotating a frame is a value-filling task by choosing role-values
+from a predefined list of possible values. Annotators were asked to choose the most appropriate value
+for a role and if such a value was unavailable in the list, they could add their own values with which
+the possible value lists were progressively updated. All the role-values were kept mandatory and if a
+user is unsure about a particular role-value, the user can select the ”unsure” field to avoid entering
+inaccurate data.
+Semantic role labelling tool: The tool was developed using React, Express, and TypeORM
+frameworks with MySQL. Even though many open source and commercial-off-the-shelf software [ 2, 4,
+3, 1] are available for dataset annotation tasks, to the best of our knowledge, there does not exist
+any software that caters to dataset annotation for situation recognition and scene graph generation.
+This software not only can be used to provide situation annotation for videos but also can be easily
+adapted for image data as well. We will make the code and the user manual on how to use and adapt
+14
+Figure 5: Distribution of object occurrences
+in SSG dataset.
+Figure 6: Distribution of verb predicate oc-
+currences in SSG dataset.
+the tool publicly available once the paper is published. This tool also created a better platform for
+us to scale up the dataset at any time.
+Distribution of the SSG dataset: As shown in Fig. 5 and Fig. 6, SSG dataset retains the
+long-tailed object and verb predicate distributions from Action Genome dataset. Similarly, Fig.
+7 illustrates that the semantic role-value (SR V) occurrences of the semantic entities also follow a
+long-tailed distribution. However, even with such a distribution almost all the semantic entities
+have at least 0.5K instances. Further, as shown in Fig. 8, each semantic entity is associated with a
+minimum of two and a maximum of seven semantic roles.
+Additional dataset statistics: The SSG dataset has 25,541 video frames, 7737.62 semantic roles
+per object (on average), 10,266.68 semantic roles per verb predicate, 2.36 objects per video frame,
+2.03 verb predicates per video frame, 1.16 verb predicates per object, 10.6 object SR V pairs per video
+frame, 6.43 verb predicate SR V pairs per video frame, 5 person SR V pairs per video frame, and 3.41
+actions per video frame.
+7.2 Fine-tuning VILA on the SSG dataset for situational scene graph
+generation task
+There are several ways of adapting Large Vision Language Models (L VLMs) for other vision-language
+tasks such as adding linear classifiers on top of image encoders [ 55, 74, 40], in-context learning [ 59]
+and prompting in VQA style [ 37]. W e choose interleaved image-text VQA MCQ style as we
+plan to extend our SSG dataset towards a video-QA dataset as one of our immediate
+future works. Accordingly, to comply the SSG tasks with VILA prompting, we created a VQA
+dataset with 475k training and 140K testing questions using the SSG annotations which specifically
+focus on verb predicates and SR V of person, objects and verb predicates of human-object relations.
+The question formats we used for the SSG tasks are given in Table 7 and the statistics about the
+questions that we generated are given in Table 8. These questions were automatically generated from
+the SSG annotations using the question formats. Accordingly, the VILA1.5-3b-z-shot model was
+evaluated using the VQA test set. VILA1.5-3b-FT model with CLIP ViT-L-14-336 vision encoder
+15
+Figure 7: Distribution of semantic role-value
+occurrences for person, object and verb predi-
+cate semantic roles.
+Figure 8: Distribution of semantic role occur-
+rences for person, objects and verb predicates.
+SSG classification task Question
+(1) Verb predicate <image>What is the{verb predicate} between person and{object}? 0. option1 1. option2 ...
+(2) SR V| object SR V <image>What is the{role} of the{object}? 0. option1 1. option2 ...
+(3) SR V| person SR V <image>What is the{role} of the person? 0. option1 1. option2 ...
+(4) SR V| verb predicate SR V<image>What is the{role} used by the person for{predicted verb predicate} the{object}? 0. option1 1. option2 ...
+Table 7: Various types of question prompts passed to VILA [ 37], each formatted using the Vicuna v1
+prompt style. For instance, the final prompt for a question appears as: ”A chat between a curious
+user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers
+to the user’s questions. USER <question>. Answer with the option ’s number from the given choices
+directly. ASSISTANT”. The template of questions in (4) may vary depending on the verb predicates
+and their semantic roles.
+was instruction-tuned using the VQA train set on a single 49GB NVIDIA RTX A6000 node with
+four GPUs with batch size 16 and learning rate 1e-4.
+For the experiment in Table 2 of the main paper, we defined the option space for questions to
+align with the SSG tasks. Specifically, the option space for questions related to verb predicates
+consisted of the verb predicate classes in the SSG dataset. For questions concerning SR V, the option
+space was defined as the unique set of role-values corresponding to each semantic role in the SSG
+dataset. Hence, the number of options ranged from a minimum of two to a maximum of 81. For
+the experiment in Table 5 of the main paper, we limited the option space for four options following
+[67]. Notably, we observed that this reduction in the option space helped the VILA model achieve
+a significant performance improvement of 38.6% as shown in Table 9, probably because a smaller
+option space reduces ambiguity and simplifies the decision-making process for the model, allowing it
+to focus more effectively on relevant distinctions between the choices.
+16
+SSG task # Training questions # Testing questions
+Verb predicate classification 39 704 12 123
+Verb predicate SR V classification 125 830 38 437
+Object semantic SR V classification 206 775 64 042
+Person semantic SR V classification 102 910 25 285
+Total 475 219 139 887
+Table 8: Statistics about the VQA dataset we created from our SSG dataset for evaluating VILA
+[37] on the SSG task.
+Input
+Obj SR V
+questions
+Verb predicate
+questions
+Verb predicate
+SR V questionsPerson SR Vquestions
+Image + question with all options11.3 19.6 10.9 34.5
+Image + question with four options53.9 60.1 70.6 46.2
+Table 9: Prompting VILA [37] with MCQs having different option spaces.
+7.3 Fine-tuning CLIP ViT-L-14-336 model on SSG dataset
+When fine-tuning the CLIP ViT-L/14-336 [ 50] model on our SSG dataset, we generated detailed
+descriptions for each video frame using the SSG annotations. We used a single 49GB NVIDIA RTX
+A6000 node with four GPUs with batch size 16 and learning rate 5e-6. We then used this model
+checkpoint to extract the required image and text embeddings for the InComNet-336-FT model.
+7.4 Detailed settings and further experiments on InComNet
+Performance of InComNet across iterations: We report InComNet’s performance across itera-
+tions for object SR V classification, verb predicate classification and verb predicate SR V classification
+in Table 10. We first conducted iteration 1-5 by increasing the number of iterations by a factor of 1.
+However, as most of the metrics exhibited a fluctuating trend, we decided to increase the number of
+iterations by a factor of 5. Subsequently, we observed that, despite the fluctuating behaviour, the
+model reaches its highest overall performance with refinement of its predictions around iterations
+10 and therefore, more iteration number is unnecessary [ 17]. A plausible reason for the fluctuating
+behaviour of certain metrics could be attributed to the propagation of errors from the complementary
+exchange of input-output information between the sub tasks. We applied iterations during testing
+as well, as it produced better results [ 17]. However, it should also be noted that the inference time
+increases as the iteration number increases.
+Ablating the performance of InComNet’s individual stages: In Table 11 we present ablations
+(1)-(7), where we independently train the stages of InComNet, including object SR V, verb, and
+verb SR V classifications, using various combinations of input features. Ablations (1), (2), (3), (4),
+(6) and (7) indicate that, performance of object SR V, verb and verb SR V improves by average 2%
+when the translucent background prompt is utilized. Additionally, ablation (4) and (5) indicate that,
+performance of verb predicate improves by 23% when the associated object name is utilized for verb
+predicate classification.
+Visualizations of InComNet’s Situational Scene Graph predictions: In Fig. 9, we compare
+the situational scene graph predictions of InComNet-336-FT model with the second best baseline
+VILA1.5-3B-FT (Instruction-tuned MCQ all options) [ 37] model on the situational scene graph
+generation task. Overall, InComNet outperforms VILA1.5-3B-FT, particularly in predicting verb
+17
+Method Object SR V classificationVerb predicate classificationVerb predicate SR V classificationInference time (s)Role-based acc.ValueValue-twoValue-all Acc. Role-based acc.ValueValue-twoValue-allIndividual 45.5 86.2 54.0 5.7 66.9 26.9 65.3 63.1 23.4 0.96Iteration 5 46.2 85.7 54.7 5.4 67.0 28.4 65.8 64.3 31.4 1.01Iteration 10 46.8 86.6 55.0 5.9 67.8 29.4 66.2 64.7 32.0 1.07Iteration 1547.1 88.1 55.0 6.0 67.1 27.0 65.9 64.3 32.1 1.18
+Table 10: Performance of InComNet across iterations. SR V refers to semantic role-values. The bold
+and underlined font show the best and the second best result respectively.
+Method Object SR V classificationVerb predicateclassification acc.Verb predicate SR V classificationPerson SR V classificationRole-based acc.ValueValue-twoValue-all Role-based acc.ValueValue-twoValue-allRole-based acc.ValueValue-twoValue-all(1) Obj SR: frame + obj name + role names41.5 86.0 48.4 5.0(2) Obj SR: visual prompt + obj name + role names45.5 86.2 54.0 5.7(3) Verb: frame 40.2(4) Verb: visual prompt 43.6(5) Verb: visual prompt + obj name 66.9(6) Verb SR: frame + verb Q + role names 26.8 65.3 63.1 23.4(7) Verb SR: visual prompt + verb Q + role names 26.9 65.3 63.4 28.3InComNet-224 46.8 86.6 55.0 5.9 67.8 29.4 66.2 64.7 32.0 39.8 97.4 77.4 1.6InComNet-336-Frozen 47.4 87.6 58.3 6.8 68.5 36.3 66.7 64.8 32.6 42.2 98.0 77.7 1.8InComNet-336-FT 49.6 89.562.1 7.8 70.8 38.4 69.067.4 38.7 49.3 98.585.8 1.9
+Table 11: Performance of InComNet for SSG generation task on SSG dataset. The bold and
+underlined font show the best and the second best result respectively.
+predicates and the SR V of objects, persons, and verb predicates, though minor errors may still
+occur. For instance, InComNet consistently predicts the correct verb predicates and their SR Vs,
+while VILA1.5-3B-FT struggles. In Fig. 9a, VILA1.5-3B-FT fails to predict the verb predicate
+correctly while it also fails to recognize certain semantic roles such as place and entity. In object
+SR V, InComNet correctly identifies the location precisely where as VILA1.5-3B-FT fails to do so in
+many cases. Further, InComNet correctly identifies the functional properties such as affordance in
+all the cases where VILA1.5-3B-FT fails in most of the cases. However, there could be errors in some
+predictions of InComNet. For an example, in Fig. 9b, InComNet-336-FT incorrectly identifies the
+color of the chair as black, although it is challenging for humans as well to distinguish between black
+and brown in this context. Further, it seems the model tends to recognize one major visible color
+of the object when there are multiple colors e.g. in Fig. 9a, InComNet has identified color of the
+blanket as black where the ground truth is multiple. In person SR V classification, InComNet-336-FT
+correctly identifies the age, gender and skin color in most of the cases while it fails to recognize the
+dress color and hair color correctly. Same as in object SR V classification, it seems the model tends
+to identify one major visible color of the dress when there are multiple colors e.g. in Fig. 9c, model
+has identified the dress color as blue where the ground truth is multiple.
+Per-class and per-role performance of InComNet on Situational Scene Graph generation
+task: In verb predicate classification, the verb predicates, {holding, sitting on, standing on, drinking
+from} obtained the top-in-class accuracies. In object SR V classification, the semantic roles {material,
+goal, location, content } received the highest per-role performance while the roles {agent, contact,
+body part, entity } obtained the highest per-role performance in verb SR V classification. In person
+SR V classification, the roles {gender, skin color } have received the highest per-role performance.
+7.5 Hyper-parameters of InComNet
+We employ 4 heads and 4 layers in Transformer encoders in object SR V, verb predicate, verb
+predicate SR V and person SVR encoders. We also explore the effect of fixed vs learned positional
+embeddings and find that fixed positional embeddings give better results compared to learned
+18
+Figure 9: InComNet vs VILA1.5-3B-FT (Instruction-tuned MCQ all options) [37] predicted situational
+scene graphs. Boxes with green and red colors depict the correct and the incorrect predictions
+respectively.
+19
+positional embeddings. As shown in Section 7.4, we choose number of iterations of InComNet to be
+10 as it gave the highest overall performance. Further, InComNet-224 model has 7.5M paramaters
+while, InComNet-L-14-336-FT Frozen and InComNet-L-14-336-FT models have 16.6M and 449M
+parameters, respectively. The larger parameter count in InComNet-L-14-336-FT is due to the
+fine-tuning of the CLIP ViT-L-14-336 model on our SSG dataset.
+7.6 Evaluation of different visual prompts for Situational Scene Graph
+generation task
+In this work, we experimented the applicability of different visual prompts for situational scene graph
+generation task. In our translucent background prompt (see Fig. 10a), we applied a translucent pink
+overlay to the non-interested regions in the video frame, allowing the model to pay more attention
+to the interested region. Here the interested region refers to the bounding box region (e.g. in
+object SR V classification, the prompt is applied to the non-bounding box region of the object while
+retaining the bounding box region in its original state). In the color prompt [ 79] (see Fig. 10b), we
+applied a translucent pink overlay to the interested regions in the video frame (e.g. in verb predicate
+classification, the prompt is applied to the union region of the bounding boxes of the person and
+the object). Following [ 5], in the padding prompt (see Fig. 10c) we applied a zero padding to the
+non-interested region in the video frame. As shown in Table 12, translucent background prompt has
+achieved the overall best performance over the existing visual prompts. On one hand, a plausible
+explanation for this behaviour could be that the translucent background introduces a certain degree
+of distortion to the information in the non-interested region while retaining the complete features of
+the interested region. This enables the model to concentrate its attention effectively on the specified
+region. Specially in the verb and the verb SR V classifications, translucent background prompt likely
+enhances the human pose estimation due to the retention of complete features of the relationship
+region. On the other hand, rather than entirely disregarding the non-interested region as seen in
+padding prompt, partially retaining the non-interested region may also help the model grasp broader
+semantics by integrating the dispersed individual semantics through out the video frame.
+Figure 10: Different visual prompts.
+7.7 Predicate classification with 8% Action Genome training data
+In Table 4 of the main paper we demonstrated how our model receives competitive performance with
+SOTA predicate classification models on Action genome dataset with just 8% of Action Genome
+training data for which we have provided SSG annotations. In Table 13, we compare our method
+with SOTA baselines (with codes publicly available) trained on the same 8% of Action Genome
+data and tested on the entire test set. The results showcase that our approach, which leverages
+20
+Prompt Task Role-based accuracyValue Value-two Value-all Accuracy mR F1
+Color [79]
+T1 39.9 85.9 54.8 6.1 - - -
+T2 - - - - 67.6 36.5 37.8
+T3 24.9 66.0 63.2 24.2 - - -
+T4 33.4 96.7 74.0 0.0 - - -
+Padding [5]
+T1 42.0 86.5 53.6 5.5 - - -
+T2 - - - - 67.8 30.5 31.2
+T3 24.5 66.1 64.2 24.5 - - -
+T4 34.4 97.4 68.5 0.0 - - -
+Translucent
+background
+T1 46.8 86.6 55.0 5.9 - - -
+T2 - - - - 67.8 36.6 38.0
+T3 29.4 66.2 64.7 32.0 - - -
+T4 39.8 97.4 77.4 1.6 - - -
+Table 12: Comparison of different visual prompt engineering methods with CLIP embeddings for
+situational scene graph generation. T1, T2, T3 and T4 refers to object SR V, verb predicate, verb
+predicate SR V and person SR V classifications respectively. The bold and underlined font shows the
+best and the second best result respectively.
+Method R@10 R@20 R@50
+TEMPURA [45] 61.7 64.1 64.1
+DSG-DETR [19] 61.6 64.4 64.5
+STTran [11] 63.8 66.6 66.6
+TR2 [61] 67.3 70.1 70.1
+InComNet-336-FT69.4 72.7 72.7
+Table 13: Performance of SOTA predicate classification models trained on 8% Action Genome train
+set (for the frames we provided the SSG annotations) and tested on the entire Action genome test
+set. The bold and underlined font show the best and the second best result respectively.
+situational scene graphs, still outperforms the SOTA TR 2 by 3.5%, highlighting the strength of our
+representation in predicate classification.
+7.8 Situational Scene Graphs for action recognition
+We demonstrate the utility of the proposed SSG representation for action recognition on Charades
+[54]. This is a multi-label classification task where each video can have multiple action labels. We
+evaluate this problem under two settings as ground truth setting [ 27, 49] and predicted setting. In
+the ground truth setting we utilize all the frames in Action Genome dataset along with the frames for
+which we have provided SSG annotations. During training, for each video we create a multi-modal
+sequence of frame-level SSGs along with each frame’s visual features such that the sequence for one
+frame is created by converting it into a CLIP visual token and all SSG elements into CLIP textual
+tokens with each token having a dimension of 512. This sequence forms the keys and values while a
+learnable query vector act as the query in a multi-headed transformer encoder. The learned query
+embedding is then passed through a linear classifier to classify the actions. For the frames which do
+not have SSG annotations, we utilize the person, verb predicate and object in all relation instances.
+In the predicted setting, we train the model using the SSG dataset and tested using the entire Action
+Genome dataset. During training, the keys, values and queries are formed in the same way as in
+the ground truth setting. During testing, we utilize the trained InComNet and person SR V models
+21
+Ablation Modality mAP (%)
+(1) Spatio-temporal scene graph [27] Text 61.9
+(2) Person + verb predicate + object Text 61.9
+(3) Situational scene graph Text 62.7
+(4) Frame + Spatio-temporal scene graph Text, visual 62.1
+Our GT version: Frame + Situational scene graphText, visual 62.9
+Table 14: Contribution of different components of situational scene graphs for action recognition.
+Method GFLOPS mAP(%)
+STRG [63] 630 39.7
+Timeception [26] - 41.1
+SlowFast [18] 213 42.1
+MULE [81] - 47.2
+AssembleNet++ [21] - 59.9
+GT version in [27] - 60.3
+Predicted version in [27] - 44.3
+MoViNet [32] 100 63.2
+Our predicted version using InComNet-2240.04 54.2
+Our GT version 0.04 62.9
+Table 15: SSG’s action recognition performance on Charades dataset.
+to obtain the learned query embeddings for verb predicates, object SR V, verb predicate SR V and
+person SR V respectively to form the key/value sequence. In Table 14, we ablate the contribution of
+different components in the situational scene graph for action recognition under ground truth setting.
+As shown in ablations (2) and (3), performance improves by 0.8% when the components of the verb
+predicate relationships are further elaborated with semantic roles and values. Further, (1) and (3)
+suggest that, action recognition performance improves when situational scene graph text is utilized
+instead of spatio-temporal scene graph text. However, it is worth to mention that, performance of
+our model is not an upper bound on performance since we use ground truth SSG annotations for only
+8% Action Genome’s spatio-temporal scene graph annotated frames. In the predicted setting, our
+model received 54.4 % performance. We further compare the performance of our models with existing
+action recognition models on Charades dataset in Table 15. Accordingly, it can be concluded that,
+structured action representation provided by the situational scene graphs seems to have a potential
+to capture finer details and associations in a human-centric situation leading towards improved action
+recognition performance.
+References
+[1] Accelerate the development of ai applications: Scale ai. https://scale.com. Accessed: 2024-
+08-18.
+[2] The ai data engine for computer vision and generative ai. https://www.v7labs.com. Accessed:
+2024-08-18.
+[3] Cvat. https://www.cvat.ai. Accessed: 2024-08-18.
+22
+[4] Give your software the power to see objects in images and video. https://roboflow.com.
+Accessed: 2024-08-18.
+[5] Hyojin Bahng, Ali Jahanian, Swami Sankaranarayanan, and Phillip Isola. Exploring visual
+prompts for adapting large-scale models. arXiv preprint arXiv:2203.17274 , 2022.
+[6] Fabian Caba Heilbron, Victor Escorcia, Bernard Ghanem, and Juan Carlos Niebles. Activitynet:
+A large-scale video benchmark for human activity understanding. In Proceedings of the ieee
+conference on computer vision and pattern recognition , pages 961–970, 2015.
+[7] Joao Carreira, Eric Noland, Chloe Hillier, and Andrew Zisserman. A short note on the kinetics-
+700 human action dataset. arXiv preprint arXiv:1907.06987 , 2019.
+[8] Vincent S Chen, Paroma Varma, Ranjay Krishna, Michael Bernstein, Christopher Re, and Li Fei-
+Fei. Scene graph prediction with limited labels. In Proceedings of the IEEE/CVF International
+Conference on Computer Vision , pages 2580–2590, 2019.
+[9] Junhyeong Cho, Youngseok Yoon, and Suha Kwak. Collaborative transformers for grounded
+situation recognition. In Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition, pages 19659–19668, 2022.
+[10] Junhyeong Cho, Youngseok Yoon, Hyeonjun Lee, and Suha Kwak. Grounded situation recognition
+with transformers. arXiv preprint arXiv:2111.10135 , 2021.
+[11] Yuren Cong, Wentong Liao, Hanno Ackermann, Bodo Rosenhahn, and Michael Ying Yang.
+Spatial-temporal transformer for dynamic scene graph generation. In Proceedings of the
+IEEE/CVF international conference on computer vision , pages 16372–16382, 2021.
+[12] Yuren Cong, Michael Ying Yang, and Bodo Rosenhahn. Reltr: Relation transformer for scene
+graph generation. IEEE Transactions on Pattern Analysis and Machine Intelligence , 2023.
+[13] Yuren Cong, Jinhui Yi, Bodo Rosenhahn, and Michael Ying Yang. Ssgvs: Semantic scene
+graph-to-video synthesis. In Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition, pages 2555–2565, 2023.
+[14] Dima Damen, Hazel Doughty, Giovanni Maria Farinella, Sanja Fidler, Antonino Furnari, Evan-
+gelos Kazakos, Davide Moltisanti, Jonathan Munro, Toby Perrett, Will Price, et al. Scaling
+egocentric vision: The epic-kitchens dataset. In Proceedings of the European conference on
+computer vision (ECCV) , pages 720–736, 2018.
+[15] Abhishek Das, Satwik Kottur, Khushi Gupta, Avi Singh, Deshraj Yadav, Jos´ e MF Moura, Devi
+Parikh, and Dhruv Batra. Visual dialog. In Proceedings of the IEEE conference on computer
+vision and pattern recognition, pages 326–335, 2017.
+[16] Bruno Cesar de Oliveira Souza, Marius Aasan, Helio Pedrini, and Adin Ramirez Rivera. Self-
+graphvqa: a self-supervised graph neural network for scene-based question answering. In
+Proceedings of the IEEE/CVF international conference on computer vision , pages 4640–4645,
+2023.
+[17] Shancheng Fang, Hongtao Xie, Yuxin Wang, Zhendong Mao, and Yongdong Zhang. Read like
+humans: Autonomous, bidirectional and iterative language modeling for scene text recognition.
+In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition ,
+pages 7098–7107, 2021.
+23
+[18] Christoph Feichtenhofer, Haoqi Fan, Jitendra Malik, and Kaiming He. Slowfast networks for
+video recognition. In Proceedings of the IEEE/CVF international conference on computer vision ,
+pages 6202–6211, 2019.
+[19] Shengyu Feng, Hesham Mostafa, Marcel Nassar, Somdeb Majumdar, and Subarna Tripathi.
+Exploiting long-term dependencies for generating dynamic scene graphs. In Proceedings of the
+IEEE/CVF Winter Conference on Applications of Computer Vision , pages 5130–5139, 2023.
+[20] Charles J Fillmore, Christopher R Johnson, and Miriam RL Petruck. Background to framenet.
+International journal of lexicography , 16(3):235–250, 2003.
+[21] Rohit Girdhar, Deva Ramanan, Abhinav Gupta, Josef Sivic, and Bryan Russell. Actionvlad:
+Learning spatio-temporal aggregation for action classification. In Proceedings of the IEEE
+conference on computer vision and pattern recognition , pages 971–980, 2017.
+[22] Arushi Goel, Basura Fernando, Frank Keller, and Hakan Bilen. Not all relations are equal: Mining
+informative labels for scene graph generation. In Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition , pages 15596–15606, 2022.
+[23] Madeleine Grunde-McLaughlin, Ranjay Krishna, and Maneesh Agrawala. Agqa: A benchmark
+for compositional spatio-temporal reasoning. In Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition , pages 11287–11297, 2021.
+[24] Chunhui Gu, Chen Sun, David A Ross, Carl Vondrick, Caroline Pantofaru, Yeqing Li, Sudheendra
+Vijayanarasimhan, George Toderici, Susanna Ricco, Rahul Sukthankar, et al. Ava: A video
+dataset of spatio-temporally localized atomic visual actions. InProceedings of the IEEE conference
+on computer vision and pattern recognition , pages 6047–6056, 2018.
+[25] Marcel Hildebrandt, Hang Li, Rajat Koner, Volker Tresp, and Stephan G¨ unnemann. Scene
+graph reasoning for visual question answering. arXiv preprint arXiv:2007.01072 , 2020.
+[26] Noureldien Hussein, Efstratios Gavves, and Arnold WM Smeulders. Timeception for complex
+action recognition. In Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition, pages 254–263, 2019.
+[27] Jingwei Ji, Ranjay Krishna, Li Fei-Fei, and Juan Carlos Niebles. Action genome: Actions as
+compositions of spatio-temporal scene graphs. In Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition , pages 10236–10247, 2020.
+[28] Chao Jia, Yinfei Yang, Ye Xia, Yi-Ting Chen, Zarana Parekh, Hieu Pham, Quoc Le, Yun-Hsuan
+Sung, Zhen Li, and Tom Duerig. Scaling up visual and vision-language representation learning
+with noisy text supervision. In International conference on machine learning , pages 4904–4916.
+PMLR, 2021.
+[29] Tianyu Jiang and Ellen Riloff. Exploiting commonsense knowledge about objects for visual
+activity recognition. In Findings of the Association for Computational Linguistics: ACL 2023 ,
+pages 7277–7285, 2023.
+[30] Justin Johnson, Bharath Hariharan, Laurens Van Der Maaten, Li Fei-Fei, C Lawrence Zitnick,
+and Ross Girshick. Clevr: A diagnostic dataset for compositional language and elementary visual
+reasoning. In Proceedings of the IEEE conference on computer vision and pattern recognition ,
+pages 2901–2910, 2017.
+24
+[31] Justin Johnson, Ranjay Krishna, Michael Stark, Li-Jia Li, David Shamma, Michael Bernstein,
+and Li Fei-Fei. Image retrieval using scene graphs. In Proceedings of the IEEE conference on
+computer vision and pattern recognition , pages 3668–3678, 2015.
+[32] Dan Kondratyuk, Liangzhe Yuan, Yandong Li, Li Zhang, Mingxing Tan, Matthew Brown, and
+Boqing Gong. Movinets: Mobile video networks for efficient video recognition. In Proceedings of
+the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 16020–16030,
+2021.
+[33] Ruiyu Li, Makarand Tapaswi, Renjie Liao, Jiaya Jia, Raquel Urtasun, and Sanja Fidler. Situation
+recognition with graph neural networks. In Proceedings of the IEEE international conference on
+computer vision, pages 4173–4182, 2017.
+[34] Shijie Li, Jinhui Yi, Yazan Abu Farha, and Juergen Gall. Pose refinement graph convolutional
+network for skeleton-based action recognition. IEEE Robotics and Automation Letters, 6(2):1028–
+1035, 2021.
+[35] Yikang Li, Wanli Ouyang, Bolei Zhou, Kun Wang, and Xiaogang Wang. Scene graph generation
+from objects, phrases and region captions. In Proceedings of the IEEE international conference
+on computer vision , pages 1261–1270, 2017.
+[36] Yiming Li, Xiaoshan Yang, and Changsheng Xu. Dynamic scene graph generation via anticipatory
+pre-training. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern
+Recognition, pages 13874–13883, 2022.
+[37] Ji Lin, Hongxu Yin, Wei Ping, Pavlo Molchanov, Mohammad Shoeybi, and Song Han. Vila:
+On pre-training for visual language models. In Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition , pages 26689–26699, 2024.
+[38] Xin Lin, Changxing Ding, Jinquan Zeng, and Dacheng Tao. Gps-net: Graph property sensing
+network for scene graph generation. In Proceedings of the IEEE/CVF Conference on Computer
+Vision and Pattern Recognition , pages 3746–3753, 2020.
+[39] Xin Lin, Chong Shi, Yibing Zhan, Zuopeng Yang, Yaqi Wu, and Dacheng Tao. Tdˆ 2-net: Toward
+denoising and debiasing for dynamic scene graph generation. arXiv preprint arXiv:2401.12479 ,
+2024.
+[40] Ziyi Lin, Shijie Geng, Renrui Zhang, Peng Gao, Gerard De Melo, Xiaogang Wang, Jifeng
+Dai, Yu Qiao, and Hongsheng Li. Frozen clip models are efficient video learners. In European
+Conference on Computer Vision , pages 388–404. Springer, 2022.
+[41] Haotian Liu, Chunyuan Li, Yuheng Li, and Yong Jae Lee. Improved baselines with visual
+instruction tuning. In Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition, pages 26296–26306, 2024.
+[42] Cewu Lu, Ranjay Krishna, Michael Bernstein, and Li Fei-Fei. Visual relationship detection with
+language priors. In Computer Vision–ECCV 2016: 14th European Conference, Amsterdam, The
+Netherlands, October 11–14, 2016, Proceedings, Part I 14 , pages 852–869. Springer, 2016.
+[43] Yichao Lu, Himanshu Rai, Jason Chang, Boris Knyazev, Guangwei Yu, Shashank Shekhar,
+Graham W Taylor, and Maksims Volkovs. Context-aware scene graph generation with seq2seq
+transformers. In Proceedings of the IEEE/CVF international conference on computer vision ,
+pages 15931–15941, 2021.
+25
+[44] Arun Mallya and Svetlana Lazebnik. Recurrent models for situation recognition. In Proceedings
+of the IEEE International Conference on Computer Vision , pages 455–463, 2017.
+[45] Sayak Nag, Kyle Min, Subarna Tripathi, and Amit K Roy-Chowdhury. Unbiased scene graph
+generation in videos. In Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition, pages 22803–22813, 2023.
+[46] Sarah Pratt, Mark Yatskar, Luca Weihs, Ali Farhadi, and Aniruddha Kembhavi. Grounded
+situation recognition. In Computer Vision–ECCV 2020: 16th European Conference, Glasgow,
+UK, August 23–28, 2020, Proceedings, Part IV 16 , pages 314–332. Springer, 2020.
+[47] Tianwen Qian, Jingjing Chen, Linhai Zhuo, Yang Jiao, and Yu-Gang Jiang. Nuscenes-qa:
+A multi-modal visual question answering benchmark for autonomous driving scenario. In
+Proceedings of the AAAI Conference on Artificial Intelligence , volume 38, pages 4542–4550,
+2024.
+[48] Xufeng Qian, Yueting Zhuang, Yimeng Li, Shaoning Xiao, Shiliang Pu, and Jun Xiao. Video
+relation detection with spatio-temporal graph. In Proceedings of the 27th ACM international
+conference on multimedia, pages 84–93, 2019.
+[49] Gorjan Radevski12, Marie-Francine Moens, and Tinne Tuytelaars. Revisiting spatio-temporal
+layouts for compositional action recognition. 2021.
+[50] Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal,
+Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al. Learning transferable visual
+models from natural language supervision. In International conference on machine learning ,
+pages 8748–8763. PMLR, 2021.
+[51] Debaditya Roy, Dhruv Verma, and Basura Fernando. Clipsitu: Effectively leveraging clip
+for conditional predictions in situation recognition. In Proceedings of the IEEE/CVF Winter
+Conference on Applications of Computer Vision , pages 444–453, 2024.
+[52] Michael S Ryoo, AJ Piergiovanni, Anurag Arnab, Mostafa Dehghani, and Anelia Angelova. Token-
+learner: What can 8 learned tokens do for images and videos? arXiv preprint arXiv:2106.11297 ,
+2021.
+[53] Arka Sadhu, Tanmay Gupta, Mark Yatskar, Ram Nevatia, and Aniruddha Kembhavi. Visual
+semantic role labeling for video understanding. In Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition , pages 5589–5600, 2021.
+[54] Gunnar A Sigurdsson, G¨ ul Varol, Xiaolong Wang, Ali Farhadi, Ivan Laptev, and Abhinav Gupta.
+Hollywood in homes: Crowdsourcing data collection for activity understanding. In Computer
+Vision–ECCV 2016: 14th European Conference, Amsterdam, The Netherlands, October 11–14,
+2016, Proceedings, Part I 14 , pages 510–526. Springer, 2016.
+[55] Yi-Lin Sung, Jaemin Cho, and Mohit Bansal. Vl-adapter: Parameter-efficient transfer learning
+for vision-and-language tasks. In Proceedings of the IEEE/CVF conference on computer vision
+and pattern recognition, pages 5227–5237, 2022.
+[56] Kaihua Tang, Hanwang Zhang, Baoyuan Wu, Wenhan Luo, and Wei Liu. Learning to compose
+dynamic tree structures for visual contexts. In Proceedings of the IEEE/CVF conference on
+computer vision and pattern recognition , pages 6619–6628, 2019.
+26
+[57] Damien Teney, Lingqiao Liu, and Anton van Den Hengel. Graph-structured representations
+for visual question answering. In Proceedings of the IEEE conference on computer vision and
+pattern recognition, pages 1–9, 2017.
+[58] Yao Teng, Limin Wang, Zhifeng Li, and Gangshan Wu. Target adaptive context aggregation for
+video scene graph generation. In Proceedings of the IEEE/CVF International Conference on
+Computer Vision , pages 13688–13697, 2021.
+[59] Dhruv Verma, Debaditya Roy, and Basura Fernando. Effectively leveraging clip for generating
+situational summaries of images and videos. arXiv preprint arXiv:2407.20642 , 2024.
+[60] Johanna Wald, Helisa Dhamo, Nassir Navab, and Federico Tombari. Learning 3d semantic
+scene graphs from 3d indoor reconstructions. In Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition , pages 3961–3970, 2020.
+[61] Jingyi Wang, Jinfa Huang, Can Zhang, and Zhidong Deng. Cross-modality time-variant relation
+learning for generating dynamic scene graphs. In 2023 IEEE International Conference on
+Robotics and Automation (ICRA) , pages 8231–8238. IEEE, 2023.
+[62] Shuang Wang, Lianli Gao, Xinyu Lyu, Yuyu Guo, Pengpeng Zeng, and Jingkuan Song. Dynamic
+scene graph generation via temporal prior inference. In Proceedings of the 30th ACM International
+Conference on Multimedia, pages 5793–5801, 2022.
+[63] Xiaolong Wang and Abhinav Gupta. Videos as space-time region graphs. In Proceedings of the
+European conference on computer vision (ECCV) , pages 399–417, 2018.
+[64] Chen Wei, Haoqi Fan, Saining Xie, Chao-Yuan Wu, Alan Yuille, and Christoph Feichtenhofer.
+Masked feature prediction for self-supervised visual pre-training. InProceedings of the IEEE/CVF
+Conference on Computer Vision and Pattern Recognition , pages 14668–14678, 2022.
+[65] Meng Wei, Long Chen, Wei Ji, Xiaoyu Yue, and Tat-Seng Chua. Rethinking the two-stage
+framework for grounded situation recognition. In Proceedings of the AAAI Conference on
+Artificial Intelligence, volume 36, pages 2651–2658, 2022.
+[66] Philippe Weinzaepfel, Xavier Martin, and Cordelia Schmid. Human action localization with
+sparse spatial supervision. arXiv preprint arXiv:1605.05197 , 2016.
+[67] Bo Wu, Shoubin Yu, Zhenfang Chen, Joshua B Tenenbaum, and Chuang Gan. Star: A benchmark
+for situated reasoning in real-world videos. In Thirty-fifth Conference on Neural Information
+Processing Systems Datasets and Benchmarks Track (Round 2) , 2021.
+[68] Shun-Cheng Wu, Johanna Wald, Keisuke Tateno, Nassir Navab, and Federico Tombari. Scene-
+graphfusion: Incremental 3d scene graph prediction from rgb-d sequences. In Proceedings of the
+IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 7515–7525, 2021.
+[69] Danfei Xu, Yuke Zhu, Christopher B Choy, and Li Fei-Fei. Scene graph generation by iterative
+message passing. In Proceedings of the IEEE conference on computer vision and pattern
+recognition, pages 5410–5419, 2017.
+[70] Jianwei Yang, Jiasen Lu, Stefan Lee, Dhruv Batra, and Devi Parikh. Graph r-cnn for scene
+graph generation. In Proceedings of the European conference on computer vision (ECCV) , pages
+670–685, 2018.
+27
+[71] Jingkang Yang, Yi Zhe Ang, Zujin Guo, Kaiyang Zhou, Wayne Zhang, and Ziwei Liu. Panoptic
+scene graph generation. In European Conference on Computer Vision , pages 178–196. Springer,
+2022.
+[72] Jingkang Yang, Wenxuan Peng, Xiangtai Li, Zujin Guo, Liangyu Chen, Bo Li, Zheng Ma,
+Kaiyang Zhou, Wayne Zhang, Chen Change Loy, et al. Panoptic video scene graph generation.
+In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition ,
+pages 18675–18685, 2023.
+[73] Sibei Yang, Guanbin Li, and Yizhou Yu. Cross-modal relationship inference for grounding
+referring expressions. In Proceedings of the IEEE/CVF conference on computer vision and
+pattern recognition, pages 4145–4154, 2019.
+[74] Taojiannan Yang, Yi Zhu, Yusheng Xie, Aston Zhang, Chen Chen, and Mu Li. Aim: Adapting
+image models for efficient video action recognition. arXiv preprint arXiv:2302.03024 , 2023.
+[75] Xu Yang, Kaihua Tang, Hanwang Zhang, and Jianfei Cai. Auto-encoding scene graphs for
+image captioning. In Proceedings of the IEEE/CVF conference on computer vision and pattern
+recognition, pages 10685–10694, 2019.
+[76] Mark Yatskar, Vicente Ordonez, Luke Zettlemoyer, and Ali Farhadi. Commonly uncommon:
+Semantic sparsity in situation recognition. In Proceedings of the IEEE Conference on Computer
+Vision and Pattern Recognition , pages 7196–7205, 2017.
+[77] Mark Yatskar, Luke Zettlemoyer, and Ali Farhadi. Situation recognition: Visual semantic role
+labeling for image understanding. In Proceedings of the IEEE conference on computer vision
+and pattern recognition, pages 5534–5542, 2016.
+[78] Rowan Zellers, Mark Yatskar, Sam Thomson, and Yejin Choi. Neural motifs: Scene graph
+parsing with global context. In Proceedings of the IEEE conference on computer vision and
+pattern recognition, pages 5831–5840, 2018.
+[79] Hao Zhang and Basura Fernando. Fine-grained regional prompt tuning for visual abductive
+reasoning. arXiv preprint arXiv:2303.10428 , 2023.
+[80] Ji Zhang, Kevin J Shih, Ahmed Elgammal, Andrew Tao, and Bryan Catanzaro. Graphical
+contrastive losses for scene graph parsing. In Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition , pages 11535–11543, 2019.
+[81] Chen Zhao, Dawei Du, Anthony Hoogs, and Christopher Funk. Open set action recognition
+via multi-label evidential learning. In Proceedings of the IEEE/CVF Conference on Computer
+Vision and Pattern Recognition , pages 22982–22991, 2023.
+[82] Hang Zhao, Antonio Torralba, Lorenzo Torresani, and Zhicheng Yan. Hacs: Human action
+clips and segments dataset for recognition and temporal localization. In Proceedings of the
+IEEE/CVF International Conference on Computer Vision , pages 8668–8678, 2019.
+[83] Tao Zhuo, Zhiyong Cheng, Peng Zhang, Yongkang Wong, and Mohan Kankanhalli. Explainable
+video action reasoning via prior knowledge and state transitions. In Proceedings of the 27th acm
+international conference on multimedia , pages 521–529, 2019.
+28
