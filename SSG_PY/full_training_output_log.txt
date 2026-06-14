@@ -1,0 +1,8 @@
+# 1. Clear the module runtime cache one last time
+import sys
+for mod in ['config', 'dataset', 'feature_extraction', 'train', 'model']:
+    if mod in sys.modules: 
+        del sys.modules[mod]
+
+# 2. Kick off the full, deep training cycle
+get_ipython().system('python train.py      --data_path "/content/drive/MyDrive/project/SSG/data/"      --frame_path "/content/drive/MyDrive/project/SSG/data/frames/"      --clip_sft_path "/content/drive/MyDrive/project/SSG/open_clip_backups/checkpoints/epoch_3.pt"      --save_path "/content/drive/MyDrive/project/SSG/incomnet_ckpts"      --device "cuda:0"      --datasize "large"      --nepochs 30')
