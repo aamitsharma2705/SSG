@@ -1,0 +1,2103 @@
+/usr/local/lib/python3.12/dist-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+############### Configurations ###############
+optimizer: adamax
+lr: 0.001
+nepochs: 30.0
+mode: predcls
+iterations: 10
+clip_model: ViT_L_14_336_sft
+clip_sft_path: /content/drive/MyDrive/project/SSG/open_clip_backups/checkpoints/epoch_3.pt
+data_path: /content/drive/MyDrive/project/SSG/data/
+frame_path: /content/drive/MyDrive/project/SSG/data/frames/
+datasize: large
+save_path: /content/drive/MyDrive/project/SSG/incomnet_ckpts
+model_path: /content/drive/MyDrive/project/SSG/incomnet_trained_models
+ckpt: /content/drive/MyDrive/project/SSG/incomnet_trained_models/incomnet-224_epoch_0.tar
+ckpt_person: /content/drive/MyDrive/project/SSG/incomnet_trained_models/incomnet-224_person_epoch_0.tar
+top1: True
+seed: 2222
+device: cuda:0
+wandb: False
+##############################################
+
+============================================================
+📋 ACTIVE PIPELINE RUNTIME LOGS
+============================================================
+📊 DATASET PROFILE : LARGE dataset split
+🛠️ EXTRACTION MODE : predcls
+💾 CLIP CHECKPOINT : /content/drive/MyDrive/project/SSG/open_clip_backups/checkpoints/epoch_3.pt
+============================================================
+
+-------loading annotations---------slowly-----------
+Removed CGNBJ.mp4/000959.png as it has one contacting relationship and it is 'other relationship'
+Removed 004QE.mp4/000273.png as it has one contacting relationship and it is 'other relationship'
+Removed 004QE.mp4/000343.png as it has one contacting relationship and it is 'other relationship'
+Removed BOC1T.mp4/000055.png as it has one contacting relationship and it is 'other relationship'
+Removed BOC1T.mp4/000379.png as it has one contacting relationship and it is 'other relationship'
+Removed BOC1T.mp4/000271.png as it has one contacting relationship and it is 'other relationship'
+Removed BOC1T.mp4/000497.png as it has one contacting relationship and it is 'other relationship'
+Removed 05124.mp4/000603.png as it has one contacting relationship and it is 'other relationship'
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+There are 30 videos and 632 valid frames
+2 videos are invalid (no person), remove them
+0 videos are invalid (only one frame), remove them
+68 frames have no human bbox in GT, remove them!
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+-------loading annotations---------slowly-----------
+Removed 03PRW.mp4/000240.png as it has one contacting relationship and it is 'other relationship'
+Removed 00T1E.mp4/000240.png as it has one contacting relationship and it is 'other relationship'
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+There are 4 videos and 126 valid frames
+1 videos are invalid (no person), remove them
+0 videos are invalid (only one frame), remove them
+68 frames have no human bbox in GT, remove them!
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+epoch : 0  batch : 0  learning rate : 0.0010, loss : 89.789, obj SR loss : 4.425, verb loss : 2.904, verb SR loss : 1.650
+epoch : 0  batch : 1  learning rate : 0.0010, loss : 105.107, obj SR loss : 4.033, verb loss : 4.060, verb SR loss : 2.418
+epoch : 0  batch : 2  learning rate : 0.0010, loss : 151.437, obj SR loss : 4.096, verb loss : 9.179, verb SR loss : 1.868
+epoch : 0  batch : 3  learning rate : 0.0010, loss : 86.989, obj SR loss : 2.453, verb loss : 4.114, verb SR loss : 2.132
+epoch : 0  batch : 4  learning rate : 0.0010, loss : 76.009, obj SR loss : 3.253, verb loss : 2.947, verb SR loss : 1.401
+epoch : 0  batch : 5  learning rate : 0.0010, loss : 79.954, obj SR loss : 2.676, verb loss : 3.936, verb SR loss : 1.383
+epoch : 0  batch : 6  learning rate : 0.0010, loss : 46.090, obj SR loss : 2.304, verb loss : 1.286, verb SR loss : 1.019
+epoch : 0  batch : 7  learning rate : 0.0010, loss : 71.855, obj SR loss : 2.744, verb loss : 2.619, verb SR loss : 1.823
+epoch : 0  batch : 8  learning rate : 0.0010, loss : 50.779, obj SR loss : 2.919, verb loss : 0.778, verb SR loss : 1.381
+epoch : 0  batch : 9  learning rate : 0.0010, loss : 107.149, obj SR loss : 2.760, verb loss : 5.622, verb SR loss : 2.332
+epoch : 0  batch : 10  learning rate : 0.0010, loss : 63.579, obj SR loss : 2.657, verb loss : 1.571, verb SR loss : 2.130
+epoch : 0  batch : 11  learning rate : 0.0010, loss : 89.222, obj SR loss : 3.054, verb loss : 4.086, verb SR loss : 1.782
+epoch : 0  batch : 12  learning rate : 0.0010, loss : 66.637, obj SR loss : 2.114, verb loss : 3.379, verb SR loss : 1.170
+epoch : 0  batch : 13  learning rate : 0.0010, loss : 64.005, obj SR loss : 2.211, verb loss : 2.501, verb SR loss : 1.689
+epoch : 0  batch : 14  learning rate : 0.0010, loss : 85.996, obj SR loss : 3.209, verb loss : 3.212, verb SR loss : 2.179
+epoch : 0  batch : 15  learning rate : 0.0010, loss : 89.216, obj SR loss : 4.345, verb loss : 2.683, verb SR loss : 1.894
+epoch : 0  batch : 16  learning rate : 0.0010, loss : 66.505, obj SR loss : 2.943, verb loss : 2.145, verb SR loss : 1.563
+epoch : 0  batch : 17  learning rate : 0.0010, loss : 61.467, obj SR loss : 2.997, verb loss : 1.883, verb SR loss : 1.266
+epoch : 0  batch : 18  learning rate : 0.0010, loss : 60.347, obj SR loss : 3.064, verb loss : 0.896, verb SR loss : 2.074
+epoch : 0  batch : 19  learning rate : 0.0010, loss : 84.315, obj SR loss : 4.722, verb loss : 2.161, verb SR loss : 1.548
+epoch : 0  batch : 20  learning rate : 0.0010, loss : 90.615, obj SR loss : 3.473, verb loss : 4.108, verb SR loss : 1.480
+epoch : 0  batch : 21  learning rate : 0.0010, loss : 66.945, obj SR loss : 4.021, verb loss : 1.209, verb SR loss : 1.464
+epoch : 0  batch : 22  learning rate : 0.0010, loss : 79.793, obj SR loss : 2.806, verb loss : 3.125, verb SR loss : 2.048
+epoch : 0  batch : 23  learning rate : 0.0010, loss : 55.850, obj SR loss : 2.847, verb loss : 1.342, verb SR loss : 1.396
+epoch : 0  batch : 24  learning rate : 0.0010, loss : 89.652, obj SR loss : 2.553, verb loss : 4.227, verb SR loss : 2.185
+epoch : 0  batch : 25  learning rate : 0.0010, loss : 69.200, obj SR loss : 3.067, verb loss : 2.504, verb SR loss : 1.349
+epoch : 0  batch : 26  learning rate : 0.0010, loss : 69.221, obj SR loss : 2.469, verb loss : 2.344, verb SR loss : 2.109
+epoch : 0  batch : 27  learning rate : 0.0010, loss : 56.275, obj SR loss : 2.259, verb loss : 1.787, verb SR loss : 1.582
+epoch : 0  batch : 28  learning rate : 0.0010, loss : 54.980, obj SR loss : 2.581, verb loss : 1.097, verb SR loss : 1.820
+epoch : 0  batch : 29  learning rate : 0.0010, loss : 62.950, obj SR loss : 3.435, verb loss : 1.378, verb SR loss : 1.482
+
+Object SR result:
+Accuracy: 0.0
+mR: 0.0
+mP: 0.0
+F1: 0.0
+Value: 0.0
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 0.0
+role_based_mP: 0.0
+role_based_mR: 0.0
+role_based_f1: 0.0
+
+Verb result:
+Accuracy: 17.842323651452283
+mR: 11.11111111111111
+mP: 1.98248040571692
+F1: 3.3646322378716746
+
+Verb SR result:
+Accuracy: 33.99153737658674
+mR: 5.263157894736842
+mP: 1.7890282829782496
+F1: 2.6703601108033244
+Value: 17.842323651452283
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 1.9824804057169203
+role_based_mP: 0.9912402028584602
+role_based_mR: 5.555555555555555
+role_based_f1: 1.682316118935837
+avg epoch performance :  35.684647302904565
+****************************************************************************************************
+val_acc is:  0 35.684647302904565
+save the checkpoint after 0 epochs
+epoch : 1  batch : 0  learning rate : 0.0009, loss : 64.659, obj SR loss : 3.771, verb loss : 1.494, verb SR loss : 1.201
+epoch : 1  batch : 1  learning rate : 0.0009, loss : 70.724, obj SR loss : 2.976, verb loss : 2.373, verb SR loss : 1.723
+epoch : 1  batch : 2  learning rate : 0.0009, loss : 58.702, obj SR loss : 3.032, verb loss : 1.564, verb SR loss : 1.275
+epoch : 1  batch : 3  learning rate : 0.0009, loss : 83.899, obj SR loss : 2.390, verb loss : 4.626, verb SR loss : 1.373
+epoch : 1  batch : 4  learning rate : 0.0009, loss : 78.550, obj SR loss : 3.122, verb loss : 3.194, verb SR loss : 1.539
+epoch : 1  batch : 5  learning rate : 0.0009, loss : 88.548, obj SR loss : 2.398, verb loss : 5.018, verb SR loss : 1.438
+epoch : 1  batch : 6  learning rate : 0.0009, loss : 51.095, obj SR loss : 2.107, verb loss : 1.938, verb SR loss : 1.065
+epoch : 1  batch : 7  learning rate : 0.0009, loss : 56.332, obj SR loss : 2.626, verb loss : 1.344, verb SR loss : 1.664
+epoch : 1  batch : 8  learning rate : 0.0009, loss : 47.003, obj SR loss : 2.645, verb loss : 0.989, verb SR loss : 1.066
+epoch : 1  batch : 9  learning rate : 0.0009, loss : 58.115, obj SR loss : 2.492, verb loss : 1.581, verb SR loss : 1.738
+epoch : 1  batch : 10  learning rate : 0.0009, loss : 53.806, obj SR loss : 2.435, verb loss : 1.301, verb SR loss : 1.644
+epoch : 1  batch : 11  learning rate : 0.0009, loss : 91.531, obj SR loss : 3.035, verb loss : 4.669, verb SR loss : 1.449
+epoch : 1  batch : 12  learning rate : 0.0009, loss : 53.558, obj SR loss : 2.048, verb loss : 2.263, verb SR loss : 1.045
+epoch : 1  batch : 13  learning rate : 0.0009, loss : 56.767, obj SR loss : 2.255, verb loss : 2.061, verb SR loss : 1.361
+epoch : 1  batch : 14  learning rate : 0.0009, loss : 67.331, obj SR loss : 2.882, verb loss : 1.991, verb SR loss : 1.859
+epoch : 1  batch : 15  learning rate : 0.0009, loss : 69.288, obj SR loss : 4.006, verb loss : 1.218, verb SR loss : 1.704
+epoch : 1  batch : 16  learning rate : 0.0009, loss : 57.571, obj SR loss : 2.676, verb loss : 1.768, verb SR loss : 1.314
+epoch : 1  batch : 17  learning rate : 0.0009, loss : 70.047, obj SR loss : 2.730, verb loss : 3.124, verb SR loss : 1.150
+epoch : 1  batch : 18  learning rate : 0.0009, loss : 59.103, obj SR loss : 2.997, verb loss : 0.943, verb SR loss : 1.971
+epoch : 1  batch : 19  learning rate : 0.0009, loss : 73.689, obj SR loss : 3.999, verb loss : 1.855, verb SR loss : 1.515
+epoch : 1  batch : 20  learning rate : 0.0009, loss : 73.875, obj SR loss : 3.051, verb loss : 2.955, verb SR loss : 1.382
+epoch : 1  batch : 21  learning rate : 0.0009, loss : 65.899, obj SR loss : 4.212, verb loss : 0.925, verb SR loss : 1.453
+epoch : 1  batch : 22  learning rate : 0.0009, loss : 83.916, obj SR loss : 2.531, verb loss : 3.988, verb SR loss : 1.873
+epoch : 1  batch : 23  learning rate : 0.0009, loss : 64.991, obj SR loss : 2.498, verb loss : 2.832, verb SR loss : 1.169
+epoch : 1  batch : 24  learning rate : 0.0009, loss : 81.877, obj SR loss : 1.952, verb loss : 4.120, verb SR loss : 2.115
+epoch : 1  batch : 25  learning rate : 0.0009, loss : 57.868, obj SR loss : 3.167, verb loss : 1.363, verb SR loss : 1.257
+epoch : 1  batch : 26  learning rate : 0.0009, loss : 66.028, obj SR loss : 2.708, verb loss : 2.050, verb SR loss : 1.844
+epoch : 1  batch : 27  learning rate : 0.0009, loss : 52.425, obj SR loss : 2.501, verb loss : 1.235, verb SR loss : 1.506
+epoch : 1  batch : 28  learning rate : 0.0009, loss : 49.957, obj SR loss : 2.229, verb loss : 1.044, verb SR loss : 1.723
+epoch : 1  batch : 29  learning rate : 0.0009, loss : 62.986, obj SR loss : 3.577, verb loss : 1.334, verb SR loss : 1.388
+
+Object SR result:
+Accuracy: 6.28997867803838
+mR: 3.0303030303030303
+mP: 0.1906054144860115
+F1: 0.3586517127138993
+Value: 24.481327800829874
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 14.788535807832103
+role_based_mP: 5.553708018876861
+role_based_mR: 11.856661856661857
+role_based_f1: 7.209285143169442
+
+Verb result:
+Accuracy: 17.842323651452283
+mR: 11.11111111111111
+mP: 1.98248040571692
+F1: 3.3646322378716746
+
+Verb SR result:
+Accuracy: 33.99153737658674
+mR: 5.263157894736842
+mP: 1.7890282829782496
+F1: 2.6703601108033244
+Value: 17.842323651452283
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 1.9824804057169203
+role_based_mP: 0.9912402028584602
+role_based_mR: 5.555555555555555
+role_based_f1: 1.682316118935837
+avg epoch performance :  60.16597510373444
+****************************************************************************************************
+val_acc is:  1 60.16597510373444
+save the checkpoint after 1 epochs
+epoch : 2  batch : 0  learning rate : 0.0008, loss : 74.041, obj SR loss : 4.036, verb loss : 2.151, verb SR loss : 1.218
+epoch : 2  batch : 1  learning rate : 0.0008, loss : 69.805, obj SR loss : 3.015, verb loss : 2.396, verb SR loss : 1.569
+epoch : 2  batch : 2  learning rate : 0.0008, loss : 71.635, obj SR loss : 3.554, verb loss : 2.342, verb SR loss : 1.267
+epoch : 2  batch : 3  learning rate : 0.0008, loss : 78.404, obj SR loss : 2.415, verb loss : 4.288, verb SR loss : 1.138
+epoch : 2  batch : 4  learning rate : 0.0008, loss : 67.198, obj SR loss : 3.064, verb loss : 2.462, verb SR loss : 1.194
+epoch : 2  batch : 5  learning rate : 0.0008, loss : 78.257, obj SR loss : 2.730, verb loss : 3.854, verb SR loss : 1.242
+epoch : 2  batch : 6  learning rate : 0.0008, loss : 48.289, obj SR loss : 2.223, verb loss : 1.649, verb SR loss : 0.956
+epoch : 2  batch : 7  learning rate : 0.0008, loss : 63.955, obj SR loss : 2.907, verb loss : 2.030, verb SR loss : 1.459
+epoch : 2  batch : 8  learning rate : 0.0008, loss : 37.172, obj SR loss : 2.176, verb loss : 0.545, verb SR loss : 0.996
+epoch : 2  batch : 9  learning rate : 0.0008, loss : 66.421, obj SR loss : 1.853, verb loss : 3.178, verb SR loss : 1.612
+epoch : 2  batch : 10  learning rate : 0.0008, loss : 59.201, obj SR loss : 2.281, verb loss : 2.122, verb SR loss : 1.517
+epoch : 2  batch : 11  learning rate : 0.0008, loss : 67.173, obj SR loss : 2.724, verb loss : 2.688, verb SR loss : 1.306
+epoch : 2  batch : 12  learning rate : 0.0008, loss : 51.579, obj SR loss : 1.981, verb loss : 2.129, verb SR loss : 1.048
+epoch : 2  batch : 13  learning rate : 0.0008, loss : 59.637, obj SR loss : 2.004, verb loss : 2.564, verb SR loss : 1.396
+epoch : 2  batch : 14  learning rate : 0.0008, loss : 65.462, obj SR loss : 2.405, verb loss : 2.303, verb SR loss : 1.838
+epoch : 2  batch : 15  learning rate : 0.0008, loss : 68.810, obj SR loss : 3.589, verb loss : 1.664, verb SR loss : 1.628
+epoch : 2  batch : 16  learning rate : 0.0008, loss : 58.024, obj SR loss : 2.510, verb loss : 1.820, verb SR loss : 1.472
+epoch : 2  batch : 17  learning rate : 0.0008, loss : 63.395, obj SR loss : 2.680, verb loss : 2.606, verb SR loss : 1.054
+epoch : 2  batch : 18  learning rate : 0.0008, loss : 57.616, obj SR loss : 2.754, verb loss : 1.038, verb SR loss : 1.970
+epoch : 2  batch : 19  learning rate : 0.0008, loss : 78.913, obj SR loss : 3.822, verb loss : 2.778, verb SR loss : 1.291
+epoch : 2  batch : 20  learning rate : 0.0008, loss : 77.836, obj SR loss : 2.972, verb loss : 3.569, verb SR loss : 1.243
+epoch : 2  batch : 21  learning rate : 0.0008, loss : 72.928, obj SR loss : 3.568, verb loss : 2.637, verb SR loss : 1.088
+epoch : 2  batch : 22  learning rate : 0.0008, loss : 76.534, obj SR loss : 2.674, verb loss : 3.206, verb SR loss : 1.773
+epoch : 2  batch : 23  learning rate : 0.0008, loss : 61.528, obj SR loss : 2.496, verb loss : 2.492, verb SR loss : 1.165
+epoch : 2  batch : 24  learning rate : 0.0008, loss : 75.892, obj SR loss : 2.139, verb loss : 3.426, verb SR loss : 2.025
+epoch : 2  batch : 25  learning rate : 0.0008, loss : 57.628, obj SR loss : 2.983, verb loss : 1.543, verb SR loss : 1.237
+epoch : 2  batch : 26  learning rate : 0.0008, loss : 56.285, obj SR loss : 2.468, verb loss : 1.560, verb SR loss : 1.600
+epoch : 2  batch : 27  learning rate : 0.0008, loss : 51.176, obj SR loss : 2.453, verb loss : 1.262, verb SR loss : 1.402
+epoch : 2  batch : 28  learning rate : 0.0008, loss : 48.090, obj SR loss : 2.022, verb loss : 1.195, verb SR loss : 1.592
+epoch : 2  batch : 29  learning rate : 0.0008, loss : 59.738, obj SR loss : 3.015, verb loss : 1.512, verb SR loss : 1.447
+
+Object SR result:
+Accuracy: 6.28997867803838
+mR: 3.0303030303030303
+mP: 0.1906054144860115
+F1: 0.3586517127138993
+Value: 24.481327800829874
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 14.788535807832103
+role_based_mP: 5.553708018876861
+role_based_mR: 11.856661856661857
+role_based_f1: 7.209285143169442
+
+Verb result:
+Accuracy: 26.556016597510375
+mR: 11.11111111111111
+mP: 2.9506685108344857
+F1: 4.6630236794171225
+
+Verb SR result:
+Accuracy: 33.99153737658674
+mR: 5.263157894736842
+mP: 1.7890282829782496
+F1: 2.6703601108033244
+Value: 26.556016597510375
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 2.950668510834486
+role_based_mP: 1.475334255417243
+role_based_mR: 5.555555555555555
+role_based_f1: 2.331511839708561
+avg epoch performance :  77.59336099585063
+****************************************************************************************************
+val_acc is:  2 77.59336099585063
+save the checkpoint after 2 epochs
+epoch : 3  batch : 0  learning rate : 0.0007, loss : 58.438, obj SR loss : 3.677, verb loss : 0.943, verb SR loss : 1.223
+epoch : 3  batch : 1  learning rate : 0.0007, loss : 60.246, obj SR loss : 2.724, verb loss : 1.570, verb SR loss : 1.731
+epoch : 3  batch : 2  learning rate : 0.0007, loss : 56.957, obj SR loss : 3.198, verb loss : 1.264, verb SR loss : 1.234
+epoch : 3  batch : 3  learning rate : 0.0007, loss : 58.686, obj SR loss : 2.175, verb loss : 2.537, verb SR loss : 1.157
+epoch : 3  batch : 4  learning rate : 0.0007, loss : 61.245, obj SR loss : 2.850, verb loss : 1.941, verb SR loss : 1.333
+epoch : 3  batch : 5  learning rate : 0.0007, loss : 72.149, obj SR loss : 2.499, verb loss : 3.244, verb SR loss : 1.472
+epoch : 3  batch : 6  learning rate : 0.0007, loss : 44.871, obj SR loss : 2.075, verb loss : 1.442, verb SR loss : 0.970
+epoch : 3  batch : 7  learning rate : 0.0007, loss : 54.554, obj SR loss : 2.659, verb loss : 1.233, verb SR loss : 1.563
+epoch : 3  batch : 8  learning rate : 0.0007, loss : 36.872, obj SR loss : 2.072, verb loss : 0.692, verb SR loss : 0.923
+epoch : 3  batch : 9  learning rate : 0.0007, loss : 48.018, obj SR loss : 1.804, verb loss : 1.429, verb SR loss : 1.568
+epoch : 3  batch : 10  learning rate : 0.0007, loss : 48.270, obj SR loss : 2.142, verb loss : 1.243, verb SR loss : 1.443
+epoch : 3  batch : 11  learning rate : 0.0007, loss : 61.674, obj SR loss : 2.625, verb loss : 2.308, verb SR loss : 1.235
+epoch : 3  batch : 12  learning rate : 0.0007, loss : 48.727, obj SR loss : 1.891, verb loss : 1.778, verb SR loss : 1.203
+epoch : 3  batch : 13  learning rate : 0.0007, loss : 59.383, obj SR loss : 2.162, verb loss : 2.429, verb SR loss : 1.347
+epoch : 3  batch : 14  learning rate : 0.0007, loss : 59.801, obj SR loss : 2.414, verb loss : 1.774, verb SR loss : 1.792
+epoch : 3  batch : 15  learning rate : 0.0007, loss : 63.648, obj SR loss : 3.667, verb loss : 1.123, verb SR loss : 1.575
+epoch : 3  batch : 16  learning rate : 0.0007, loss : 50.993, obj SR loss : 2.447, verb loss : 1.316, verb SR loss : 1.336
+epoch : 3  batch : 17  learning rate : 0.0007, loss : 53.588, obj SR loss : 2.556, verb loss : 1.785, verb SR loss : 1.018
+epoch : 3  batch : 18  learning rate : 0.0007, loss : 54.507, obj SR loss : 2.751, verb loss : 0.912, verb SR loss : 1.787
+epoch : 3  batch : 19  learning rate : 0.0007, loss : 68.862, obj SR loss : 3.749, verb loss : 1.893, verb SR loss : 1.244
+epoch : 3  batch : 20  learning rate : 0.0007, loss : 70.591, obj SR loss : 2.889, verb loss : 2.889, verb SR loss : 1.282
+epoch : 3  batch : 21  learning rate : 0.0007, loss : 60.162, obj SR loss : 3.349, verb loss : 1.588, verb SR loss : 1.079
+epoch : 3  batch : 22  learning rate : 0.0007, loss : 65.464, obj SR loss : 2.583, verb loss : 2.273, verb SR loss : 1.690
+epoch : 3  batch : 23  learning rate : 0.0007, loss : 51.265, obj SR loss : 2.419, verb loss : 1.501, verb SR loss : 1.207
+epoch : 3  batch : 24  learning rate : 0.0007, loss : 70.519, obj SR loss : 2.077, verb loss : 3.063, verb SR loss : 1.912
+epoch : 3  batch : 25  learning rate : 0.0007, loss : 53.741, obj SR loss : 2.853, verb loss : 1.258, verb SR loss : 1.263
+epoch : 3  batch : 26  learning rate : 0.0007, loss : 57.021, obj SR loss : 2.438, verb loss : 1.542, verb SR loss : 1.722
+epoch : 3  batch : 27  learning rate : 0.0007, loss : 49.496, obj SR loss : 2.380, verb loss : 1.132, verb SR loss : 1.438
+epoch : 3  batch : 28  learning rate : 0.0007, loss : 47.899, obj SR loss : 2.039, verb loss : 1.139, verb SR loss : 1.612
+epoch : 3  batch : 29  learning rate : 0.0007, loss : 55.151, obj SR loss : 2.870, verb loss : 1.276, verb SR loss : 1.369
+
+Object SR result:
+Accuracy: 6.28997867803838
+mR: 3.0303030303030303
+mP: 0.1906054144860115
+F1: 0.3586517127138993
+Value: 24.481327800829874
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 14.788535807832103
+role_based_mP: 5.553708018876861
+role_based_mR: 11.856661856661857
+role_based_f1: 7.209285143169442
+
+Verb result:
+Accuracy: 21.57676348547718
+mR: 11.177325581395348
+mP: 8.10355207706201
+F1: 6.914409014624789
+
+Verb SR result:
+Accuracy: 33.99153737658674
+mR: 5.263157894736842
+mP: 1.7890282829782496
+F1: 2.6703601108033244
+Value: 21.57676348547718
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 2.39741816505302
+role_based_mP: 1.19870908252651
+role_based_mR: 5.555555555555555
+role_based_f1: 1.9719378081152827
+avg epoch performance :  67.63485477178423
+****************************************************************************************************
+epoch : 4  batch : 0  learning rate : 0.0007, loss : 51.446, obj SR loss : 3.377, verb loss : 0.784, verb SR loss : 0.984
+epoch : 4  batch : 1  learning rate : 0.0007, loss : 54.318, obj SR loss : 2.652, verb loss : 1.307, verb SR loss : 1.473
+epoch : 4  batch : 2  learning rate : 0.0007, loss : 54.270, obj SR loss : 3.113, verb loss : 1.223, verb SR loss : 1.091
+epoch : 4  batch : 3  learning rate : 0.0007, loss : 50.987, obj SR loss : 2.124, verb loss : 1.910, verb SR loss : 1.065
+epoch : 4  batch : 4  learning rate : 0.0007, loss : 52.263, obj SR loss : 2.842, verb loss : 1.232, verb SR loss : 1.152
+epoch : 4  batch : 5  learning rate : 0.0007, loss : 66.155, obj SR loss : 2.504, verb loss : 2.807, verb SR loss : 1.304
+epoch : 4  batch : 6  learning rate : 0.0007, loss : 37.835, obj SR loss : 2.068, verb loss : 0.868, verb SR loss : 0.848
+epoch : 4  batch : 7  learning rate : 0.0007, loss : 50.564, obj SR loss : 2.621, verb loss : 1.003, verb SR loss : 1.432
+epoch : 4  batch : 8  learning rate : 0.0007, loss : 30.528, obj SR loss : 2.009, verb loss : 0.264, verb SR loss : 0.779
+epoch : 4  batch : 9  learning rate : 0.0007, loss : 41.726, obj SR loss : 1.670, verb loss : 1.040, verb SR loss : 1.463
+epoch : 4  batch : 10  learning rate : 0.0007, loss : 46.620, obj SR loss : 2.121, verb loss : 1.184, verb SR loss : 1.357
+epoch : 4  batch : 11  learning rate : 0.0007, loss : 64.042, obj SR loss : 2.623, verb loss : 2.621, verb SR loss : 1.160
+epoch : 4  batch : 12  learning rate : 0.0007, loss : 47.185, obj SR loss : 1.976, verb loss : 1.631, verb SR loss : 1.112
+epoch : 4  batch : 13  learning rate : 0.0007, loss : 65.567, obj SR loss : 2.210, verb loss : 3.084, verb SR loss : 1.263
+epoch : 4  batch : 14  learning rate : 0.0007, loss : 53.488, obj SR loss : 2.240, verb loss : 1.454, verb SR loss : 1.655
+epoch : 4  batch : 15  learning rate : 0.0007, loss : 60.016, obj SR loss : 3.550, verb loss : 0.917, verb SR loss : 1.535
+epoch : 4  batch : 16  learning rate : 0.0007, loss : 48.627, obj SR loss : 2.424, verb loss : 1.164, verb SR loss : 1.274
+epoch : 4  batch : 17  learning rate : 0.0007, loss : 48.844, obj SR loss : 2.488, verb loss : 1.419, verb SR loss : 0.977
+epoch : 4  batch : 18  learning rate : 0.0007, loss : 48.400, obj SR loss : 2.615, verb loss : 0.544, verb SR loss : 1.680
+epoch : 4  batch : 19  learning rate : 0.0007, loss : 63.964, obj SR loss : 3.667, verb loss : 1.522, verb SR loss : 1.207
+epoch : 4  batch : 20  learning rate : 0.0007, loss : 70.599, obj SR loss : 2.854, verb loss : 3.027, verb SR loss : 1.179
+epoch : 4  batch : 21  learning rate : 0.0007, loss : 52.231, obj SR loss : 3.286, verb loss : 0.964, verb SR loss : 0.973
+epoch : 4  batch : 22  learning rate : 0.0007, loss : 60.778, obj SR loss : 2.601, verb loss : 1.825, verb SR loss : 1.652
+epoch : 4  batch : 23  learning rate : 0.0007, loss : 42.220, obj SR loss : 2.398, verb loss : 0.775, verb SR loss : 1.049
+epoch : 4  batch : 24  learning rate : 0.0007, loss : 58.758, obj SR loss : 2.109, verb loss : 1.907, verb SR loss : 1.860
+epoch : 4  batch : 25  learning rate : 0.0007, loss : 49.896, obj SR loss : 2.777, verb loss : 1.026, verb SR loss : 1.187
+epoch : 4  batch : 26  learning rate : 0.0007, loss : 56.820, obj SR loss : 2.430, verb loss : 1.619, verb SR loss : 1.633
+epoch : 4  batch : 27  learning rate : 0.0007, loss : 51.946, obj SR loss : 2.203, verb loss : 1.638, verb SR loss : 1.354
+epoch : 4  batch : 28  learning rate : 0.0007, loss : 45.507, obj SR loss : 2.081, verb loss : 0.861, verb SR loss : 1.608
+epoch : 4  batch : 29  learning rate : 0.0007, loss : 52.483, obj SR loss : 2.788, verb loss : 1.154, verb SR loss : 1.306
+
+Object SR result:
+Accuracy: 6.28997867803838
+mR: 3.0303030303030303
+mP: 0.1906054144860115
+F1: 0.3586517127138993
+Value: 24.481327800829874
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 14.788535807832103
+role_based_mP: 5.553708018876861
+role_based_mR: 11.856661856661857
+role_based_f1: 7.209285143169442
+
+Verb result:
+Accuracy: 32.780082987551864
+mR: 18.459934277047523
+mP: 12.325783972125434
+F1: 13.842905405405407
+
+Verb SR result:
+Accuracy: 33.286318758815234
+mR: 8.58402489626556
+mP: 4.205710102489019
+F1: 5.52164502164502
+Value: 30.70539419087137
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 3.5422150835080832
+role_based_mP: 1.413587565039847
+role_based_mR: 3.571428571428571
+role_based_f1: 1.9445171230885516
+avg epoch performance :  87.96680497925311
+****************************************************************************************************
+val_acc is:  4 87.96680497925311
+save the checkpoint after 4 epochs
+epoch : 5  batch : 0  learning rate : 0.0006, loss : 46.037, obj SR loss : 3.178, verb loss : 0.708, verb SR loss : 0.718
+epoch : 5  batch : 1  learning rate : 0.0006, loss : 52.345, obj SR loss : 2.536, verb loss : 1.339, verb SR loss : 1.360
+epoch : 5  batch : 2  learning rate : 0.0006, loss : 50.837, obj SR loss : 2.970, verb loss : 1.119, verb SR loss : 0.995
+epoch : 5  batch : 3  learning rate : 0.0006, loss : 45.840, obj SR loss : 2.043, verb loss : 1.588, verb SR loss : 0.953
+epoch : 5  batch : 4  learning rate : 0.0006, loss : 46.755, obj SR loss : 2.693, verb loss : 0.971, verb SR loss : 1.011
+epoch : 5  batch : 5  learning rate : 0.0006, loss : 61.814, obj SR loss : 2.425, verb loss : 2.487, verb SR loss : 1.269
+epoch : 5  batch : 6  learning rate : 0.0006, loss : 33.997, obj SR loss : 1.955, verb loss : 0.701, verb SR loss : 0.744
+epoch : 5  batch : 7  learning rate : 0.0006, loss : 46.396, obj SR loss : 2.527, verb loss : 0.764, verb SR loss : 1.348
+epoch : 5  batch : 8  learning rate : 0.0006, loss : 26.673, obj SR loss : 1.857, verb loss : 0.167, verb SR loss : 0.643
+epoch : 5  batch : 9  learning rate : 0.0006, loss : 34.103, obj SR loss : 1.665, verb loss : 0.425, verb SR loss : 1.320
+epoch : 5  batch : 10  learning rate : 0.0006, loss : 44.999, obj SR loss : 2.121, verb loss : 0.976, verb SR loss : 1.402
+epoch : 5  batch : 11  learning rate : 0.0006, loss : 54.994, obj SR loss : 2.519, verb loss : 1.836, verb SR loss : 1.144
+epoch : 5  batch : 12  learning rate : 0.0006, loss : 47.373, obj SR loss : 1.998, verb loss : 1.755, verb SR loss : 0.984
+epoch : 5  batch : 13  learning rate : 0.0006, loss : 58.203, obj SR loss : 2.188, verb loss : 2.452, verb SR loss : 1.181
+epoch : 5  batch : 14  learning rate : 0.0006, loss : 48.273, obj SR loss : 2.136, verb loss : 1.200, verb SR loss : 1.492
+epoch : 5  batch : 15  learning rate : 0.0006, loss : 60.875, obj SR loss : 3.515, verb loss : 1.104, verb SR loss : 1.468
+epoch : 5  batch : 16  learning rate : 0.0006, loss : 45.223, obj SR loss : 2.443, verb loss : 0.952, verb SR loss : 1.126
+epoch : 5  batch : 17  learning rate : 0.0006, loss : 43.077, obj SR loss : 2.584, verb loss : 0.800, verb SR loss : 0.924
+epoch : 5  batch : 18  learning rate : 0.0006, loss : 46.891, obj SR loss : 2.544, verb loss : 0.518, verb SR loss : 1.627
+epoch : 5  batch : 19  learning rate : 0.0006, loss : 60.168, obj SR loss : 3.553, verb loss : 1.170, verb SR loss : 1.294
+epoch : 5  batch : 20  learning rate : 0.0006, loss : 58.514, obj SR loss : 2.780, verb loss : 1.993, verb SR loss : 1.079
+epoch : 5  batch : 21  learning rate : 0.0006, loss : 47.828, obj SR loss : 3.179, verb loss : 0.773, verb SR loss : 0.831
+epoch : 5  batch : 22  learning rate : 0.0006, loss : 50.620, obj SR loss : 2.444, verb loss : 1.064, verb SR loss : 1.555
+epoch : 5  batch : 23  learning rate : 0.0006, loss : 35.666, obj SR loss : 2.280, verb loss : 0.347, verb SR loss : 0.940
+epoch : 5  batch : 24  learning rate : 0.0006, loss : 54.713, obj SR loss : 1.954, verb loss : 1.639, verb SR loss : 1.878
+epoch : 5  batch : 25  learning rate : 0.0006, loss : 52.763, obj SR loss : 2.662, verb loss : 1.512, verb SR loss : 1.102
+epoch : 5  batch : 26  learning rate : 0.0006, loss : 49.248, obj SR loss : 2.424, verb loss : 0.994, verb SR loss : 1.507
+epoch : 5  batch : 27  learning rate : 0.0006, loss : 56.940, obj SR loss : 2.149, verb loss : 2.204, verb SR loss : 1.342
+epoch : 5  batch : 28  learning rate : 0.0006, loss : 41.869, obj SR loss : 2.046, verb loss : 0.545, verb SR loss : 1.597
+epoch : 5  batch : 29  learning rate : 0.0006, loss : 50.478, obj SR loss : 2.876, verb loss : 0.877, verb SR loss : 1.295
+
+Object SR result:
+Accuracy: 6.28997867803838
+mR: 3.0303030303030303
+mP: 0.1906054144860115
+F1: 0.3586517127138993
+Value: 24.481327800829874
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 14.788535807832103
+role_based_mP: 5.553708018876861
+role_based_mR: 11.856661856661857
+role_based_f1: 7.209285143169442
+
+Verb result:
+Accuracy: 34.85477178423236
+mR: 20.076782103134477
+mP: 13.251925066084356
+F1: 14.281045751633986
+
+Verb SR result:
+Accuracy: 33.85049365303244
+mR: 7.8281804095300505
+mP: 3.144757500788403
+F1: 4.4868512118140895
+Value: 34.85477178423236
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 9.18009585383898
+role_based_mP: 2.5601549979143337
+role_based_mR: 6.481481481481481
+role_based_f1: 3.5297586143357287
+avg epoch performance :  94.1908713692946
+****************************************************************************************************
+val_acc is:  5 94.1908713692946
+save the checkpoint after 5 epochs
+epoch : 6  batch : 0  learning rate : 0.0005, loss : 47.771, obj SR loss : 3.034, verb loss : 1.065, verb SR loss : 0.679
+epoch : 6  batch : 1  learning rate : 0.0005, loss : 49.779, obj SR loss : 2.536, verb loss : 1.112, verb SR loss : 1.330
+epoch : 6  batch : 2  learning rate : 0.0005, loss : 51.950, obj SR loss : 2.972, verb loss : 1.239, verb SR loss : 0.984
+epoch : 6  batch : 3  learning rate : 0.0005, loss : 42.708, obj SR loss : 1.997, verb loss : 1.544, verb SR loss : 0.730
+epoch : 6  batch : 4  learning rate : 0.0005, loss : 42.487, obj SR loss : 2.663, verb loss : 0.737, verb SR loss : 0.848
+epoch : 6  batch : 5  learning rate : 0.0005, loss : 54.654, obj SR loss : 2.408, verb loss : 1.985, verb SR loss : 1.072
+epoch : 6  batch : 6  learning rate : 0.0005, loss : 29.790, obj SR loss : 1.891, verb loss : 0.526, verb SR loss : 0.562
+epoch : 6  batch : 7  learning rate : 0.0005, loss : 44.586, obj SR loss : 2.506, verb loss : 0.783, verb SR loss : 1.170
+epoch : 6  batch : 8  learning rate : 0.0005, loss : 25.360, obj SR loss : 1.913, verb loss : 0.123, verb SR loss : 0.500
+epoch : 6  batch : 9  learning rate : 0.0005, loss : 31.489, obj SR loss : 1.686, verb loss : 0.330, verb SR loss : 1.133
+epoch : 6  batch : 10  learning rate : 0.0005, loss : 43.564, obj SR loss : 2.044, verb loss : 1.130, verb SR loss : 1.182
+epoch : 6  batch : 11  learning rate : 0.0005, loss : 44.851, obj SR loss : 2.495, verb loss : 0.922, verb SR loss : 1.068
+epoch : 6  batch : 12  learning rate : 0.0005, loss : 44.910, obj SR loss : 1.936, verb loss : 1.681, verb SR loss : 0.874
+epoch : 6  batch : 13  learning rate : 0.0005, loss : 59.119, obj SR loss : 2.127, verb loss : 2.583, verb SR loss : 1.202
+epoch : 6  batch : 14  learning rate : 0.0005, loss : 45.492, obj SR loss : 2.134, verb loss : 1.021, verb SR loss : 1.395
+epoch : 6  batch : 15  learning rate : 0.0005, loss : 60.328, obj SR loss : 3.497, verb loss : 1.156, verb SR loss : 1.379
+epoch : 6  batch : 16  learning rate : 0.0005, loss : 46.432, obj SR loss : 2.413, verb loss : 1.223, verb SR loss : 1.008
+epoch : 6  batch : 17  learning rate : 0.0005, loss : 40.483, obj SR loss : 2.563, verb loss : 0.660, verb SR loss : 0.826
+epoch : 6  batch : 18  learning rate : 0.0005, loss : 47.287, obj SR loss : 2.548, verb loss : 0.773, verb SR loss : 1.408
+epoch : 6  batch : 19  learning rate : 0.0005, loss : 58.834, obj SR loss : 3.557, verb loss : 1.236, verb SR loss : 1.091
+epoch : 6  batch : 20  learning rate : 0.0005, loss : 52.833, obj SR loss : 2.802, verb loss : 1.460, verb SR loss : 1.022
+epoch : 6  batch : 21  learning rate : 0.0005, loss : 46.692, obj SR loss : 3.240, verb loss : 0.727, verb SR loss : 0.702
+epoch : 6  batch : 22  learning rate : 0.0005, loss : 45.369, obj SR loss : 2.432, verb loss : 0.709, verb SR loss : 1.396
+epoch : 6  batch : 23  learning rate : 0.0005, loss : 33.373, obj SR loss : 2.248, verb loss : 0.223, verb SR loss : 0.867
+epoch : 6  batch : 24  learning rate : 0.0005, loss : 48.703, obj SR loss : 2.021, verb loss : 1.211, verb SR loss : 1.638
+epoch : 6  batch : 25  learning rate : 0.0005, loss : 51.768, obj SR loss : 2.692, verb loss : 1.453, verb SR loss : 1.032
+epoch : 6  batch : 26  learning rate : 0.0005, loss : 48.026, obj SR loss : 2.508, verb loss : 0.769, verb SR loss : 1.526
+epoch : 6  batch : 27  learning rate : 0.0005, loss : 44.922, obj SR loss : 2.218, verb loss : 1.038, verb SR loss : 1.236
+epoch : 6  batch : 28  learning rate : 0.0005, loss : 41.026, obj SR loss : 1.966, verb loss : 0.717, verb SR loss : 1.419
+epoch : 6  batch : 29  learning rate : 0.0005, loss : 49.335, obj SR loss : 2.773, verb loss : 0.954, verb SR loss : 1.207
+
+Object SR result:
+Accuracy: 6.28997867803838
+mR: 3.0303030303030303
+mP: 0.1906054144860115
+F1: 0.3586517127138993
+Value: 24.481327800829874
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 14.788535807832103
+role_based_mP: 5.553708018876861
+role_based_mR: 11.856661856661857
+role_based_f1: 7.209285143169442
+
+Verb result:
+Accuracy: 32.780082987551864
+mR: 22.319429161958006
+mP: 17.156446411980106
+F1: 15.322944853058
+
+Verb SR result:
+Accuracy: 27.080394922425953
+mR: 14.730932774944439
+mP: 8.51094470046083
+F1: 9.490533932483762
+Value: 28.21576763485477
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 3.4257845548508428
+role_based_mP: 1.7636830665876309
+role_based_mR: 5.238095238095237
+role_based_f1: 2.3845033912148006
+avg epoch performance :  85.47717842323651
+****************************************************************************************************
+epoch : 7  batch : 0  learning rate : 0.0005, loss : 44.805, obj SR loss : 3.180, verb loss : 0.663, verb SR loss : 0.638
+epoch : 7  batch : 1  learning rate : 0.0005, loss : 47.912, obj SR loss : 2.601, verb loss : 0.965, verb SR loss : 1.225
+epoch : 7  batch : 2  learning rate : 0.0005, loss : 49.369, obj SR loss : 3.032, verb loss : 0.963, verb SR loss : 0.942
+epoch : 7  batch : 3  learning rate : 0.0005, loss : 39.118, obj SR loss : 2.052, verb loss : 1.127, verb SR loss : 0.733
+epoch : 7  batch : 4  learning rate : 0.0005, loss : 40.985, obj SR loss : 2.683, verb loss : 0.601, verb SR loss : 0.814
+epoch : 7  batch : 5  learning rate : 0.0005, loss : 48.854, obj SR loss : 2.422, verb loss : 1.427, verb SR loss : 1.036
+epoch : 7  batch : 6  learning rate : 0.0005, loss : 29.084, obj SR loss : 1.903, verb loss : 0.457, verb SR loss : 0.549
+epoch : 7  batch : 7  learning rate : 0.0005, loss : 43.178, obj SR loss : 2.547, verb loss : 0.610, verb SR loss : 1.161
+epoch : 7  batch : 8  learning rate : 0.0005, loss : 23.953, obj SR loss : 1.862, verb loss : 0.087, verb SR loss : 0.446
+epoch : 7  batch : 9  learning rate : 0.0005, loss : 29.982, obj SR loss : 1.639, verb loss : 0.343, verb SR loss : 1.017
+epoch : 7  batch : 10  learning rate : 0.0005, loss : 43.406, obj SR loss : 2.086, verb loss : 1.126, verb SR loss : 1.129
+epoch : 7  batch : 11  learning rate : 0.0005, loss : 45.602, obj SR loss : 2.528, verb loss : 1.077, verb SR loss : 0.955
+epoch : 7  batch : 12  learning rate : 0.0005, loss : 45.813, obj SR loss : 1.978, verb loss : 1.630, verb SR loss : 0.973
+epoch : 7  batch : 13  learning rate : 0.0005, loss : 55.034, obj SR loss : 2.159, verb loss : 2.186, verb SR loss : 1.158
+epoch : 7  batch : 14  learning rate : 0.0005, loss : 43.554, obj SR loss : 2.176, verb loss : 0.852, verb SR loss : 1.328
+epoch : 7  batch : 15  learning rate : 0.0005, loss : 55.593, obj SR loss : 3.498, verb loss : 0.636, verb SR loss : 1.425
+epoch : 7  batch : 16  learning rate : 0.0005, loss : 38.415, obj SR loss : 2.365, verb loss : 0.427, verb SR loss : 1.049
+epoch : 7  batch : 17  learning rate : 0.0005, loss : 35.999, obj SR loss : 2.418, verb loss : 0.474, verb SR loss : 0.708
+epoch : 7  batch : 18  learning rate : 0.0005, loss : 43.520, obj SR loss : 2.538, verb loss : 0.432, verb SR loss : 1.382
+epoch : 7  batch : 19  learning rate : 0.0005, loss : 57.076, obj SR loss : 3.564, verb loss : 1.062, verb SR loss : 1.081
+epoch : 7  batch : 20  learning rate : 0.0005, loss : 50.473, obj SR loss : 2.771, verb loss : 1.311, verb SR loss : 0.966
+epoch : 7  batch : 21  learning rate : 0.0005, loss : 44.292, obj SR loss : 3.219, verb loss : 0.599, verb SR loss : 0.611
+epoch : 7  batch : 22  learning rate : 0.0005, loss : 43.148, obj SR loss : 2.418, verb loss : 0.676, verb SR loss : 1.221
+epoch : 7  batch : 23  learning rate : 0.0005, loss : 34.249, obj SR loss : 2.237, verb loss : 0.303, verb SR loss : 0.885
+epoch : 7  batch : 24  learning rate : 0.0005, loss : 45.685, obj SR loss : 2.004, verb loss : 1.028, verb SR loss : 1.536
+epoch : 7  batch : 25  learning rate : 0.0005, loss : 45.298, obj SR loss : 2.678, verb loss : 0.859, verb SR loss : 0.993
+epoch : 7  batch : 26  learning rate : 0.0005, loss : 45.414, obj SR loss : 2.518, verb loss : 0.664, verb SR loss : 1.358
+epoch : 7  batch : 27  learning rate : 0.0005, loss : 44.593, obj SR loss : 2.107, verb loss : 1.221, verb SR loss : 1.131
+epoch : 7  batch : 28  learning rate : 0.0005, loss : 37.226, obj SR loss : 2.007, verb loss : 0.409, verb SR loss : 1.307
+epoch : 7  batch : 29  learning rate : 0.0005, loss : 48.817, obj SR loss : 2.700, verb loss : 0.931, verb SR loss : 1.251
+
+Object SR result:
+Accuracy: 4.157782515991471
+mR: 1.9441674975074776
+mP: 0.13688052786747157
+F1: 0.25575447570332477
+Value: 16.182572614107883
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 9.368481607290095
+role_based_mP: 3.915870122977966
+role_based_mR: 8.333333333333332
+role_based_f1: 4.958638291971625
+
+Verb result:
+Accuracy: 34.85477178423236
+mR: 24.993339727195224
+mP: 14.60231588678999
+F1: 17.3887904077881
+
+Verb SR result:
+Accuracy: 25.952045133991536
+mR: 8.517143481109413
+mP: 2.94491332125388
+F1: 4.205579138872044
+Value: 29.045643153526974
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 3.3939981193655857
+role_based_mP: 1.3264835671474675
+role_based_mR: 4.7979797979797985
+role_based_f1: 2.0736032869501018
+avg epoch performance :  80.08298755186722
+****************************************************************************************************
+epoch : 8  batch : 0  learning rate : 0.0004, loss : 42.427, obj SR loss : 3.102, verb loss : 0.559, verb SR loss : 0.582
+epoch : 8  batch : 1  learning rate : 0.0004, loss : 46.851, obj SR loss : 2.589, verb loss : 0.937, verb SR loss : 1.159
+epoch : 8  batch : 2  learning rate : 0.0004, loss : 43.533, obj SR loss : 2.896, verb loss : 0.586, verb SR loss : 0.872
+epoch : 8  batch : 3  learning rate : 0.0004, loss : 38.406, obj SR loss : 2.021, verb loss : 1.049, verb SR loss : 0.770
+epoch : 8  batch : 4  learning rate : 0.0004, loss : 39.536, obj SR loss : 2.631, verb loss : 0.555, verb SR loss : 0.767
+epoch : 8  batch : 5  learning rate : 0.0004, loss : 44.745, obj SR loss : 2.371, verb loss : 1.144, verb SR loss : 0.960
+epoch : 8  batch : 6  learning rate : 0.0004, loss : 28.080, obj SR loss : 1.905, verb loss : 0.416, verb SR loss : 0.487
+epoch : 8  batch : 7  learning rate : 0.0004, loss : 41.554, obj SR loss : 2.476, verb loss : 0.564, verb SR loss : 1.115
+epoch : 8  batch : 8  learning rate : 0.0004, loss : 22.691, obj SR loss : 1.793, verb loss : 0.054, verb SR loss : 0.422
+epoch : 8  batch : 9  learning rate : 0.0004, loss : 30.566, obj SR loss : 1.615, verb loss : 0.408, verb SR loss : 1.034
+epoch : 8  batch : 10  learning rate : 0.0004, loss : 42.673, obj SR loss : 2.089, verb loss : 1.180, verb SR loss : 0.998
+epoch : 8  batch : 11  learning rate : 0.0004, loss : 38.229, obj SR loss : 2.492, verb loss : 0.492, verb SR loss : 0.839
+epoch : 8  batch : 12  learning rate : 0.0004, loss : 46.709, obj SR loss : 1.991, verb loss : 1.816, verb SR loss : 0.864
+epoch : 8  batch : 13  learning rate : 0.0004, loss : 46.612, obj SR loss : 2.137, verb loss : 1.349, verb SR loss : 1.175
+epoch : 8  batch : 14  learning rate : 0.0004, loss : 45.528, obj SR loss : 2.143, verb loss : 1.168, verb SR loss : 1.242
+epoch : 8  batch : 15  learning rate : 0.0004, loss : 58.921, obj SR loss : 3.470, verb loss : 1.008, verb SR loss : 1.414
+epoch : 8  batch : 16  learning rate : 0.0004, loss : 35.205, obj SR loss : 2.313, verb loss : 0.343, verb SR loss : 0.864
+epoch : 8  batch : 17  learning rate : 0.0004, loss : 35.177, obj SR loss : 2.369, verb loss : 0.528, verb SR loss : 0.621
+epoch : 8  batch : 18  learning rate : 0.0004, loss : 41.829, obj SR loss : 2.451, verb loss : 0.487, verb SR loss : 1.244
+epoch : 8  batch : 19  learning rate : 0.0004, loss : 55.325, obj SR loss : 3.498, verb loss : 1.104, verb SR loss : 0.930
+epoch : 8  batch : 20  learning rate : 0.0004, loss : 45.666, obj SR loss : 2.687, verb loss : 0.984, verb SR loss : 0.896
+epoch : 8  batch : 21  learning rate : 0.0004, loss : 42.928, obj SR loss : 3.135, verb loss : 0.601, verb SR loss : 0.557
+epoch : 8  batch : 22  learning rate : 0.0004, loss : 40.536, obj SR loss : 2.283, verb loss : 0.638, verb SR loss : 1.133
+epoch : 8  batch : 23  learning rate : 0.0004, loss : 32.338, obj SR loss : 2.224, verb loss : 0.117, verb SR loss : 0.893
+epoch : 8  batch : 24  learning rate : 0.0004, loss : 44.367, obj SR loss : 1.888, verb loss : 1.064, verb SR loss : 1.484
+epoch : 8  batch : 25  learning rate : 0.0004, loss : 46.400, obj SR loss : 2.725, verb loss : 1.005, verb SR loss : 0.910
+epoch : 8  batch : 26  learning rate : 0.0004, loss : 43.643, obj SR loss : 2.440, verb loss : 0.667, verb SR loss : 1.258
+epoch : 8  batch : 27  learning rate : 0.0004, loss : 44.403, obj SR loss : 2.141, verb loss : 1.234, verb SR loss : 1.066
+epoch : 8  batch : 28  learning rate : 0.0004, loss : 37.953, obj SR loss : 1.949, verb loss : 0.692, verb SR loss : 1.154
+epoch : 8  batch : 29  learning rate : 0.0004, loss : 49.081, obj SR loss : 2.678, verb loss : 1.077, verb SR loss : 1.153
+
+Object SR result:
+Accuracy: 6.28997867803838
+mR: 3.0303030303030303
+mP: 0.1906054144860115
+F1: 0.3586517127138993
+Value: 24.481327800829874
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 14.788535807832103
+role_based_mP: 5.553708018876861
+role_based_mR: 11.856661856661857
+role_based_f1: 7.209285143169442
+
+Verb result:
+Accuracy: 29.045643153526974
+mR: 23.9712098607559
+mP: 19.37456535881733
+F1: 13.751104930050563
+
+Verb SR result:
+Accuracy: 33.99153737658674
+mR: 12.367017127881944
+mP: 6.065628274361248
+F1: 8.025035500532686
+Value: 29.045643153526974
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 3.484652058686347
+role_based_mP: 1.8142000922083907
+role_based_mR: 5.7936507936507935
+role_based_f1: 2.4713549879112793
+avg epoch performance :  82.57261410788382
+****************************************************************************************************
+epoch : 9  batch : 0  learning rate : 0.0004, loss : 41.243, obj SR loss : 2.958, verb loss : 0.654, verb SR loss : 0.513
+epoch : 9  batch : 1  learning rate : 0.0004, loss : 45.977, obj SR loss : 2.541, verb loss : 0.993, verb SR loss : 1.063
+epoch : 9  batch : 2  learning rate : 0.0004, loss : 41.152, obj SR loss : 2.798, verb loss : 0.562, verb SR loss : 0.755
+epoch : 9  batch : 3  learning rate : 0.0004, loss : 34.894, obj SR loss : 1.965, verb loss : 0.903, verb SR loss : 0.622
+epoch : 9  batch : 4  learning rate : 0.0004, loss : 37.212, obj SR loss : 2.514, verb loss : 0.478, verb SR loss : 0.729
+epoch : 9  batch : 5  learning rate : 0.0004, loss : 41.653, obj SR loss : 2.291, verb loss : 0.991, verb SR loss : 0.883
+epoch : 9  batch : 6  learning rate : 0.0004, loss : 26.768, obj SR loss : 1.795, verb loss : 0.394, verb SR loss : 0.488
+epoch : 9  batch : 7  learning rate : 0.0004, loss : 39.522, obj SR loss : 2.398, verb loss : 0.519, verb SR loss : 1.035
+epoch : 9  batch : 8  learning rate : 0.0004, loss : 21.290, obj SR loss : 1.660, verb loss : 0.055, verb SR loss : 0.414
+epoch : 9  batch : 9  learning rate : 0.0004, loss : 29.459, obj SR loss : 1.642, verb loss : 0.284, verb SR loss : 1.020
+epoch : 9  batch : 10  learning rate : 0.0004, loss : 40.481, obj SR loss : 2.099, verb loss : 0.909, verb SR loss : 1.039
+epoch : 9  batch : 11  learning rate : 0.0004, loss : 38.093, obj SR loss : 2.376, verb loss : 0.496, verb SR loss : 0.937
+epoch : 9  batch : 12  learning rate : 0.0004, loss : 39.744, obj SR loss : 1.934, verb loss : 1.237, verb SR loss : 0.804
+epoch : 9  batch : 13  learning rate : 0.0004, loss : 44.733, obj SR loss : 2.105, verb loss : 1.383, verb SR loss : 0.985
+epoch : 9  batch : 14  learning rate : 0.0004, loss : 41.886, obj SR loss : 2.043, verb loss : 0.866, verb SR loss : 1.280
+epoch : 9  batch : 15  learning rate : 0.0004, loss : 53.025, obj SR loss : 3.513, verb loss : 0.608, verb SR loss : 1.182
+epoch : 9  batch : 16  learning rate : 0.0004, loss : 35.000, obj SR loss : 2.271, verb loss : 0.355, verb SR loss : 0.874
+epoch : 9  batch : 17  learning rate : 0.0004, loss : 32.743, obj SR loss : 2.328, verb loss : 0.378, verb SR loss : 0.568
+epoch : 9  batch : 18  learning rate : 0.0004, loss : 40.079, obj SR loss : 2.397, verb loss : 0.482, verb SR loss : 1.129
+epoch : 9  batch : 19  learning rate : 0.0004, loss : 53.916, obj SR loss : 3.471, verb loss : 1.108, verb SR loss : 0.812
+epoch : 9  batch : 20  learning rate : 0.0004, loss : 42.674, obj SR loss : 2.661, verb loss : 0.830, verb SR loss : 0.777
+epoch : 9  batch : 21  learning rate : 0.0004, loss : 42.223, obj SR loss : 3.058, verb loss : 0.637, verb SR loss : 0.527
+epoch : 9  batch : 22  learning rate : 0.0004, loss : 40.696, obj SR loss : 2.190, verb loss : 0.673, verb SR loss : 1.207
+epoch : 9  batch : 23  learning rate : 0.0004, loss : 31.543, obj SR loss : 2.188, verb loss : 0.192, verb SR loss : 0.775
+epoch : 9  batch : 24  learning rate : 0.0004, loss : 39.155, obj SR loss : 1.816, verb loss : 0.863, verb SR loss : 1.237
+epoch : 9  batch : 25  learning rate : 0.0004, loss : 41.908, obj SR loss : 2.609, verb loss : 0.753, verb SR loss : 0.829
+epoch : 9  batch : 26  learning rate : 0.0004, loss : 40.270, obj SR loss : 2.364, verb loss : 0.490, verb SR loss : 1.173
+epoch : 9  batch : 27  learning rate : 0.0004, loss : 41.089, obj SR loss : 2.073, verb loss : 0.939, verb SR loss : 1.097
+epoch : 9  batch : 28  learning rate : 0.0004, loss : 36.454, obj SR loss : 1.992, verb loss : 0.576, verb SR loss : 1.078
+epoch : 9  batch : 29  learning rate : 0.0004, loss : 46.630, obj SR loss : 2.578, verb loss : 0.980, verb SR loss : 1.106
+
+Object SR result:
+Accuracy: 4.157782515991471
+mR: 3.236358744833321
+mP: 0.8134187402480086
+F1: 0.8910069959317136
+Value: 16.182572614107883
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 2.627052523318083
+role_based_mP: 1.851517840154204
+role_based_mR: 2.8990299823633157
+role_based_f1: 1.0824369272308152
+
+Verb result:
+Accuracy: 28.63070539419087
+mR: 23.008134413185566
+mP: 17.82384690147227
+F1: 13.748765789220544
+
+Verb SR result:
+Accuracy: 33.42736248236953
+mR: 13.249070719374659
+mP: 6.700845658793292
+F1: 8.78431288702638
+Value: 28.63070539419087
+Value-two: 0.4149377593360996
+value-all: 0.0
+role_based_accuracy: 7.713856361817282
+role_based_mP: 2.7728284971654986
+role_based_mR: 7.592592592592592
+role_based_f1: 3.7411518099318632
+avg epoch performance :  73.44398340248962
+****************************************************************************************************
+epoch : 10  batch : 0  learning rate : 0.0003, loss : 41.292, obj SR loss : 2.926, verb loss : 0.714, verb SR loss : 0.490
+epoch : 10  batch : 1  learning rate : 0.0003, loss : 44.338, obj SR loss : 2.483, verb loss : 0.930, verb SR loss : 1.021
+epoch : 10  batch : 2  learning rate : 0.0003, loss : 39.604, obj SR loss : 2.775, verb loss : 0.478, verb SR loss : 0.707
+epoch : 10  batch : 3  learning rate : 0.0003, loss : 35.639, obj SR loss : 1.902, verb loss : 1.083, verb SR loss : 0.579
+epoch : 10  batch : 4  learning rate : 0.0003, loss : 36.975, obj SR loss : 2.380, verb loss : 0.658, verb SR loss : 0.659
+epoch : 10  batch : 5  learning rate : 0.0003, loss : 39.148, obj SR loss : 2.198, verb loss : 0.886, verb SR loss : 0.831
+epoch : 10  batch : 6  learning rate : 0.0003, loss : 25.521, obj SR loss : 1.702, verb loss : 0.391, verb SR loss : 0.459
+epoch : 10  batch : 7  learning rate : 0.0003, loss : 38.654, obj SR loss : 2.346, verb loss : 0.517, verb SR loss : 1.003
+epoch : 10  batch : 8  learning rate : 0.0003, loss : 19.918, obj SR loss : 1.556, verb loss : 0.040, verb SR loss : 0.397
+epoch : 10  batch : 9  learning rate : 0.0003, loss : 27.087, obj SR loss : 1.496, verb loss : 0.274, verb SR loss : 0.938
+epoch : 10  batch : 10  learning rate : 0.0003, loss : 39.280, obj SR loss : 2.077, verb loss : 0.916, verb SR loss : 0.935
+epoch : 10  batch : 11  learning rate : 0.0003, loss : 34.701, obj SR loss : 2.306, verb loss : 0.386, verb SR loss : 0.778
+epoch : 10  batch : 12  learning rate : 0.0003, loss : 42.021, obj SR loss : 1.844, verb loss : 1.570, verb SR loss : 0.788
+epoch : 10  batch : 13  learning rate : 0.0003, loss : 39.724, obj SR loss : 2.037, verb loss : 1.017, verb SR loss : 0.918
+epoch : 10  batch : 14  learning rate : 0.0003, loss : 39.214, obj SR loss : 1.860, verb loss : 0.886, verb SR loss : 1.176
+epoch : 10  batch : 15  learning rate : 0.0003, loss : 51.610, obj SR loss : 3.478, verb loss : 0.539, verb SR loss : 1.144
+epoch : 10  batch : 16  learning rate : 0.0003, loss : 32.667, obj SR loss : 2.252, verb loss : 0.240, verb SR loss : 0.774
+epoch : 10  batch : 17  learning rate : 0.0003, loss : 31.850, obj SR loss : 2.235, verb loss : 0.383, verb SR loss : 0.567
+epoch : 10  batch : 18  learning rate : 0.0003, loss : 39.862, obj SR loss : 2.347, verb loss : 0.467, verb SR loss : 1.172
+epoch : 10  batch : 19  learning rate : 0.0003, loss : 50.529, obj SR loss : 3.309, verb loss : 0.961, verb SR loss : 0.783
+epoch : 10  batch : 20  learning rate : 0.0003, loss : 40.035, obj SR loss : 2.590, verb loss : 0.685, verb SR loss : 0.729
+epoch : 10  batch : 21  learning rate : 0.0003, loss : 42.710, obj SR loss : 3.007, verb loss : 0.699, verb SR loss : 0.565
+epoch : 10  batch : 22  learning rate : 0.0003, loss : 35.338, obj SR loss : 2.004, verb loss : 0.495, verb SR loss : 1.035
+epoch : 10  batch : 23  learning rate : 0.0003, loss : 29.950, obj SR loss : 2.160, verb loss : 0.109, verb SR loss : 0.726
+epoch : 10  batch : 24  learning rate : 0.0003, loss : 38.010, obj SR loss : 1.699, verb loss : 0.953, verb SR loss : 1.150
+epoch : 10  batch : 25  learning rate : 0.0003, loss : 38.228, obj SR loss : 2.581, verb loss : 0.458, verb SR loss : 0.783
+epoch : 10  batch : 26  learning rate : 0.0003, loss : 37.600, obj SR loss : 2.289, verb loss : 0.381, verb SR loss : 1.090
+epoch : 10  batch : 27  learning rate : 0.0003, loss : 44.547, obj SR loss : 2.074, verb loss : 1.335, verb SR loss : 1.046
+epoch : 10  batch : 28  learning rate : 0.0003, loss : 33.626, obj SR loss : 2.029, verb loss : 0.299, verb SR loss : 1.034
+epoch : 10  batch : 29  learning rate : 0.0003, loss : 42.325, obj SR loss : 2.528, verb loss : 0.677, verb SR loss : 1.027
+
+Object SR result:
+Accuracy: 3.8379530916844353
+mR: 2.9116834201579964
+mP: 0.8302052518623478
+F1: 0.5985767833755911
+Value: 14.937759336099585
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 2.41337730964287
+role_based_mP: 1.8550830001211682
+role_based_mR: 2.7502204585537924
+role_based_f1: 0.8284927656880454
+
+Verb result:
+Accuracy: 28.63070539419087
+mR: 23.008134413185566
+mP: 17.59363824581216
+F1: 13.589459462086529
+
+Verb SR result:
+Accuracy: 33.99153737658674
+mR: 11.46725735500577
+mP: 6.036587194481932
+F1: 7.520851308599368
+Value: 28.63070539419087
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 3.4218774196405217
+role_based_mP: 1.7507080287163272
+role_based_mR: 5.7936507936507935
+role_based_f1: 2.3716398881961798
+avg epoch performance :  72.19917012448133
+****************************************************************************************************
+epoch : 11  batch : 0  learning rate : 0.0003, loss : 38.111, obj SR loss : 2.856, verb loss : 0.499, verb SR loss : 0.456
+epoch : 11  batch : 1  learning rate : 0.0003, loss : 41.615, obj SR loss : 2.420, verb loss : 0.778, verb SR loss : 0.963
+epoch : 11  batch : 2  learning rate : 0.0003, loss : 39.795, obj SR loss : 2.784, verb loss : 0.495, verb SR loss : 0.700
+epoch : 11  batch : 3  learning rate : 0.0003, loss : 33.267, obj SR loss : 1.850, verb loss : 0.930, verb SR loss : 0.547
+epoch : 11  batch : 4  learning rate : 0.0003, loss : 34.369, obj SR loss : 2.320, verb loss : 0.498, verb SR loss : 0.618
+epoch : 11  batch : 5  learning rate : 0.0003, loss : 39.758, obj SR loss : 2.169, verb loss : 0.998, verb SR loss : 0.809
+epoch : 11  batch : 6  learning rate : 0.0003, loss : 24.055, obj SR loss : 1.645, verb loss : 0.338, verb SR loss : 0.422
+epoch : 11  batch : 7  learning rate : 0.0003, loss : 37.880, obj SR loss : 2.361, verb loss : 0.602, verb SR loss : 0.825
+epoch : 11  batch : 8  learning rate : 0.0003, loss : 19.549, obj SR loss : 1.531, verb loss : 0.031, verb SR loss : 0.393
+epoch : 11  batch : 9  learning rate : 0.0003, loss : 28.175, obj SR loss : 1.525, verb loss : 0.342, verb SR loss : 0.951
+epoch : 11  batch : 10  learning rate : 0.0003, loss : 40.508, obj SR loss : 2.101, verb loss : 1.050, verb SR loss : 0.899
+epoch : 11  batch : 11  learning rate : 0.0003, loss : 32.836, obj SR loss : 2.185, verb loss : 0.385, verb SR loss : 0.713
+epoch : 11  batch : 12  learning rate : 0.0003, loss : 36.580, obj SR loss : 1.824, verb loss : 1.129, verb SR loss : 0.705
+epoch : 11  batch : 13  learning rate : 0.0003, loss : 37.240, obj SR loss : 2.010, verb loss : 0.869, verb SR loss : 0.845
+epoch : 11  batch : 14  learning rate : 0.0003, loss : 36.840, obj SR loss : 1.760, verb loss : 0.826, verb SR loss : 1.098
+epoch : 11  batch : 15  learning rate : 0.0003, loss : 48.455, obj SR loss : 3.472, verb loss : 0.269, verb SR loss : 1.105
+epoch : 11  batch : 16  learning rate : 0.0003, loss : 32.121, obj SR loss : 2.234, verb loss : 0.214, verb SR loss : 0.764
+epoch : 11  batch : 17  learning rate : 0.0003, loss : 30.109, obj SR loss : 2.219, verb loss : 0.344, verb SR loss : 0.447
+epoch : 11  batch : 18  learning rate : 0.0003, loss : 38.044, obj SR loss : 2.341, verb loss : 0.383, verb SR loss : 1.080
+epoch : 11  batch : 19  learning rate : 0.0003, loss : 48.984, obj SR loss : 3.118, verb loss : 1.091, verb SR loss : 0.690
+epoch : 11  batch : 20  learning rate : 0.0003, loss : 38.925, obj SR loss : 2.518, verb loss : 0.741, verb SR loss : 0.634
+epoch : 11  batch : 21  learning rate : 0.0003, loss : 39.762, obj SR loss : 2.866, verb loss : 0.575, verb SR loss : 0.536
+epoch : 11  batch : 22  learning rate : 0.0003, loss : 34.143, obj SR loss : 1.902, verb loss : 0.583, verb SR loss : 0.929
+epoch : 11  batch : 23  learning rate : 0.0003, loss : 28.587, obj SR loss : 2.085, verb loss : 0.081, verb SR loss : 0.693
+epoch : 11  batch : 24  learning rate : 0.0003, loss : 37.544, obj SR loss : 1.754, verb loss : 0.789, verb SR loss : 1.211
+epoch : 11  batch : 25  learning rate : 0.0003, loss : 38.111, obj SR loss : 2.534, verb loss : 0.524, verb SR loss : 0.753
+epoch : 11  batch : 26  learning rate : 0.0003, loss : 37.542, obj SR loss : 2.276, verb loss : 0.395, verb SR loss : 1.083
+epoch : 11  batch : 27  learning rate : 0.0003, loss : 45.923, obj SR loss : 2.132, verb loss : 1.478, verb SR loss : 0.983
+epoch : 11  batch : 28  learning rate : 0.0003, loss : 31.767, obj SR loss : 2.018, verb loss : 0.228, verb SR loss : 0.930
+epoch : 11  batch : 29  learning rate : 0.0003, loss : 42.171, obj SR loss : 2.457, verb loss : 0.776, verb SR loss : 0.984
+
+Object SR result:
+Accuracy: 6.50319829424307
+mR: 3.4904890307432677
+mP: 1.3214726450020566
+F1: 1.1643183984840206
+Value: 25.311203319502074
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 14.456068045448339
+role_based_mP: 6.974367992482176
+role_based_mR: 10.388583053812937
+role_based_f1: 6.837809569557159
+
+Verb result:
+Accuracy: 38.589211618257266
+mR: 27.314708112769882
+mP: 17.095496495090817
+F1: 19.782896907305002
+
+Verb SR result:
+Accuracy: 33.286318758815234
+mR: 15.170498861261034
+mP: 7.241983714201411
+F1: 9.67322354666546
+Value: 38.589211618257266
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 7.142584733476584
+role_based_mP: 2.435179696590485
+role_based_mR: 7.037037037037036
+role_based_f1: 3.4067035277337854
+avg epoch performance :  102.4896265560166
+****************************************************************************************************
+val_acc is:  11 102.4896265560166
+save the checkpoint after 11 epochs
+epoch : 12  batch : 0  learning rate : 0.0003, loss : 36.845, obj SR loss : 2.796, verb loss : 0.453, verb SR loss : 0.436
+epoch : 12  batch : 1  learning rate : 0.0003, loss : 40.349, obj SR loss : 2.353, verb loss : 0.758, verb SR loss : 0.924
+epoch : 12  batch : 2  learning rate : 0.0003, loss : 39.006, obj SR loss : 2.826, verb loss : 0.456, verb SR loss : 0.619
+epoch : 12  batch : 3  learning rate : 0.0003, loss : 31.650, obj SR loss : 1.813, verb loss : 0.812, verb SR loss : 0.540
+epoch : 12  batch : 4  learning rate : 0.0003, loss : 33.229, obj SR loss : 2.254, verb loss : 0.476, verb SR loss : 0.592
+epoch : 12  batch : 5  learning rate : 0.0003, loss : 35.637, obj SR loss : 2.046, verb loss : 0.799, verb SR loss : 0.719
+epoch : 12  batch : 6  learning rate : 0.0003, loss : 23.440, obj SR loss : 1.584, verb loss : 0.330, verb SR loss : 0.430
+epoch : 12  batch : 7  learning rate : 0.0003, loss : 38.056, obj SR loss : 2.382, verb loss : 0.630, verb SR loss : 0.794
+epoch : 12  batch : 8  learning rate : 0.0003, loss : 18.438, obj SR loss : 1.420, verb loss : 0.067, verb SR loss : 0.357
+epoch : 12  batch : 9  learning rate : 0.0003, loss : 26.837, obj SR loss : 1.396, verb loss : 0.381, verb SR loss : 0.907
+epoch : 12  batch : 10  learning rate : 0.0003, loss : 40.373, obj SR loss : 2.095, verb loss : 1.086, verb SR loss : 0.857
+epoch : 12  batch : 11  learning rate : 0.0003, loss : 30.738, obj SR loss : 2.118, verb loss : 0.278, verb SR loss : 0.678
+epoch : 12  batch : 12  learning rate : 0.0003, loss : 35.040, obj SR loss : 1.763, verb loss : 1.049, verb SR loss : 0.692
+epoch : 12  batch : 13  learning rate : 0.0003, loss : 34.948, obj SR loss : 1.954, verb loss : 0.791, verb SR loss : 0.750
+epoch : 12  batch : 14  learning rate : 0.0003, loss : 36.397, obj SR loss : 1.671, verb loss : 0.901, verb SR loss : 1.067
+epoch : 12  batch : 15  learning rate : 0.0003, loss : 49.135, obj SR loss : 3.557, verb loss : 0.323, verb SR loss : 1.033
+epoch : 12  batch : 16  learning rate : 0.0003, loss : 31.365, obj SR loss : 2.226, verb loss : 0.179, verb SR loss : 0.732
+epoch : 12  batch : 17  learning rate : 0.0003, loss : 32.478, obj SR loss : 2.255, verb loss : 0.541, verb SR loss : 0.452
+epoch : 12  batch : 18  learning rate : 0.0003, loss : 36.545, obj SR loss : 2.296, verb loss : 0.318, verb SR loss : 1.041
+epoch : 12  batch : 19  learning rate : 0.0003, loss : 50.524, obj SR loss : 3.169, verb loss : 1.204, verb SR loss : 0.680
+epoch : 12  batch : 20  learning rate : 0.0003, loss : 36.764, obj SR loss : 2.493, verb loss : 0.577, verb SR loss : 0.606
+epoch : 12  batch : 21  learning rate : 0.0003, loss : 38.691, obj SR loss : 2.705, verb loss : 0.660, verb SR loss : 0.505
+epoch : 12  batch : 22  learning rate : 0.0003, loss : 31.959, obj SR loss : 1.826, verb loss : 0.455, verb SR loss : 0.914
+epoch : 12  batch : 23  learning rate : 0.0003, loss : 26.408, obj SR loss : 1.991, verb loss : 0.045, verb SR loss : 0.604
+epoch : 12  batch : 24  learning rate : 0.0003, loss : 34.631, obj SR loss : 1.658, verb loss : 0.691, verb SR loss : 1.115
+epoch : 12  batch : 25  learning rate : 0.0003, loss : 39.335, obj SR loss : 2.513, verb loss : 0.735, verb SR loss : 0.686
+epoch : 12  batch : 26  learning rate : 0.0003, loss : 40.462, obj SR loss : 2.289, verb loss : 0.741, verb SR loss : 1.015
+epoch : 12  batch : 27  learning rate : 0.0003, loss : 54.938, obj SR loss : 2.206, verb loss : 2.276, verb SR loss : 1.012
+epoch : 12  batch : 28  learning rate : 0.0003, loss : 36.104, obj SR loss : 2.175, verb loss : 0.545, verb SR loss : 0.890
+epoch : 12  batch : 29  learning rate : 0.0003, loss : 41.994, obj SR loss : 2.566, verb loss : 0.669, verb SR loss : 0.965
+
+Object SR result:
+Accuracy: 6.609808102345416
+mR: 3.5255704747230174
+mP: 0.6435175811567794
+F1: 0.8894029731204727
+Value: 25.72614107883817
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 15.002211021507314
+role_based_mP: 6.597380771052552
+role_based_mR: 11.948419214429066
+role_based_f1: 7.695020549097801
+
+Verb result:
+Accuracy: 36.09958506224066
+mR: 18.96626783507471
+mP: 10.661447042351185
+F1: 13.398371110774566
+
+Verb SR result:
+Accuracy: 33.14527503526093
+mR: 15.53104753585208
+mP: 7.2812569398179
+F1: 9.443947888735407
+Value: 33.60995850622407
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 5.394502152509082
+role_based_mP: 1.8491624404487474
+role_based_mR: 5.7407407407407405
+role_based_f1: 2.534748804845268
+avg epoch performance :  95.4356846473029
+****************************************************************************************************
+epoch : 13  batch : 0  learning rate : 0.0003, loss : 43.736, obj SR loss : 2.966, verb loss : 0.980, verb SR loss : 0.427
+epoch : 13  batch : 1  learning rate : 0.0003, loss : 45.627, obj SR loss : 2.404, verb loss : 1.233, verb SR loss : 0.926
+epoch : 13  batch : 2  learning rate : 0.0003, loss : 47.115, obj SR loss : 2.929, verb loss : 1.149, verb SR loss : 0.634
+epoch : 13  batch : 3  learning rate : 0.0003, loss : 36.967, obj SR loss : 1.811, verb loss : 1.374, verb SR loss : 0.511
+epoch : 13  batch : 4  learning rate : 0.0003, loss : 34.536, obj SR loss : 2.406, verb loss : 0.476, verb SR loss : 0.572
+epoch : 13  batch : 5  learning rate : 0.0003, loss : 40.114, obj SR loss : 2.088, verb loss : 1.182, verb SR loss : 0.741
+epoch : 13  batch : 6  learning rate : 0.0003, loss : 21.887, obj SR loss : 1.506, verb loss : 0.288, verb SR loss : 0.395
+epoch : 13  batch : 7  learning rate : 0.0003, loss : 37.175, obj SR loss : 2.350, verb loss : 0.565, verb SR loss : 0.802
+epoch : 13  batch : 8  learning rate : 0.0003, loss : 17.027, obj SR loss : 1.314, verb loss : 0.053, verb SR loss : 0.336
+epoch : 13  batch : 9  learning rate : 0.0003, loss : 24.589, obj SR loss : 1.280, verb loss : 0.318, verb SR loss : 0.861
+epoch : 13  batch : 10  learning rate : 0.0003, loss : 39.486, obj SR loss : 2.009, verb loss : 1.160, verb SR loss : 0.779
+epoch : 13  batch : 11  learning rate : 0.0003, loss : 30.791, obj SR loss : 2.089, verb loss : 0.296, verb SR loss : 0.694
+epoch : 13  batch : 12  learning rate : 0.0003, loss : 34.474, obj SR loss : 1.713, verb loss : 1.058, verb SR loss : 0.676
+epoch : 13  batch : 13  learning rate : 0.0003, loss : 31.849, obj SR loss : 1.845, verb loss : 0.593, verb SR loss : 0.747
+epoch : 13  batch : 14  learning rate : 0.0003, loss : 35.041, obj SR loss : 1.559, verb loss : 0.906, verb SR loss : 1.039
+epoch : 13  batch : 15  learning rate : 0.0003, loss : 45.756, obj SR loss : 3.249, verb loss : 0.294, verb SR loss : 1.033
+epoch : 13  batch : 16  learning rate : 0.0003, loss : 32.536, obj SR loss : 2.177, verb loss : 0.369, verb SR loss : 0.708
+epoch : 13  batch : 17  learning rate : 0.0003, loss : 32.645, obj SR loss : 2.256, verb loss : 0.559, verb SR loss : 0.449
+epoch : 13  batch : 18  learning rate : 0.0003, loss : 38.839, obj SR loss : 2.286, verb loss : 0.505, verb SR loss : 1.093
+epoch : 13  batch : 19  learning rate : 0.0003, loss : 47.754, obj SR loss : 2.950, verb loss : 1.165, verb SR loss : 0.661
+epoch : 13  batch : 20  learning rate : 0.0003, loss : 36.809, obj SR loss : 2.425, verb loss : 0.674, verb SR loss : 0.582
+epoch : 13  batch : 21  learning rate : 0.0003, loss : 48.848, obj SR loss : 3.002, verb loss : 1.382, verb SR loss : 0.501
+epoch : 13  batch : 22  learning rate : 0.0003, loss : 30.286, obj SR loss : 1.665, verb loss : 0.524, verb SR loss : 0.840
+epoch : 13  batch : 23  learning rate : 0.0003, loss : 26.562, obj SR loss : 1.966, verb loss : 0.071, verb SR loss : 0.619
+epoch : 13  batch : 24  learning rate : 0.0003, loss : 30.511, obj SR loss : 1.541, verb loss : 0.618, verb SR loss : 0.892
+epoch : 13  batch : 25  learning rate : 0.0003, loss : 34.540, obj SR loss : 2.317, verb loss : 0.490, verb SR loss : 0.647
+epoch : 13  batch : 26  learning rate : 0.0003, loss : 35.833, obj SR loss : 2.271, verb loss : 0.332, verb SR loss : 0.981
+epoch : 13  batch : 27  learning rate : 0.0003, loss : 47.124, obj SR loss : 2.162, verb loss : 1.495, verb SR loss : 1.056
+epoch : 13  batch : 28  learning rate : 0.0003, loss : 29.347, obj SR loss : 1.828, verb loss : 0.213, verb SR loss : 0.894
+epoch : 13  batch : 29  learning rate : 0.0003, loss : 39.913, obj SR loss : 2.462, verb loss : 0.577, verb SR loss : 0.953
+
+Object SR result:
+Accuracy: 9.488272921108742
+mR: 6.557072967145077
+mP: 1.2446081291869697
+F1: 2.016596918695239
+Value: 36.92946058091287
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 11.751432742897844
+role_based_mP: 5.471811346204232
+role_based_mR: 9.323991335819725
+role_based_f1: 6.518287237157497
+
+Verb result:
+Accuracy: 38.589211618257266
+mR: 26.466839895715616
+mP: 16.483435545935546
+F1: 19.77830172302234
+
+Verb SR result:
+Accuracy: 33.99153737658674
+mR: 13.129431914623291
+mP: 7.1126091089793455
+F1: 8.786807906941895
+Value: 38.589211618257266
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 7.891737021431358
+role_based_mP: 2.4030117589561932
+role_based_mR: 7.037037037037036
+role_based_f1: 3.274486688279792
+avg epoch performance :  114.1078838174274
+****************************************************************************************************
+val_acc is:  13 114.1078838174274
+save the checkpoint after 13 epochs
+epoch : 14  batch : 0  learning rate : 0.0002, loss : 38.340, obj SR loss : 2.796, verb loss : 0.607, verb SR loss : 0.431
+epoch : 14  batch : 1  learning rate : 0.0002, loss : 40.776, obj SR loss : 2.355, verb loss : 0.870, verb SR loss : 0.853
+epoch : 14  batch : 2  learning rate : 0.0002, loss : 40.265, obj SR loss : 2.837, verb loss : 0.604, verb SR loss : 0.585
+epoch : 14  batch : 3  learning rate : 0.0002, loss : 30.987, obj SR loss : 1.801, verb loss : 0.792, verb SR loss : 0.506
+epoch : 14  batch : 4  learning rate : 0.0002, loss : 32.114, obj SR loss : 2.225, verb loss : 0.403, verb SR loss : 0.583
+epoch : 14  batch : 5  learning rate : 0.0002, loss : 34.919, obj SR loss : 2.063, verb loss : 0.719, verb SR loss : 0.709
+epoch : 14  batch : 6  learning rate : 0.0002, loss : 21.082, obj SR loss : 1.437, verb loss : 0.292, verb SR loss : 0.379
+epoch : 14  batch : 7  learning rate : 0.0002, loss : 37.569, obj SR loss : 2.290, verb loss : 0.690, verb SR loss : 0.777
+epoch : 14  batch : 8  learning rate : 0.0002, loss : 15.690, obj SR loss : 1.185, verb loss : 0.055, verb SR loss : 0.328
+epoch : 14  batch : 9  learning rate : 0.0002, loss : 23.910, obj SR loss : 1.250, verb loss : 0.269, verb SR loss : 0.873
+epoch : 14  batch : 10  learning rate : 0.0002, loss : 35.445, obj SR loss : 1.966, verb loss : 0.808, verb SR loss : 0.770
+epoch : 14  batch : 11  learning rate : 0.0002, loss : 29.526, obj SR loss : 2.082, verb loss : 0.236, verb SR loss : 0.634
+epoch : 14  batch : 12  learning rate : 0.0002, loss : 34.198, obj SR loss : 1.778, verb loss : 0.968, verb SR loss : 0.675
+epoch : 14  batch : 13  learning rate : 0.0002, loss : 30.648, obj SR loss : 1.822, verb loss : 0.531, verb SR loss : 0.713
+epoch : 14  batch : 14  learning rate : 0.0002, loss : 32.621, obj SR loss : 1.524, verb loss : 0.715, verb SR loss : 1.022
+epoch : 14  batch : 15  learning rate : 0.0002, loss : 43.402, obj SR loss : 3.153, verb loss : 0.213, verb SR loss : 0.974
+epoch : 14  batch : 16  learning rate : 0.0002, loss : 30.383, obj SR loss : 2.144, verb loss : 0.185, verb SR loss : 0.709
+epoch : 14  batch : 17  learning rate : 0.0002, loss : 29.444, obj SR loss : 2.199, verb loss : 0.310, verb SR loss : 0.435
+epoch : 14  batch : 18  learning rate : 0.0002, loss : 35.428, obj SR loss : 2.214, verb loss : 0.345, verb SR loss : 0.984
+epoch : 14  batch : 19  learning rate : 0.0002, loss : 44.655, obj SR loss : 2.880, verb loss : 0.928, verb SR loss : 0.658
+epoch : 14  batch : 20  learning rate : 0.0002, loss : 33.932, obj SR loss : 2.347, verb loss : 0.482, verb SR loss : 0.564
+epoch : 14  batch : 21  learning rate : 0.0002, loss : 46.304, obj SR loss : 2.945, verb loss : 1.187, verb SR loss : 0.498
+epoch : 14  batch : 22  learning rate : 0.0002, loss : 28.055, obj SR loss : 1.632, verb loss : 0.430, verb SR loss : 0.743
+epoch : 14  batch : 23  learning rate : 0.0002, loss : 25.643, obj SR loss : 1.889, verb loss : 0.040, verb SR loss : 0.636
+epoch : 14  batch : 24  learning rate : 0.0002, loss : 29.031, obj SR loss : 1.374, verb loss : 0.660, verb SR loss : 0.869
+epoch : 14  batch : 25  learning rate : 0.0002, loss : 33.583, obj SR loss : 2.208, verb loss : 0.505, verb SR loss : 0.645
+epoch : 14  batch : 26  learning rate : 0.0002, loss : 34.053, obj SR loss : 2.178, verb loss : 0.274, verb SR loss : 0.954
+epoch : 14  batch : 27  learning rate : 0.0002, loss : 44.702, obj SR loss : 2.090, verb loss : 1.460, verb SR loss : 0.920
+epoch : 14  batch : 28  learning rate : 0.0002, loss : 26.958, obj SR loss : 1.680, verb loss : 0.190, verb SR loss : 0.826
+epoch : 14  batch : 29  learning rate : 0.0002, loss : 38.306, obj SR loss : 2.387, verb loss : 0.545, verb SR loss : 0.898
+
+Object SR result:
+Accuracy: 12.899786780383796
+mR: 7.976302375146506
+mP: 2.8728038671434186
+F1: 3.1899180122316224
+Value: 50.20746887966805
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 17.604344880465806
+role_based_mP: 8.707916220963858
+role_based_mR: 11.449395465459723
+role_based_f1: 8.840258578947967
+
+Verb result:
+Accuracy: 33.60995850622407
+mR: 25.231374779436543
+mP: 15.299420113269704
+F1: 17.042590439148743
+
+Verb SR result:
+Accuracy: 33.42736248236953
+mR: 15.217400347341384
+mP: 7.321950710108604
+F1: 9.706241839227129
+Value: 32.780082987551864
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 6.234820928704682
+role_based_mP: 2.1313310939866956
+role_based_mR: 7.037037037037036
+role_based_f1: 3.00020964360587
+avg epoch performance :  116.59751037344398
+****************************************************************************************************
+val_acc is:  14 116.59751037344398
+save the checkpoint after 14 epochs
+epoch : 15  batch : 0  learning rate : 0.0002, loss : 38.211, obj SR loss : 2.913, verb loss : 0.498, verb SR loss : 0.410
+epoch : 15  batch : 1  learning rate : 0.0002, loss : 38.363, obj SR loss : 2.288, verb loss : 0.696, verb SR loss : 0.853
+epoch : 15  batch : 2  learning rate : 0.0002, loss : 37.272, obj SR loss : 2.806, verb loss : 0.357, verb SR loss : 0.564
+epoch : 15  batch : 3  learning rate : 0.0002, loss : 30.147, obj SR loss : 1.666, verb loss : 0.843, verb SR loss : 0.505
+epoch : 15  batch : 4  learning rate : 0.0002, loss : 31.200, obj SR loss : 2.175, verb loss : 0.407, verb SR loss : 0.537
+epoch : 15  batch : 5  learning rate : 0.0002, loss : 31.966, obj SR loss : 1.928, verb loss : 0.587, verb SR loss : 0.682
+epoch : 15  batch : 6  learning rate : 0.0002, loss : 20.169, obj SR loss : 1.397, verb loss : 0.237, verb SR loss : 0.382
+epoch : 15  batch : 7  learning rate : 0.0002, loss : 34.624, obj SR loss : 2.291, verb loss : 0.448, verb SR loss : 0.723
+epoch : 15  batch : 8  learning rate : 0.0002, loss : 13.751, obj SR loss : 1.012, verb loss : 0.034, verb SR loss : 0.329
+epoch : 15  batch : 9  learning rate : 0.0002, loss : 23.419, obj SR loss : 1.209, verb loss : 0.273, verb SR loss : 0.861
+epoch : 15  batch : 10  learning rate : 0.0002, loss : 33.072, obj SR loss : 1.910, verb loss : 0.677, verb SR loss : 0.720
+epoch : 15  batch : 11  learning rate : 0.0002, loss : 28.707, obj SR loss : 1.996, verb loss : 0.234, verb SR loss : 0.640
+epoch : 15  batch : 12  learning rate : 0.0002, loss : 34.121, obj SR loss : 1.701, verb loss : 1.043, verb SR loss : 0.668
+epoch : 15  batch : 13  learning rate : 0.0002, loss : 30.010, obj SR loss : 1.792, verb loss : 0.504, verb SR loss : 0.705
+epoch : 15  batch : 14  learning rate : 0.0002, loss : 32.558, obj SR loss : 1.478, verb loss : 0.782, verb SR loss : 0.996
+epoch : 15  batch : 15  learning rate : 0.0002, loss : 42.514, obj SR loss : 3.046, verb loss : 0.200, verb SR loss : 1.005
+epoch : 15  batch : 16  learning rate : 0.0002, loss : 29.541, obj SR loss : 2.133, verb loss : 0.128, verb SR loss : 0.693
+epoch : 15  batch : 17  learning rate : 0.0002, loss : 29.844, obj SR loss : 2.223, verb loss : 0.336, verb SR loss : 0.425
+epoch : 15  batch : 18  learning rate : 0.0002, loss : 34.619, obj SR loss : 2.162, verb loss : 0.305, verb SR loss : 0.994
+epoch : 15  batch : 19  learning rate : 0.0002, loss : 42.174, obj SR loss : 2.726, verb loss : 0.903, verb SR loss : 0.588
+epoch : 15  batch : 20  learning rate : 0.0002, loss : 32.526, obj SR loss : 2.284, verb loss : 0.429, verb SR loss : 0.540
+epoch : 15  batch : 21  learning rate : 0.0002, loss : 44.118, obj SR loss : 2.939, verb loss : 0.969, verb SR loss : 0.504
+epoch : 15  batch : 22  learning rate : 0.0002, loss : 27.114, obj SR loss : 1.542, verb loss : 0.380, verb SR loss : 0.789
+epoch : 15  batch : 23  learning rate : 0.0002, loss : 26.300, obj SR loss : 2.040, verb loss : 0.033, verb SR loss : 0.557
+epoch : 15  batch : 24  learning rate : 0.0002, loss : 28.345, obj SR loss : 1.323, verb loss : 0.566, verb SR loss : 0.945
+epoch : 15  batch : 25  learning rate : 0.0002, loss : 32.021, obj SR loss : 2.098, verb loss : 0.510, verb SR loss : 0.593
+epoch : 15  batch : 26  learning rate : 0.0002, loss : 33.117, obj SR loss : 2.106, verb loss : 0.259, verb SR loss : 0.947
+epoch : 15  batch : 27  learning rate : 0.0002, loss : 40.690, obj SR loss : 2.078, verb loss : 1.112, verb SR loss : 0.879
+epoch : 15  batch : 28  learning rate : 0.0002, loss : 25.973, obj SR loss : 1.623, verb loss : 0.171, verb SR loss : 0.804
+epoch : 15  batch : 29  learning rate : 0.0002, loss : 37.437, obj SR loss : 2.360, verb loss : 0.532, verb SR loss : 0.852
+
+Object SR result:
+Accuracy: 10.767590618336886
+mR: 5.087637966515846
+mP: 2.863303534727756
+F1: 2.835125342417555
+Value: 41.90871369294606
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 16.786539825927843
+role_based_mP: 8.668908134663628
+role_based_mR: 10.872854135539468
+role_based_f1: 8.25051908203043
+
+Verb result:
+Accuracy: 33.19502074688796
+mR: 22.754211770653658
+mP: 14.726430553172861
+F1: 15.483954451345758
+
+Verb SR result:
+Accuracy: 33.14527503526093
+mR: 15.443612692947891
+mP: 7.683277468166996
+F1: 9.76555079359405
+Value: 32.780082987551864
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 3.9931026879997926
+role_based_mP: 1.9763002480844802
+role_based_mR: 6.031746031746032
+role_based_f1: 2.698107471230719
+avg epoch performance :  107.88381742738589
+****************************************************************************************************
+epoch : 16  batch : 0  learning rate : 0.0002, loss : 36.608, obj SR loss : 2.830, verb loss : 0.396, verb SR loss : 0.435
+epoch : 16  batch : 1  learning rate : 0.0002, loss : 37.164, obj SR loss : 2.229, verb loss : 0.664, verb SR loss : 0.823
+epoch : 16  batch : 2  learning rate : 0.0002, loss : 35.925, obj SR loss : 2.741, verb loss : 0.326, verb SR loss : 0.526
+epoch : 16  batch : 3  learning rate : 0.0002, loss : 29.131, obj SR loss : 1.596, verb loss : 0.826, verb SR loss : 0.491
+epoch : 16  batch : 4  learning rate : 0.0002, loss : 29.661, obj SR loss : 2.094, verb loss : 0.325, verb SR loss : 0.547
+epoch : 16  batch : 5  learning rate : 0.0002, loss : 31.773, obj SR loss : 1.868, verb loss : 0.614, verb SR loss : 0.695
+epoch : 16  batch : 6  learning rate : 0.0002, loss : 19.756, obj SR loss : 1.363, verb loss : 0.242, verb SR loss : 0.371
+epoch : 16  batch : 7  learning rate : 0.0002, loss : 33.798, obj SR loss : 2.223, verb loss : 0.478, verb SR loss : 0.679
+epoch : 16  batch : 8  learning rate : 0.0002, loss : 14.070, obj SR loss : 1.043, verb loss : 0.048, verb SR loss : 0.316
+epoch : 16  batch : 9  learning rate : 0.0002, loss : 22.927, obj SR loss : 1.205, verb loss : 0.260, verb SR loss : 0.828
+epoch : 16  batch : 10  learning rate : 0.0002, loss : 35.148, obj SR loss : 1.859, verb loss : 0.937, verb SR loss : 0.718
+epoch : 16  batch : 11  learning rate : 0.0002, loss : 28.251, obj SR loss : 1.925, verb loss : 0.246, verb SR loss : 0.654
+epoch : 16  batch : 12  learning rate : 0.0002, loss : 32.001, obj SR loss : 1.651, verb loss : 0.914, verb SR loss : 0.635
+epoch : 16  batch : 13  learning rate : 0.0002, loss : 28.217, obj SR loss : 1.706, verb loss : 0.437, verb SR loss : 0.679
+epoch : 16  batch : 14  learning rate : 0.0002, loss : 30.791, obj SR loss : 1.475, verb loss : 0.599, verb SR loss : 1.005
+epoch : 16  batch : 15  learning rate : 0.0002, loss : 41.142, obj SR loss : 2.981, verb loss : 0.196, verb SR loss : 0.938
+epoch : 16  batch : 16  learning rate : 0.0002, loss : 28.913, obj SR loss : 2.069, verb loss : 0.117, verb SR loss : 0.705
+epoch : 16  batch : 17  learning rate : 0.0002, loss : 28.570, obj SR loss : 2.131, verb loss : 0.298, verb SR loss : 0.428
+epoch : 16  batch : 18  learning rate : 0.0002, loss : 33.730, obj SR loss : 2.044, verb loss : 0.296, verb SR loss : 1.032
+epoch : 16  batch : 19  learning rate : 0.0002, loss : 39.530, obj SR loss : 2.581, verb loss : 0.849, verb SR loss : 0.523
+epoch : 16  batch : 20  learning rate : 0.0002, loss : 31.152, obj SR loss : 2.232, verb loss : 0.399, verb SR loss : 0.485
+epoch : 16  batch : 21  learning rate : 0.0002, loss : 39.920, obj SR loss : 2.856, verb loss : 0.628, verb SR loss : 0.509
+epoch : 16  batch : 22  learning rate : 0.0002, loss : 26.313, obj SR loss : 1.562, verb loss : 0.396, verb SR loss : 0.673
+epoch : 16  batch : 23  learning rate : 0.0002, loss : 23.856, obj SR loss : 1.828, verb loss : 0.040, verb SR loss : 0.517
+epoch : 16  batch : 24  learning rate : 0.0002, loss : 27.573, obj SR loss : 1.406, verb loss : 0.512, verb SR loss : 0.839
+epoch : 16  batch : 25  learning rate : 0.0002, loss : 30.977, obj SR loss : 2.082, verb loss : 0.493, verb SR loss : 0.523
+epoch : 16  batch : 26  learning rate : 0.0002, loss : 33.028, obj SR loss : 2.125, verb loss : 0.254, verb SR loss : 0.924
+epoch : 16  batch : 27  learning rate : 0.0002, loss : 38.722, obj SR loss : 2.056, verb loss : 1.098, verb SR loss : 0.718
+epoch : 16  batch : 28  learning rate : 0.0002, loss : 24.951, obj SR loss : 1.592, verb loss : 0.126, verb SR loss : 0.777
+epoch : 16  batch : 29  learning rate : 0.0002, loss : 35.530, obj SR loss : 2.275, verb loss : 0.459, verb SR loss : 0.819
+
+Object SR result:
+Accuracy: 9.168443496801707
+mR: 6.56176070591602
+mP: 2.652547394482878
+F1: 3.254595229464658
+Value: 35.684647302904565
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 5.535472386304304
+role_based_mP: 3.837274242975997
+role_based_mR: 2.7084097410229524
+role_based_f1: 2.8813785129388614
+
+Verb result:
+Accuracy: 28.63070539419087
+mR: 21.9633802712187
+mP: 15.746753246753247
+F1: 14.705197429732936
+
+Verb SR result:
+Accuracy: 36.24823695345557
+mR: 19.938349391429142
+mP: 9.896924648233805
+F1: 13.035870327158893
+Value: 28.63070539419087
+Value-two: 5.394190871369295
+value-all: 0.0
+role_based_accuracy: 6.64065254226834
+role_based_mP: 2.392026501435194
+role_based_mR: 8.002645502645501
+role_based_f1: 3.3448421867863503
+avg epoch performance :  92.9460580912863
+****************************************************************************************************
+epoch : 17  batch : 0  learning rate : 0.0002, loss : 35.990, obj SR loss : 2.680, verb loss : 0.488, verb SR loss : 0.431
+epoch : 17  batch : 1  learning rate : 0.0002, loss : 38.997, obj SR loss : 2.249, verb loss : 0.877, verb SR loss : 0.773
+epoch : 17  batch : 2  learning rate : 0.0002, loss : 35.500, obj SR loss : 2.659, verb loss : 0.368, verb SR loss : 0.523
+epoch : 17  batch : 3  learning rate : 0.0002, loss : 27.620, obj SR loss : 1.560, verb loss : 0.724, verb SR loss : 0.478
+epoch : 17  batch : 4  learning rate : 0.0002, loss : 29.755, obj SR loss : 2.071, verb loss : 0.381, verb SR loss : 0.524
+epoch : 17  batch : 5  learning rate : 0.0002, loss : 31.219, obj SR loss : 1.821, verb loss : 0.659, verb SR loss : 0.642
+epoch : 17  batch : 6  learning rate : 0.0002, loss : 18.655, obj SR loss : 1.297, verb loss : 0.234, verb SR loss : 0.334
+epoch : 17  batch : 7  learning rate : 0.0002, loss : 33.445, obj SR loss : 2.214, verb loss : 0.476, verb SR loss : 0.654
+epoch : 17  batch : 8  learning rate : 0.0002, loss : 12.754, obj SR loss : 0.944, verb loss : 0.040, verb SR loss : 0.292
+epoch : 17  batch : 9  learning rate : 0.0002, loss : 22.132, obj SR loss : 1.146, verb loss : 0.240, verb SR loss : 0.827
+epoch : 17  batch : 10  learning rate : 0.0002, loss : 33.307, obj SR loss : 1.902, verb loss : 0.764, verb SR loss : 0.664
+epoch : 17  batch : 11  learning rate : 0.0002, loss : 26.457, obj SR loss : 1.792, verb loss : 0.251, verb SR loss : 0.603
+epoch : 17  batch : 12  learning rate : 0.0002, loss : 31.307, obj SR loss : 1.641, verb loss : 0.892, verb SR loss : 0.598
+epoch : 17  batch : 13  learning rate : 0.0002, loss : 26.966, obj SR loss : 1.633, verb loss : 0.441, verb SR loss : 0.622
+epoch : 17  batch : 14  learning rate : 0.0002, loss : 30.646, obj SR loss : 1.412, verb loss : 0.776, verb SR loss : 0.876
+epoch : 17  batch : 15  learning rate : 0.0002, loss : 40.680, obj SR loss : 2.974, verb loss : 0.269, verb SR loss : 0.824
+epoch : 17  batch : 16  learning rate : 0.0002, loss : 31.100, obj SR loss : 2.185, verb loss : 0.253, verb SR loss : 0.672
+epoch : 17  batch : 17  learning rate : 0.0002, loss : 29.352, obj SR loss : 2.171, verb loss : 0.454, verb SR loss : 0.311
+epoch : 17  batch : 18  learning rate : 0.0002, loss : 32.886, obj SR loss : 2.076, verb loss : 0.360, verb SR loss : 0.853
+epoch : 17  batch : 19  learning rate : 0.0002, loss : 45.120, obj SR loss : 2.576, verb loss : 1.204, verb SR loss : 0.733
+epoch : 17  batch : 20  learning rate : 0.0002, loss : 32.170, obj SR loss : 2.153, verb loss : 0.432, verb SR loss : 0.631
+epoch : 17  batch : 21  learning rate : 0.0002, loss : 40.556, obj SR loss : 2.966, verb loss : 0.605, verb SR loss : 0.484
+epoch : 17  batch : 22  learning rate : 0.0002, loss : 26.794, obj SR loss : 1.526, verb loss : 0.531, verb SR loss : 0.622
+epoch : 17  batch : 23  learning rate : 0.0002, loss : 24.199, obj SR loss : 1.790, verb loss : 0.036, verb SR loss : 0.594
+epoch : 17  batch : 24  learning rate : 0.0002, loss : 27.946, obj SR loss : 1.333, verb loss : 0.507, verb SR loss : 0.955
+epoch : 17  batch : 25  learning rate : 0.0002, loss : 32.822, obj SR loss : 1.967, verb loss : 0.422, verb SR loss : 0.894
+epoch : 17  batch : 26  learning rate : 0.0002, loss : 31.790, obj SR loss : 2.048, verb loss : 0.259, verb SR loss : 0.872
+epoch : 17  batch : 27  learning rate : 0.0002, loss : 40.424, obj SR loss : 1.979, verb loss : 1.133, verb SR loss : 0.930
+epoch : 17  batch : 28  learning rate : 0.0002, loss : 25.138, obj SR loss : 1.493, verb loss : 0.128, verb SR loss : 0.893
+epoch : 17  batch : 29  learning rate : 0.0002, loss : 35.491, obj SR loss : 2.244, verb loss : 0.503, verb SR loss : 0.802
+
+Object SR result:
+Accuracy: 7.036247334754798
+mR: 4.679529093504326
+mP: 3.1104747146180514
+F1: 2.737675875526343
+Value: 27.385892116182575
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 4.979686620865776
+role_based_mP: 4.374215079539436
+role_based_mR: 2.4927344370574387
+role_based_f1: 2.488850291154267
+
+Verb result:
+Accuracy: 28.21576763485477
+mR: 21.139282516174653
+mP: 17.36266038229903
+F1: 13.73265571488515
+
+Verb SR result:
+Accuracy: 38.787023977433
+mR: 9.609022556390977
+mP: 9.818041725936462
+F1: 6.4973784101324314
+Value: 28.21576763485477
+Value-two: 14.107883817427386
+value-all: 0.0
+role_based_accuracy: 11.751822810474403
+role_based_mP: 3.0503468791850534
+role_based_mR: 8.101851851851851
+role_based_f1: 4.128212043260587
+avg epoch performance :  83.81742738589212
+****************************************************************************************************
+epoch : 18  batch : 0  learning rate : 0.0002, loss : 35.021, obj SR loss : 2.601, verb loss : 0.492, verb SR loss : 0.409
+epoch : 18  batch : 1  learning rate : 0.0002, loss : 37.983, obj SR loss : 2.216, verb loss : 0.812, verb SR loss : 0.770
+epoch : 18  batch : 2  learning rate : 0.0002, loss : 37.670, obj SR loss : 2.689, verb loss : 0.596, verb SR loss : 0.482
+epoch : 18  batch : 3  learning rate : 0.0002, loss : 27.632, obj SR loss : 1.515, verb loss : 0.797, verb SR loss : 0.451
+epoch : 18  batch : 4  learning rate : 0.0002, loss : 29.596, obj SR loss : 2.053, verb loss : 0.422, verb SR loss : 0.485
+epoch : 18  batch : 5  learning rate : 0.0002, loss : 32.317, obj SR loss : 1.813, verb loss : 0.816, verb SR loss : 0.602
+epoch : 18  batch : 6  learning rate : 0.0002, loss : 17.627, obj SR loss : 1.283, verb loss : 0.208, verb SR loss : 0.272
+epoch : 18  batch : 7  learning rate : 0.0002, loss : 35.267, obj SR loss : 2.217, verb loss : 0.777, verb SR loss : 0.533
+epoch : 18  batch : 8  learning rate : 0.0002, loss : 11.364, obj SR loss : 0.924, verb loss : 0.031, verb SR loss : 0.182
+epoch : 18  batch : 9  learning rate : 0.0002, loss : 20.070, obj SR loss : 1.060, verb loss : 0.235, verb SR loss : 0.711
+epoch : 18  batch : 10  learning rate : 0.0002, loss : 34.793, obj SR loss : 1.856, verb loss : 1.120, verb SR loss : 0.503
+epoch : 18  batch : 11  learning rate : 0.0002, loss : 26.490, obj SR loss : 1.851, verb loss : 0.240, verb SR loss : 0.558
+epoch : 18  batch : 12  learning rate : 0.0002, loss : 29.778, obj SR loss : 1.617, verb loss : 0.855, verb SR loss : 0.505
+epoch : 18  batch : 13  learning rate : 0.0002, loss : 26.593, obj SR loss : 1.614, verb loss : 0.390, verb SR loss : 0.655
+epoch : 18  batch : 14  learning rate : 0.0002, loss : 29.224, obj SR loss : 1.374, verb loss : 0.612, verb SR loss : 0.936
+epoch : 18  batch : 15  learning rate : 0.0002, loss : 38.457, obj SR loss : 2.914, verb loss : 0.204, verb SR loss : 0.727
+epoch : 18  batch : 16  learning rate : 0.0002, loss : 29.399, obj SR loss : 2.115, verb loss : 0.222, verb SR loss : 0.603
+epoch : 18  batch : 17  learning rate : 0.0002, loss : 26.515, obj SR loss : 2.057, verb loss : 0.318, verb SR loss : 0.277
+epoch : 18  batch : 18  learning rate : 0.0002, loss : 30.900, obj SR loss : 2.016, verb loss : 0.332, verb SR loss : 0.742
+epoch : 18  batch : 19  learning rate : 0.0002, loss : 36.823, obj SR loss : 2.476, verb loss : 0.836, verb SR loss : 0.370
+epoch : 18  batch : 20  learning rate : 0.0002, loss : 28.876, obj SR loss : 2.161, verb loss : 0.385, verb SR loss : 0.341
+epoch : 18  batch : 21  learning rate : 0.0002, loss : 36.211, obj SR loss : 2.733, verb loss : 0.531, verb SR loss : 0.357
+epoch : 18  batch : 22  learning rate : 0.0002, loss : 26.203, obj SR loss : 1.530, verb loss : 0.484, verb SR loss : 0.606
+epoch : 18  batch : 23  learning rate : 0.0002, loss : 21.844, obj SR loss : 1.726, verb loss : 0.031, verb SR loss : 0.427
+epoch : 18  batch : 24  learning rate : 0.0002, loss : 27.639, obj SR loss : 1.360, verb loss : 0.528, verb SR loss : 0.876
+epoch : 18  batch : 25  learning rate : 0.0002, loss : 28.652, obj SR loss : 1.974, verb loss : 0.415, verb SR loss : 0.476
+epoch : 18  batch : 26  learning rate : 0.0002, loss : 29.993, obj SR loss : 1.998, verb loss : 0.235, verb SR loss : 0.766
+epoch : 18  batch : 27  learning rate : 0.0002, loss : 35.313, obj SR loss : 1.907, verb loss : 1.092, verb SR loss : 0.532
+epoch : 18  batch : 28  learning rate : 0.0002, loss : 21.057, obj SR loss : 1.448, verb loss : 0.078, verb SR loss : 0.580
+epoch : 18  batch : 29  learning rate : 0.0002, loss : 31.788, obj SR loss : 2.163, verb loss : 0.421, verb SR loss : 0.595
+idx:  70 [41, 26] [41, 26]
+idx:  76 [41, 117, 60] [41, 117, 60]
+idx:  77 [41, 117, 60] [41, 117, 60]
+idx:  78 [41, 117, 60] [41, 117, 60]
+idx:  81 [41, 85] [41, 85]
+idx:  82 [41, 85] [41, 85]
+idx:  83 [41, 85] [41, 85]
+idx:  84 [41, 85] [41, 85]
+
+Object SR result:
+Accuracy: 10.554371002132196
+mR: 6.167094875524235
+mP: 2.492778131106269
+F1: 3.177821573453036
+Value: 41.078838174273855
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 10.83902096162912
+role_based_mP: 5.139800830457203
+role_based_mR: 5.144106646365683
+role_based_f1: 4.661101091361139
+
+Verb result:
+Accuracy: 35.26970954356847
+mR: 25.925819223880993
+mP: 16.472433972433972
+F1: 18.13684769837528
+
+Verb SR result:
+Accuracy: 46.1212976022567
+mR: 28.928664371927265
+mP: 28.805737606047206
+F1: 22.745774365247804
+Value: 35.26970954356847
+Value-two: 21.16182572614108
+value-all: 3.319502074688797
+role_based_accuracy: 9.162316727684315
+role_based_mP: 5.195231096616979
+role_based_mR: 13.194444444444445
+role_based_f1: 6.870233189718046
+avg epoch performance :  111.61825726141079
+****************************************************************************************************
+epoch : 19  batch : 0  learning rate : 0.0001, loss : 31.244, obj SR loss : 2.518, verb loss : 0.313, verb SR loss : 0.293
+epoch : 19  batch : 1  learning rate : 0.0001, loss : 33.953, obj SR loss : 2.179, verb loss : 0.589, verb SR loss : 0.627
+epoch : 19  batch : 2  learning rate : 0.0001, loss : 33.467, obj SR loss : 2.653, verb loss : 0.356, verb SR loss : 0.337
+epoch : 19  batch : 3  learning rate : 0.0001, loss : 25.252, obj SR loss : 1.514, verb loss : 0.669, verb SR loss : 0.343
+epoch : 19  batch : 4  learning rate : 0.0001, loss : 27.344, obj SR loss : 1.999, verb loss : 0.357, verb SR loss : 0.379
+epoch : 19  batch : 5  learning rate : 0.0001, loss : 28.064, obj SR loss : 1.769, verb loss : 0.532, verb SR loss : 0.505
+epoch : 19  batch : 6  learning rate : 0.0001, loss : 16.951, obj SR loss : 1.249, verb loss : 0.235, verb SR loss : 0.211
+epoch : 19  batch : 7  learning rate : 0.0001, loss : 30.520, obj SR loss : 2.184, verb loss : 0.402, verb SR loss : 0.466
+epoch : 19  batch : 8  learning rate : 0.0001, loss : 10.191, obj SR loss : 0.867, verb loss : 0.031, verb SR loss : 0.121
+epoch : 19  batch : 9  learning rate : 0.0001, loss : 19.162, obj SR loss : 1.025, verb loss : 0.251, verb SR loss : 0.640
+epoch : 19  batch : 10  learning rate : 0.0001, loss : 31.826, obj SR loss : 1.853, verb loss : 0.867, verb SR loss : 0.463
+epoch : 19  batch : 11  learning rate : 0.0001, loss : 24.058, obj SR loss : 1.773, verb loss : 0.176, verb SR loss : 0.457
+epoch : 19  batch : 12  learning rate : 0.0001, loss : 28.611, obj SR loss : 1.610, verb loss : 0.838, verb SR loss : 0.414
+epoch : 19  batch : 13  learning rate : 0.0001, loss : 24.220, obj SR loss : 1.596, verb loss : 0.392, verb SR loss : 0.433
+epoch : 19  batch : 14  learning rate : 0.0001, loss : 26.968, obj SR loss : 1.362, verb loss : 0.623, verb SR loss : 0.711
+epoch : 19  batch : 15  learning rate : 0.0001, loss : 38.252, obj SR loss : 2.927, verb loss : 0.236, verb SR loss : 0.663
+epoch : 19  batch : 16  learning rate : 0.0001, loss : 27.073, obj SR loss : 2.068, verb loss : 0.137, verb SR loss : 0.502
+epoch : 19  batch : 17  learning rate : 0.0001, loss : 25.727, obj SR loss : 2.016, verb loss : 0.341, verb SR loss : 0.216
+epoch : 19  batch : 18  learning rate : 0.0001, loss : 28.808, obj SR loss : 1.944, verb loss : 0.285, verb SR loss : 0.651
+epoch : 19  batch : 19  learning rate : 0.0001, loss : 36.933, obj SR loss : 2.457, verb loss : 0.870, verb SR loss : 0.366
+epoch : 19  batch : 20  learning rate : 0.0001, loss : 27.976, obj SR loss : 2.130, verb loss : 0.365, verb SR loss : 0.303
+epoch : 19  batch : 21  learning rate : 0.0001, loss : 33.727, obj SR loss : 2.630, verb loss : 0.468, verb SR loss : 0.275
+epoch : 19  batch : 22  learning rate : 0.0001, loss : 24.470, obj SR loss : 1.515, verb loss : 0.349, verb SR loss : 0.583
+epoch : 19  batch : 23  learning rate : 0.0001, loss : 21.481, obj SR loss : 1.715, verb loss : 0.017, verb SR loss : 0.416
+epoch : 19  batch : 24  learning rate : 0.0001, loss : 24.711, obj SR loss : 1.322, verb loss : 0.443, verb SR loss : 0.707
+epoch : 19  batch : 25  learning rate : 0.0001, loss : 26.744, obj SR loss : 1.932, verb loss : 0.388, verb SR loss : 0.354
+epoch : 19  batch : 26  learning rate : 0.0001, loss : 28.835, obj SR loss : 1.953, verb loss : 0.217, verb SR loss : 0.713
+epoch : 19  batch : 27  learning rate : 0.0001, loss : 35.511, obj SR loss : 1.939, verb loss : 1.115, verb SR loss : 0.497
+epoch : 19  batch : 28  learning rate : 0.0001, loss : 20.020, obj SR loss : 1.376, verb loss : 0.089, verb SR loss : 0.536
+epoch : 19  batch : 29  learning rate : 0.0001, loss : 30.712, obj SR loss : 2.095, verb loss : 0.422, verb SR loss : 0.554
+idx:  81 [41, 26] [41, 26]
+idx:  88 [41, 117, 60] [41, 117, 60]
+idx:  89 [41, 117, 60] [41, 117, 60]
+idx:  93 [41, 85] [41, 85]
+idx:  94 [41, 85] [41, 85]
+idx:  95 [41, 85] [41, 85]
+idx:  96 [41, 85] [41, 85]
+
+Object SR result:
+Accuracy: 11.727078891257996
+mR: 6.683712539538993
+mP: 2.3839431628610734
+F1: 3.2533239193920482
+Value: 45.643153526970956
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 14.4343024370172
+role_based_mP: 6.840206586907145
+role_based_mR: 8.755790357195979
+role_based_f1: 7.177267177267177
+
+Verb result:
+Accuracy: 40.24896265560166
+mR: 28.00915255721432
+mP: 17.623102029232296
+F1: 20.478190986665563
+
+Verb SR result:
+Accuracy: 44.99294781382229
+mR: 24.170869059548558
+mP: 30.959483729566834
+F1: 19.28540040432132
+Value: 40.24896265560166
+Value-two: 20.33195020746888
+value-all: 2.904564315352697
+role_based_accuracy: 11.267520504384716
+role_based_mP: 5.629409736412455
+role_based_mR: 13.418577307466196
+role_based_f1: 7.489201692112691
+avg epoch performance :  126.14107883817427
+****************************************************************************************************
+val_acc is:  19 126.14107883817427
+save the checkpoint after 19 epochs
+epoch : 20  batch : 0  learning rate : 0.0001, loss : 30.932, obj SR loss : 2.521, verb loss : 0.340, verb SR loss : 0.232
+epoch : 20  batch : 1  learning rate : 0.0001, loss : 32.818, obj SR loss : 2.135, verb loss : 0.594, verb SR loss : 0.552
+epoch : 20  batch : 2  learning rate : 0.0001, loss : 31.428, obj SR loss : 2.613, verb loss : 0.232, verb SR loss : 0.298
+epoch : 20  batch : 3  learning rate : 0.0001, loss : 24.075, obj SR loss : 1.486, verb loss : 0.662, verb SR loss : 0.260
+epoch : 20  batch : 4  learning rate : 0.0001, loss : 26.238, obj SR loss : 1.999, verb loss : 0.308, verb SR loss : 0.317
+epoch : 20  batch : 5  learning rate : 0.0001, loss : 26.836, obj SR loss : 1.744, verb loss : 0.524, verb SR loss : 0.416
+epoch : 20  batch : 6  learning rate : 0.0001, loss : 16.378, obj SR loss : 1.239, verb loss : 0.216, verb SR loss : 0.182
+epoch : 20  batch : 7  learning rate : 0.0001, loss : 29.546, obj SR loss : 2.111, verb loss : 0.397, verb SR loss : 0.447
+epoch : 20  batch : 8  learning rate : 0.0001, loss : 9.632, obj SR loss : 0.836, verb loss : 0.024, verb SR loss : 0.103
+epoch : 20  batch : 9  learning rate : 0.0001, loss : 18.287, obj SR loss : 1.030, verb loss : 0.247, verb SR loss : 0.552
+epoch : 20  batch : 10  learning rate : 0.0001, loss : 29.266, obj SR loss : 1.847, verb loss : 0.638, verb SR loss : 0.442
+epoch : 20  batch : 11  learning rate : 0.0001, loss : 23.296, obj SR loss : 1.691, verb loss : 0.165, verb SR loss : 0.474
+epoch : 20  batch : 12  learning rate : 0.0001, loss : 27.748, obj SR loss : 1.586, verb loss : 0.811, verb SR loss : 0.378
+epoch : 20  batch : 13  learning rate : 0.0001, loss : 23.191, obj SR loss : 1.591, verb loss : 0.354, verb SR loss : 0.374
+epoch : 20  batch : 14  learning rate : 0.0001, loss : 26.579, obj SR loss : 1.317, verb loss : 0.664, verb SR loss : 0.677
+epoch : 20  batch : 15  learning rate : 0.0001, loss : 37.230, obj SR loss : 2.880, verb loss : 0.212, verb SR loss : 0.631
+epoch : 20  batch : 16  learning rate : 0.0001, loss : 25.961, obj SR loss : 2.029, verb loss : 0.117, verb SR loss : 0.450
+epoch : 20  batch : 17  learning rate : 0.0001, loss : 25.242, obj SR loss : 2.015, verb loss : 0.300, verb SR loss : 0.209
+epoch : 20  batch : 18  learning rate : 0.0001, loss : 28.225, obj SR loss : 1.884, verb loss : 0.294, verb SR loss : 0.645
+epoch : 20  batch : 19  learning rate : 0.0001, loss : 35.761, obj SR loss : 2.447, verb loss : 0.780, verb SR loss : 0.349
+epoch : 20  batch : 20  learning rate : 0.0001, loss : 26.628, obj SR loss : 2.088, verb loss : 0.308, verb SR loss : 0.267
+epoch : 20  batch : 21  learning rate : 0.0001, loss : 34.890, obj SR loss : 2.583, verb loss : 0.668, verb SR loss : 0.238
+epoch : 20  batch : 22  learning rate : 0.0001, loss : 23.999, obj SR loss : 1.444, verb loss : 0.389, verb SR loss : 0.568
+epoch : 20  batch : 23  learning rate : 0.0001, loss : 20.973, obj SR loss : 1.690, verb loss : 0.028, verb SR loss : 0.380
+epoch : 20  batch : 24  learning rate : 0.0001, loss : 23.841, obj SR loss : 1.312, verb loss : 0.460, verb SR loss : 0.612
+epoch : 20  batch : 25  learning rate : 0.0001, loss : 26.038, obj SR loss : 1.888, verb loss : 0.366, verb SR loss : 0.350
+epoch : 20  batch : 26  learning rate : 0.0001, loss : 27.829, obj SR loss : 1.972, verb loss : 0.157, verb SR loss : 0.654
+epoch : 20  batch : 27  learning rate : 0.0001, loss : 34.421, obj SR loss : 1.911, verb loss : 1.050, verb SR loss : 0.481
+epoch : 20  batch : 28  learning rate : 0.0001, loss : 18.976, obj SR loss : 1.314, verb loss : 0.076, verb SR loss : 0.508
+epoch : 20  batch : 29  learning rate : 0.0001, loss : 31.086, obj SR loss : 2.101, verb loss : 0.441, verb SR loss : 0.567
+idx:  79 [41, 26] [41, 26]
+idx:  81 [41, 26] [41, 26]
+idx:  87 [41, 117, 60] [41, 117, 60]
+idx:  91 [41, 85] [41, 85]
+idx:  92 [41, 85] [41, 85]
+idx:  93 [41, 85] [41, 85]
+idx:  94 [41, 85] [41, 85]
+
+Object SR result:
+Accuracy: 10.767590618336886
+mR: 6.995626945500594
+mP: 3.2594639473494085
+F1: 4.037204638259848
+Value: 41.90871369294606
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 6.3920709170675
+role_based_mP: 4.051370133459686
+role_based_mR: 2.713419865480489
+role_based_f1: 3.041972307731183
+
+Verb result:
+Accuracy: 39.41908713692946
+mR: 27.661930334992103
+mP: 17.436456063907045
+F1: 20.105577954548203
+
+Verb SR result:
+Accuracy: 48.23695345557123
+mR: 26.945803119959738
+mP: 31.00766990769686
+F1: 22.552615135318796
+Value: 39.41908713692946
+Value-two: 21.57676348547718
+value-all: 2.904564315352697
+role_based_accuracy: 10.963276995413766
+role_based_mP: 5.5856559577479565
+role_based_mR: 12.72186147186147
+role_based_f1: 7.119743557937072
+avg epoch performance :  120.74688796680498
+****************************************************************************************************
+epoch : 21  batch : 0  learning rate : 0.0001, loss : 30.199, obj SR loss : 2.503, verb loss : 0.344, verb SR loss : 0.174
+epoch : 21  batch : 1  learning rate : 0.0001, loss : 32.520, obj SR loss : 2.128, verb loss : 0.609, verb SR loss : 0.515
+epoch : 21  batch : 2  learning rate : 0.0001, loss : 31.496, obj SR loss : 2.611, verb loss : 0.249, verb SR loss : 0.290
+epoch : 21  batch : 3  learning rate : 0.0001, loss : 23.436, obj SR loss : 1.459, verb loss : 0.673, verb SR loss : 0.211
+epoch : 21  batch : 4  learning rate : 0.0001, loss : 25.667, obj SR loss : 1.992, verb loss : 0.322, verb SR loss : 0.254
+epoch : 21  batch : 5  learning rate : 0.0001, loss : 25.751, obj SR loss : 1.696, verb loss : 0.493, verb SR loss : 0.386
+epoch : 21  batch : 6  learning rate : 0.0001, loss : 15.838, obj SR loss : 1.215, verb loss : 0.214, verb SR loss : 0.155
+epoch : 21  batch : 7  learning rate : 0.0001, loss : 28.737, obj SR loss : 2.080, verb loss : 0.380, verb SR loss : 0.414
+epoch : 21  batch : 8  learning rate : 0.0001, loss : 9.502, obj SR loss : 0.823, verb loss : 0.030, verb SR loss : 0.097
+epoch : 21  batch : 9  learning rate : 0.0001, loss : 17.542, obj SR loss : 0.984, verb loss : 0.237, verb SR loss : 0.533
+epoch : 21  batch : 10  learning rate : 0.0001, loss : 29.006, obj SR loss : 1.816, verb loss : 0.688, verb SR loss : 0.397
+epoch : 21  batch : 11  learning rate : 0.0001, loss : 23.176, obj SR loss : 1.675, verb loss : 0.210, verb SR loss : 0.432
+epoch : 21  batch : 12  learning rate : 0.0001, loss : 26.730, obj SR loss : 1.550, verb loss : 0.750, verb SR loss : 0.372
+epoch : 21  batch : 13  learning rate : 0.0001, loss : 22.576, obj SR loss : 1.545, verb loss : 0.350, verb SR loss : 0.362
+epoch : 21  batch : 14  learning rate : 0.0001, loss : 25.488, obj SR loss : 1.310, verb loss : 0.565, verb SR loss : 0.674
+epoch : 21  batch : 15  learning rate : 0.0001, loss : 35.798, obj SR loss : 2.789, verb loss : 0.185, verb SR loss : 0.606
+epoch : 21  batch : 16  learning rate : 0.0001, loss : 25.430, obj SR loss : 2.014, verb loss : 0.115, verb SR loss : 0.413
+epoch : 21  batch : 17  learning rate : 0.0001, loss : 24.547, obj SR loss : 2.017, verb loss : 0.261, verb SR loss : 0.177
+epoch : 21  batch : 18  learning rate : 0.0001, loss : 27.612, obj SR loss : 1.865, verb loss : 0.277, verb SR loss : 0.619
+epoch : 21  batch : 19  learning rate : 0.0001, loss : 34.049, obj SR loss : 2.348, verb loss : 0.719, verb SR loss : 0.337
+epoch : 21  batch : 20  learning rate : 0.0001, loss : 25.836, obj SR loss : 2.027, verb loss : 0.308, verb SR loss : 0.249
+epoch : 21  batch : 21  learning rate : 0.0001, loss : 33.770, obj SR loss : 2.569, verb loss : 0.589, verb SR loss : 0.219
+epoch : 21  batch : 22  learning rate : 0.0001, loss : 21.902, obj SR loss : 1.459, verb loss : 0.327, verb SR loss : 0.404
+epoch : 21  batch : 23  learning rate : 0.0001, loss : 19.819, obj SR loss : 1.646, verb loss : 0.021, verb SR loss : 0.315
+epoch : 21  batch : 24  learning rate : 0.0001, loss : 24.363, obj SR loss : 1.293, verb loss : 0.514, verb SR loss : 0.629
+epoch : 21  batch : 25  learning rate : 0.0001, loss : 26.302, obj SR loss : 1.867, verb loss : 0.400, verb SR loss : 0.364
+epoch : 21  batch : 26  learning rate : 0.0001, loss : 27.343, obj SR loss : 1.946, verb loss : 0.137, verb SR loss : 0.651
+epoch : 21  batch : 27  learning rate : 0.0001, loss : 33.123, obj SR loss : 1.948, verb loss : 0.875, verb SR loss : 0.489
+epoch : 21  batch : 28  learning rate : 0.0001, loss : 18.083, obj SR loss : 1.221, verb loss : 0.085, verb SR loss : 0.502
+epoch : 21  batch : 29  learning rate : 0.0001, loss : 29.609, obj SR loss : 2.063, verb loss : 0.375, verb SR loss : 0.523
+idx:  62 [41, 117, 60] [41, 117, 60]
+idx:  69 [41, 85] [41, 85]
+idx:  70 [41, 85] [41, 85]
+idx:  71 [41, 85] [41, 85]
+idx:  72 [41, 85] [41, 85]
+
+Object SR result:
+Accuracy: 10.554371002132196
+mR: 7.722896540686931
+mP: 3.348347659449955
+F1: 3.930577467044147
+Value: 41.078838174273855
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 4.9831656936467335
+role_based_mP: 3.5202380402848648
+role_based_mR: 2.1499637853287745
+role_based_f1: 2.322438507738715
+
+Verb result:
+Accuracy: 30.29045643153527
+mR: 23.842485890547657
+mP: 14.616773798591979
+F1: 15.680929725873547
+
+Verb SR result:
+Accuracy: 48.23695345557123
+mR: 26.573518647687443
+mP: 28.143396680241022
+F1: 23.16653271366892
+Value: 30.29045643153527
+Value-two: 21.16182572614108
+value-all: 2.0746887966804977
+role_based_accuracy: 9.966703342932185
+role_based_mP: 4.548942827677305
+role_based_mR: 11.724828820417054
+role_based_f1: 5.906014573038314
+avg epoch performance :  101.65975103734439
+****************************************************************************************************
+epoch : 22  batch : 0  learning rate : 0.0001, loss : 29.338, obj SR loss : 2.441, verb loss : 0.309, verb SR loss : 0.184
+epoch : 22  batch : 1  learning rate : 0.0001, loss : 32.571, obj SR loss : 2.125, verb loss : 0.634, verb SR loss : 0.498
+epoch : 22  batch : 2  learning rate : 0.0001, loss : 30.778, obj SR loss : 2.562, verb loss : 0.264, verb SR loss : 0.252
+epoch : 22  batch : 3  learning rate : 0.0001, loss : 22.304, obj SR loss : 1.417, verb loss : 0.636, verb SR loss : 0.177
+epoch : 22  batch : 4  learning rate : 0.0001, loss : 25.490, obj SR loss : 1.965, verb loss : 0.325, verb SR loss : 0.259
+epoch : 22  batch : 5  learning rate : 0.0001, loss : 25.147, obj SR loss : 1.660, verb loss : 0.479, verb SR loss : 0.376
+epoch : 22  batch : 6  learning rate : 0.0001, loss : 15.299, obj SR loss : 1.206, verb loss : 0.194, verb SR loss : 0.130
+epoch : 22  batch : 7  learning rate : 0.0001, loss : 27.994, obj SR loss : 2.037, verb loss : 0.361, verb SR loss : 0.401
+epoch : 22  batch : 8  learning rate : 0.0001, loss : 9.280, obj SR loss : 0.812, verb loss : 0.027, verb SR loss : 0.089
+epoch : 22  batch : 9  learning rate : 0.0001, loss : 16.893, obj SR loss : 0.954, verb loss : 0.223, verb SR loss : 0.512
+epoch : 22  batch : 10  learning rate : 0.0001, loss : 28.762, obj SR loss : 1.825, verb loss : 0.642, verb SR loss : 0.408
+epoch : 22  batch : 11  learning rate : 0.0001, loss : 22.541, obj SR loss : 1.669, verb loss : 0.187, verb SR loss : 0.398
+epoch : 22  batch : 12  learning rate : 0.0001, loss : 25.992, obj SR loss : 1.544, verb loss : 0.722, verb SR loss : 0.333
+epoch : 22  batch : 13  learning rate : 0.0001, loss : 21.879, obj SR loss : 1.522, verb loss : 0.344, verb SR loss : 0.321
+epoch : 22  batch : 14  learning rate : 0.0001, loss : 25.459, obj SR loss : 1.292, verb loss : 0.571, verb SR loss : 0.682
+epoch : 22  batch : 15  learning rate : 0.0001, loss : 35.052, obj SR loss : 2.740, verb loss : 0.189, verb SR loss : 0.576
+epoch : 22  batch : 16  learning rate : 0.0001, loss : 25.499, obj SR loss : 2.017, verb loss : 0.118, verb SR loss : 0.415
+epoch : 22  batch : 17  learning rate : 0.0001, loss : 24.324, obj SR loss : 2.007, verb loss : 0.260, verb SR loss : 0.166
+epoch : 22  batch : 18  learning rate : 0.0001, loss : 27.178, obj SR loss : 1.833, verb loss : 0.281, verb SR loss : 0.603
+epoch : 22  batch : 19  learning rate : 0.0001, loss : 33.269, obj SR loss : 2.255, verb loss : 0.763, verb SR loss : 0.308
+epoch : 22  batch : 20  learning rate : 0.0001, loss : 25.291, obj SR loss : 1.989, verb loss : 0.309, verb SR loss : 0.231
+epoch : 22  batch : 21  learning rate : 0.0001, loss : 31.495, obj SR loss : 2.567, verb loss : 0.371, verb SR loss : 0.212
+epoch : 22  batch : 22  learning rate : 0.0001, loss : 21.897, obj SR loss : 1.396, verb loss : 0.386, verb SR loss : 0.407
+epoch : 22  batch : 23  learning rate : 0.0001, loss : 19.277, obj SR loss : 1.618, verb loss : 0.018, verb SR loss : 0.292
+epoch : 22  batch : 24  learning rate : 0.0001, loss : 23.955, obj SR loss : 1.292, verb loss : 0.475, verb SR loss : 0.628
+epoch : 22  batch : 25  learning rate : 0.0001, loss : 25.163, obj SR loss : 1.828, verb loss : 0.335, verb SR loss : 0.353
+epoch : 22  batch : 26  learning rate : 0.0001, loss : 27.099, obj SR loss : 1.941, verb loss : 0.147, verb SR loss : 0.622
+epoch : 22  batch : 27  learning rate : 0.0001, loss : 31.975, obj SR loss : 1.889, verb loss : 0.876, verb SR loss : 0.433
+epoch : 22  batch : 28  learning rate : 0.0001, loss : 18.539, obj SR loss : 1.260, verb loss : 0.119, verb SR loss : 0.475
+epoch : 22  batch : 29  learning rate : 0.0001, loss : 28.522, obj SR loss : 1.974, verb loss : 0.370, verb SR loss : 0.507
+idx:  63 [41, 117, 60] [41, 117, 60]
+idx:  64 [41, 117, 60] [41, 117, 60]
+idx:  65 [41, 117, 60] [41, 117, 60]
+idx:  68 [41, 85] [41, 85]
+idx:  69 [41, 85] [41, 85]
+idx:  70 [41, 85] [41, 85]
+idx:  71 [41, 85] [41, 85]
+
+Object SR result:
+Accuracy: 10.23454157782516
+mR: 7.4434472584214415
+mP: 2.1364489411021452
+F1: 3.015443903083812
+Value: 39.83402489626556
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 4.600091212888767
+role_based_mP: 2.4507799702140494
+role_based_mR: 2.0327111253316072
+role_based_f1: 1.9740156106805098
+
+Verb result:
+Accuracy: 29.87551867219917
+mR: 23.753661601141975
+mP: 14.902534113060428
+F1: 15.279061680050251
+
+Verb SR result:
+Accuracy: 48.801128349788435
+mR: 27.314546020428377
+mP: 30.982189924254794
+F1: 22.782992755775275
+Value: 29.87551867219917
+Value-two: 21.57676348547718
+value-all: 2.904564315352697
+role_based_accuracy: 9.504334535157962
+role_based_mP: 5.272310876094713
+role_based_mR: 11.909973495339349
+role_based_f1: 6.4069823108694255
+avg epoch performance :  99.58506224066392
+****************************************************************************************************
+epoch : 23  batch : 0  learning rate : 0.0001, loss : 28.591, obj SR loss : 2.421, verb loss : 0.283, verb SR loss : 0.155
+epoch : 23  batch : 1  learning rate : 0.0001, loss : 32.499, obj SR loss : 2.115, verb loss : 0.655, verb SR loss : 0.480
+epoch : 23  batch : 2  learning rate : 0.0001, loss : 29.977, obj SR loss : 2.535, verb loss : 0.229, verb SR loss : 0.234
+epoch : 23  batch : 3  learning rate : 0.0001, loss : 21.468, obj SR loss : 1.365, verb loss : 0.611, verb SR loss : 0.170
+epoch : 23  batch : 4  learning rate : 0.0001, loss : 24.907, obj SR loss : 1.933, verb loss : 0.336, verb SR loss : 0.221
+epoch : 23  batch : 5  learning rate : 0.0001, loss : 24.298, obj SR loss : 1.632, verb loss : 0.490, verb SR loss : 0.308
+epoch : 23  batch : 6  learning rate : 0.0001, loss : 15.048, obj SR loss : 1.178, verb loss : 0.189, verb SR loss : 0.137
+epoch : 23  batch : 7  learning rate : 0.0001, loss : 27.818, obj SR loss : 2.000, verb loss : 0.355, verb SR loss : 0.426
+epoch : 23  batch : 8  learning rate : 0.0001, loss : 8.773, obj SR loss : 0.784, verb loss : 0.014, verb SR loss : 0.079
+epoch : 23  batch : 9  learning rate : 0.0001, loss : 16.808, obj SR loss : 0.931, verb loss : 0.210, verb SR loss : 0.540
+epoch : 23  batch : 10  learning rate : 0.0001, loss : 28.833, obj SR loss : 1.777, verb loss : 0.711, verb SR loss : 0.396
+epoch : 23  batch : 11  learning rate : 0.0001, loss : 21.884, obj SR loss : 1.674, verb loss : 0.233, verb SR loss : 0.282
+epoch : 23  batch : 12  learning rate : 0.0001, loss : 25.509, obj SR loss : 1.515, verb loss : 0.705, verb SR loss : 0.331
+epoch : 23  batch : 13  learning rate : 0.0001, loss : 20.684, obj SR loss : 1.499, verb loss : 0.330, verb SR loss : 0.239
+epoch : 23  batch : 14  learning rate : 0.0001, loss : 24.704, obj SR loss : 1.290, verb loss : 0.550, verb SR loss : 0.631
+epoch : 23  batch : 15  learning rate : 0.0001, loss : 34.211, obj SR loss : 2.725, verb loss : 0.181, verb SR loss : 0.515
+epoch : 23  batch : 16  learning rate : 0.0001, loss : 24.552, obj SR loss : 1.979, verb loss : 0.108, verb SR loss : 0.368
+epoch : 23  batch : 17  learning rate : 0.0001, loss : 23.529, obj SR loss : 1.955, verb loss : 0.254, verb SR loss : 0.144
+epoch : 23  batch : 18  learning rate : 0.0001, loss : 27.131, obj SR loss : 1.839, verb loss : 0.272, verb SR loss : 0.603
+epoch : 23  batch : 19  learning rate : 0.0001, loss : 32.659, obj SR loss : 2.234, verb loss : 0.709, verb SR loss : 0.324
+epoch : 23  batch : 20  learning rate : 0.0001, loss : 24.872, obj SR loss : 1.963, verb loss : 0.305, verb SR loss : 0.220
+epoch : 23  batch : 21  learning rate : 0.0001, loss : 30.848, obj SR loss : 2.470, verb loss : 0.424, verb SR loss : 0.191
+epoch : 23  batch : 22  learning rate : 0.0001, loss : 22.218, obj SR loss : 1.430, verb loss : 0.345, verb SR loss : 0.446
+epoch : 23  batch : 23  learning rate : 0.0001, loss : 18.419, obj SR loss : 1.576, verb loss : 0.018, verb SR loss : 0.248
+epoch : 23  batch : 24  learning rate : 0.0001, loss : 24.180, obj SR loss : 1.326, verb loss : 0.442, verb SR loss : 0.650
+epoch : 23  batch : 25  learning rate : 0.0001, loss : 24.938, obj SR loss : 1.822, verb loss : 0.374, verb SR loss : 0.297
+epoch : 23  batch : 26  learning rate : 0.0001, loss : 26.227, obj SR loss : 1.929, verb loss : 0.145, verb SR loss : 0.549
+epoch : 23  batch : 27  learning rate : 0.0001, loss : 30.734, obj SR loss : 1.813, verb loss : 0.873, verb SR loss : 0.387
+epoch : 23  batch : 28  learning rate : 0.0001, loss : 17.970, obj SR loss : 1.253, verb loss : 0.088, verb SR loss : 0.456
+epoch : 23  batch : 29  learning rate : 0.0001, loss : 28.743, obj SR loss : 2.015, verb loss : 0.376, verb SR loss : 0.483
+idx:  58 [41, 117, 60] [41, 117, 60]
+idx:  59 [41, 117, 60] [41, 117, 60]
+idx:  61 [41, 117, 60] [41, 117, 60]
+idx:  62 [41, 117, 60] [41, 117, 60]
+idx:  63 [41, 117, 60] [41, 117, 60]
+idx:  64 [41, 117, 60] [41, 117, 60]
+idx:  65 [41, 117, 60] [41, 117, 60]
+idx:  68 [41, 85] [41, 85]
+idx:  69 [41, 85] [41, 85]
+idx:  70 [41, 85] [41, 85]
+idx:  71 [41, 85] [41, 85]
+
+Object SR result:
+Accuracy: 10.767590618336886
+mR: 7.7580462959126875
+mP: 3.1452981053121896
+F1: 4.045266934909791
+Value: 41.49377593360996
+Value-two: 0.4149377593360996
+value-all: 0.0
+role_based_accuracy: 8.953155865136505
+role_based_mP: 10.639815662446866
+role_based_mR: 4.037359254277347
+role_based_f1: 5.435100270836671
+
+Verb result:
+Accuracy: 29.87551867219917
+mR: 23.668874779436543
+mP: 13.982378894659597
+F1: 15.038531307911152
+
+Verb SR result:
+Accuracy: 49.647390691114246
+mR: 27.079283887468037
+mP: 29.09005442868648
+F1: 23.54681086748182
+Value: 29.87551867219917
+Value-two: 21.16182572614108
+value-all: 4.564315352697095
+role_based_accuracy: 9.799982835180238
+role_based_mP: 5.588107565140702
+role_based_mR: 12.050539632238976
+role_based_f1: 6.630697214891234
+avg epoch performance :  101.24481327800831
+****************************************************************************************************
+epoch : 24  batch : 0  learning rate : 0.0001, loss : 27.615, obj SR loss : 2.366, verb loss : 0.251, verb SR loss : 0.145
+epoch : 24  batch : 1  learning rate : 0.0001, loss : 31.232, obj SR loss : 2.103, verb loss : 0.576, verb SR loss : 0.444
+epoch : 24  batch : 2  learning rate : 0.0001, loss : 29.006, obj SR loss : 2.533, verb loss : 0.154, verb SR loss : 0.213
+epoch : 24  batch : 3  learning rate : 0.0001, loss : 21.818, obj SR loss : 1.388, verb loss : 0.646, verb SR loss : 0.147
+epoch : 24  batch : 4  learning rate : 0.0001, loss : 23.999, obj SR loss : 1.897, verb loss : 0.317, verb SR loss : 0.185
+epoch : 24  batch : 5  learning rate : 0.0001, loss : 23.936, obj SR loss : 1.610, verb loss : 0.475, verb SR loss : 0.309
+epoch : 24  batch : 6  learning rate : 0.0001, loss : 14.828, obj SR loss : 1.180, verb loss : 0.190, verb SR loss : 0.113
+epoch : 24  batch : 7  learning rate : 0.0001, loss : 27.037, obj SR loss : 1.981, verb loss : 0.314, verb SR loss : 0.408
+epoch : 24  batch : 8  learning rate : 0.0001, loss : 8.599, obj SR loss : 0.769, verb loss : 0.015, verb SR loss : 0.076
+epoch : 24  batch : 9  learning rate : 0.0001, loss : 15.715, obj SR loss : 0.901, verb loss : 0.217, verb SR loss : 0.453
+epoch : 24  batch : 10  learning rate : 0.0001, loss : 27.939, obj SR loss : 1.783, verb loss : 0.623, verb SR loss : 0.388
+epoch : 24  batch : 11  learning rate : 0.0001, loss : 20.431, obj SR loss : 1.633, verb loss : 0.153, verb SR loss : 0.257
+epoch : 24  batch : 12  learning rate : 0.0001, loss : 25.393, obj SR loss : 1.501, verb loss : 0.721, verb SR loss : 0.318
+epoch : 24  batch : 13  learning rate : 0.0001, loss : 20.344, obj SR loss : 1.484, verb loss : 0.318, verb SR loss : 0.233
+epoch : 24  batch : 14  learning rate : 0.0001, loss : 23.497, obj SR loss : 1.250, verb loss : 0.523, verb SR loss : 0.576
+epoch : 24  batch : 15  learning rate : 0.0001, loss : 33.412, obj SR loss : 2.710, verb loss : 0.203, verb SR loss : 0.428
+epoch : 24  batch : 16  learning rate : 0.0001, loss : 23.253, obj SR loss : 1.925, verb loss : 0.090, verb SR loss : 0.311
+epoch : 24  batch : 17  learning rate : 0.0001, loss : 22.739, obj SR loss : 1.899, verb loss : 0.250, verb SR loss : 0.125
+epoch : 24  batch : 18  learning rate : 0.0001, loss : 26.277, obj SR loss : 1.799, verb loss : 0.254, verb SR loss : 0.575
+epoch : 24  batch : 19  learning rate : 0.0001, loss : 32.162, obj SR loss : 2.226, verb loss : 0.681, verb SR loss : 0.308
+epoch : 24  batch : 20  learning rate : 0.0001, loss : 24.521, obj SR loss : 1.963, verb loss : 0.281, verb SR loss : 0.207
+epoch : 24  batch : 21  learning rate : 0.0001, loss : 28.818, obj SR loss : 2.360, verb loss : 0.331, verb SR loss : 0.191
+epoch : 24  batch : 22  learning rate : 0.0001, loss : 21.221, obj SR loss : 1.423, verb loss : 0.269, verb SR loss : 0.431
+epoch : 24  batch : 23  learning rate : 0.0001, loss : 17.927, obj SR loss : 1.570, verb loss : 0.014, verb SR loss : 0.209
+epoch : 24  batch : 24  learning rate : 0.0001, loss : 22.472, obj SR loss : 1.343, verb loss : 0.421, verb SR loss : 0.484
+epoch : 24  batch : 25  learning rate : 0.0001, loss : 24.203, obj SR loss : 1.795, verb loss : 0.355, verb SR loss : 0.270
+epoch : 24  batch : 26  learning rate : 0.0001, loss : 25.713, obj SR loss : 1.905, verb loss : 0.151, verb SR loss : 0.515
+epoch : 24  batch : 27  learning rate : 0.0001, loss : 30.603, obj SR loss : 1.795, verb loss : 0.924, verb SR loss : 0.342
+epoch : 24  batch : 28  learning rate : 0.0001, loss : 17.375, obj SR loss : 1.237, verb loss : 0.057, verb SR loss : 0.443
+epoch : 24  batch : 29  learning rate : 0.0001, loss : 28.017, obj SR loss : 1.971, verb loss : 0.402, verb SR loss : 0.429
+idx:  67 [41, 26] [41, 26]
+idx:  68 [41, 117, 60] [41, 117, 60]
+idx:  69 [41, 117, 60] [41, 117, 60]
+idx:  71 [41, 117, 60] [41, 117, 60]
+idx:  72 [41, 117, 60] [41, 117, 60]
+idx:  73 [41, 117, 60] [41, 117, 60]
+idx:  74 [41, 117, 60] [41, 117, 60]
+idx:  75 [41, 117, 60] [41, 117, 60]
+idx:  78 [41, 85] [41, 85]
+idx:  79 [41, 85] [41, 85]
+idx:  80 [41, 85] [41, 85]
+idx:  81 [41, 85] [41, 85]
+
+Object SR result:
+Accuracy: 10.660980810234541
+mR: 7.559647659349629
+mP: 3.7367864177712575
+F1: 4.59331817710806
+Value: 41.078838174273855
+Value-two: 0.4149377593360996
+value-all: 0.0
+role_based_accuracy: 8.901794173678722
+role_based_mP: 10.154259841678014
+role_based_mR: 4.081324077197665
+role_based_f1: 5.389379788791866
+
+Verb result:
+Accuracy: 34.024896265560166
+mR: 25.404985890547653
+mP: 15.899168698280796
+F1: 17.4421612982116
+
+Verb SR result:
+Accuracy: 49.78843441466855
+mR: 28.128823246470308
+mP: 31.749199716381572
+F1: 24.164134580899088
+Value: 34.024896265560166
+Value-two: 21.991701244813278
+value-all: 4.979253112033195
+role_based_accuracy: 11.125824323214763
+role_based_mP: 5.661454561846254
+role_based_mR: 12.2173578055931
+role_based_f1: 6.848115646981226
+avg epoch performance :  109.12863070539419
+****************************************************************************************************
+epoch : 25  batch : 0  learning rate : 0.0001, loss : 27.005, obj SR loss : 2.332, verb loss : 0.237, verb SR loss : 0.132
+epoch : 25  batch : 1  learning rate : 0.0001, loss : 30.396, obj SR loss : 2.077, verb loss : 0.540, verb SR loss : 0.423
+epoch : 25  batch : 2  learning rate : 0.0001, loss : 29.071, obj SR loss : 2.518, verb loss : 0.169, verb SR loss : 0.220
+epoch : 25  batch : 3  learning rate : 0.0001, loss : 21.361, obj SR loss : 1.366, verb loss : 0.626, verb SR loss : 0.144
+epoch : 25  batch : 4  learning rate : 0.0001, loss : 23.302, obj SR loss : 1.882, verb loss : 0.296, verb SR loss : 0.152
+epoch : 25  batch : 5  learning rate : 0.0001, loss : 23.731, obj SR loss : 1.606, verb loss : 0.502, verb SR loss : 0.265
+epoch : 25  batch : 6  learning rate : 0.0001, loss : 14.584, obj SR loss : 1.167, verb loss : 0.189, verb SR loss : 0.103
+epoch : 25  batch : 7  learning rate : 0.0001, loss : 26.578, obj SR loss : 1.950, verb loss : 0.313, verb SR loss : 0.395
+epoch : 25  batch : 8  learning rate : 0.0001, loss : 8.540, obj SR loss : 0.765, verb loss : 0.013, verb SR loss : 0.076
+epoch : 25  batch : 9  learning rate : 0.0001, loss : 15.060, obj SR loss : 0.880, verb loss : 0.210, verb SR loss : 0.416
+epoch : 25  batch : 10  learning rate : 0.0001, loss : 27.474, obj SR loss : 1.766, verb loss : 0.612, verb SR loss : 0.370
+epoch : 25  batch : 11  learning rate : 0.0001, loss : 19.633, obj SR loss : 1.574, verb loss : 0.156, verb SR loss : 0.233
+epoch : 25  batch : 12  learning rate : 0.0001, loss : 24.948, obj SR loss : 1.487, verb loss : 0.719, verb SR loss : 0.289
+epoch : 25  batch : 13  learning rate : 0.0001, loss : 19.544, obj SR loss : 1.450, verb loss : 0.309, verb SR loss : 0.196
+epoch : 25  batch : 14  learning rate : 0.0001, loss : 23.227, obj SR loss : 1.254, verb loss : 0.525, verb SR loss : 0.544
+epoch : 25  batch : 15  learning rate : 0.0001, loss : 32.784, obj SR loss : 2.679, verb loss : 0.199, verb SR loss : 0.401
+epoch : 25  batch : 16  learning rate : 0.0001, loss : 23.366, obj SR loss : 1.916, verb loss : 0.111, verb SR loss : 0.309
+epoch : 25  batch : 17  learning rate : 0.0001, loss : 22.704, obj SR loss : 1.911, verb loss : 0.240, verb SR loss : 0.119
+epoch : 25  batch : 18  learning rate : 0.0001, loss : 25.682, obj SR loss : 1.779, verb loss : 0.259, verb SR loss : 0.530
+epoch : 25  batch : 19  learning rate : 0.0001, loss : 31.849, obj SR loss : 2.196, verb loss : 0.687, verb SR loss : 0.302
+epoch : 25  batch : 20  learning rate : 0.0001, loss : 23.884, obj SR loss : 1.938, verb loss : 0.274, verb SR loss : 0.176
+epoch : 25  batch : 21  learning rate : 0.0001, loss : 28.380, obj SR loss : 2.294, verb loss : 0.375, verb SR loss : 0.169
+epoch : 25  batch : 22  learning rate : 0.0001, loss : 21.017, obj SR loss : 1.398, verb loss : 0.300, verb SR loss : 0.404
+epoch : 25  batch : 23  learning rate : 0.0001, loss : 17.357, obj SR loss : 1.539, verb loss : 0.011, verb SR loss : 0.186
+epoch : 25  batch : 24  learning rate : 0.0001, loss : 22.171, obj SR loss : 1.297, verb loss : 0.435, verb SR loss : 0.485
+epoch : 25  batch : 25  learning rate : 0.0001, loss : 23.265, obj SR loss : 1.767, verb loss : 0.318, verb SR loss : 0.241
+epoch : 25  batch : 26  learning rate : 0.0001, loss : 25.063, obj SR loss : 1.889, verb loss : 0.128, verb SR loss : 0.489
+epoch : 25  batch : 27  learning rate : 0.0001, loss : 30.330, obj SR loss : 1.795, verb loss : 0.883, verb SR loss : 0.354
+epoch : 25  batch : 28  learning rate : 0.0001, loss : 16.376, obj SR loss : 1.130, verb loss : 0.062, verb SR loss : 0.446
+epoch : 25  batch : 29  learning rate : 0.0001, loss : 26.713, obj SR loss : 1.969, verb loss : 0.298, verb SR loss : 0.405
+idx:  69 [41, 26] [41, 26]
+idx:  70 [41, 117, 60] [41, 117, 60]
+idx:  71 [41, 117, 60] [41, 117, 60]
+idx:  73 [41, 117, 60] [41, 117, 60]
+idx:  74 [41, 117, 60] [41, 117, 60]
+idx:  75 [41, 117, 60] [41, 117, 60]
+idx:  76 [41, 117, 60] [41, 117, 60]
+idx:  77 [41, 117, 60] [41, 117, 60]
+idx:  80 [41, 85] [41, 85]
+idx:  81 [41, 85] [41, 85]
+idx:  82 [41, 85] [41, 85]
+idx:  83 [41, 85] [41, 85]
+
+Object SR result:
+Accuracy: 11.40724946695096
+mR: 8.144131452867036
+mP: 4.013669870530406
+F1: 4.883407336998947
+Value: 43.983402489626556
+Value-two: 0.4149377593360996
+value-all: 0.0
+role_based_accuracy: 9.299886169281091
+role_based_mP: 10.820972456910413
+role_based_mR: 4.493916014557404
+role_based_f1: 5.838181216657159
+
+Verb result:
+Accuracy: 34.85477178423236
+mR: 25.752208112769882
+mP: 15.989697168675644
+F1: 18.004833826751636
+
+Verb SR result:
+Accuracy: 50.634696755994355
+mR: 29.01867413632119
+mP: 27.48003245109263
+F1: 24.74242509430112
+Value: 34.85477178423236
+Value-two: 21.991701244813278
+value-all: 4.979253112033195
+role_based_accuracy: 11.734828579811415
+role_based_mP: 5.783144547199547
+role_based_mR: 12.2173578055931
+role_based_f1: 6.978427365895559
+avg epoch performance :  113.69294605809128
+****************************************************************************************************
+epoch : 26  batch : 0  learning rate : 0.0001, loss : 26.907, obj SR loss : 2.329, verb loss : 0.244, verb SR loss : 0.118
+epoch : 26  batch : 1  learning rate : 0.0001, loss : 30.569, obj SR loss : 2.094, verb loss : 0.558, verb SR loss : 0.405
+epoch : 26  batch : 2  learning rate : 0.0001, loss : 28.716, obj SR loss : 2.520, verb loss : 0.167, verb SR loss : 0.185
+epoch : 26  batch : 3  learning rate : 0.0001, loss : 21.261, obj SR loss : 1.388, verb loss : 0.608, verb SR loss : 0.130
+epoch : 26  batch : 4  learning rate : 0.0001, loss : 23.067, obj SR loss : 1.873, verb loss : 0.291, verb SR loss : 0.142
+epoch : 26  batch : 5  learning rate : 0.0001, loss : 22.746, obj SR loss : 1.577, verb loss : 0.458, verb SR loss : 0.239
+epoch : 26  batch : 6  learning rate : 0.0001, loss : 14.487, obj SR loss : 1.163, verb loss : 0.193, verb SR loss : 0.092
+epoch : 26  batch : 7  learning rate : 0.0001, loss : 26.306, obj SR loss : 1.907, verb loss : 0.316, verb SR loss : 0.408
+epoch : 26  batch : 8  learning rate : 0.0001, loss : 8.396, obj SR loss : 0.761, verb loss : 0.014, verb SR loss : 0.065
+epoch : 26  batch : 9  learning rate : 0.0001, loss : 14.481, obj SR loss : 0.892, verb loss : 0.199, verb SR loss : 0.357
+epoch : 26  batch : 10  learning rate : 0.0001, loss : 27.279, obj SR loss : 1.764, verb loss : 0.610, verb SR loss : 0.354
+epoch : 26  batch : 11  learning rate : 0.0001, loss : 19.457, obj SR loss : 1.576, verb loss : 0.172, verb SR loss : 0.198
+epoch : 26  batch : 12  learning rate : 0.0001, loss : 24.135, obj SR loss : 1.468, verb loss : 0.669, verb SR loss : 0.277
+epoch : 26  batch : 13  learning rate : 0.0001, loss : 19.645, obj SR loss : 1.462, verb loss : 0.310, verb SR loss : 0.192
+epoch : 26  batch : 14  learning rate : 0.0001, loss : 22.728, obj SR loss : 1.228, verb loss : 0.508, verb SR loss : 0.536
+epoch : 26  batch : 15  learning rate : 0.0001, loss : 31.950, obj SR loss : 2.639, verb loss : 0.177, verb SR loss : 0.379
+epoch : 26  batch : 16  learning rate : 0.0001, loss : 22.979, obj SR loss : 1.917, verb loss : 0.098, verb SR loss : 0.282
+epoch : 26  batch : 17  learning rate : 0.0001, loss : 22.098, obj SR loss : 1.889, verb loss : 0.217, verb SR loss : 0.104
+epoch : 26  batch : 18  learning rate : 0.0001, loss : 25.314, obj SR loss : 1.767, verb loss : 0.254, verb SR loss : 0.511
+epoch : 26  batch : 19  learning rate : 0.0001, loss : 31.116, obj SR loss : 2.154, verb loss : 0.656, verb SR loss : 0.301
+epoch : 26  batch : 20  learning rate : 0.0001, loss : 23.438, obj SR loss : 1.927, verb loss : 0.265, verb SR loss : 0.151
+epoch : 26  batch : 21  learning rate : 0.0001, loss : 27.248, obj SR loss : 2.265, verb loss : 0.307, verb SR loss : 0.152
+epoch : 26  batch : 22  learning rate : 0.0001, loss : 19.805, obj SR loss : 1.359, verb loss : 0.249, verb SR loss : 0.372
+epoch : 26  batch : 23  learning rate : 0.0001, loss : 16.909, obj SR loss : 1.514, verb loss : 0.012, verb SR loss : 0.165
+epoch : 26  batch : 24  learning rate : 0.0001, loss : 22.293, obj SR loss : 1.274, verb loss : 0.494, verb SR loss : 0.461
+epoch : 26  batch : 25  learning rate : 0.0001, loss : 23.127, obj SR loss : 1.775, verb loss : 0.320, verb SR loss : 0.218
+epoch : 26  batch : 26  learning rate : 0.0001, loss : 24.684, obj SR loss : 1.879, verb loss : 0.136, verb SR loss : 0.454
+epoch : 26  batch : 27  learning rate : 0.0001, loss : 29.294, obj SR loss : 1.795, verb loss : 0.805, verb SR loss : 0.329
+epoch : 26  batch : 28  learning rate : 0.0001, loss : 15.961, obj SR loss : 1.111, verb loss : 0.069, verb SR loss : 0.416
+epoch : 26  batch : 29  learning rate : 0.0001, loss : 26.422, obj SR loss : 1.934, verb loss : 0.319, verb SR loss : 0.389
+idx:  57 [41, 117, 60] [41, 117, 60]
+idx:  59 [41, 117, 60] [41, 117, 60]
+idx:  60 [41, 117, 60] [41, 117, 60]
+idx:  61 [41, 117, 60] [41, 117, 60]
+idx:  62 [41, 117, 60] [41, 117, 60]
+idx:  63 [41, 117, 60] [41, 117, 60]
+idx:  66 [41, 85] [41, 85]
+idx:  67 [41, 85] [41, 85]
+idx:  68 [41, 85] [41, 85]
+idx:  69 [41, 85] [41, 85]
+
+Object SR result:
+Accuracy: 10.874200426439232
+mR: 7.729465586520496
+mP: 3.7447317430806586
+F1: 4.535506074421504
+Value: 41.90871369294606
+Value-two: 0.4149377593360996
+value-all: 0.0
+role_based_accuracy: 8.9940025646423
+role_based_mP: 10.81529911790374
+role_based_mR: 4.328572099213488
+role_based_f1: 5.701935377551386
+
+Verb result:
+Accuracy: 29.045643153526974
+mR: 22.841668897083604
+mP: 14.12814886552728
+F1: 14.781230321585998
+
+Verb SR result:
+Accuracy: 51.33991537376586
+mR: 29.680049797696856
+mP: 27.722863545821635
+F1: 25.239507852028865
+Value: 29.045643153526974
+Value-two: 21.16182572614108
+value-all: 4.149377593360995
+role_based_accuracy: 11.622577532936111
+role_based_mP: 5.521180225586469
+role_based_mR: 11.484315948601662
+role_based_f1: 6.613510652129419
+avg epoch performance :  100.0
+****************************************************************************************************
+epoch : 27  batch : 0  learning rate : 0.0001, loss : 25.991, obj SR loss : 2.270, verb loss : 0.221, verb SR loss : 0.108
+epoch : 27  batch : 1  learning rate : 0.0001, loss : 30.257, obj SR loss : 2.066, verb loss : 0.572, verb SR loss : 0.388
+epoch : 27  batch : 2  learning rate : 0.0001, loss : 28.267, obj SR loss : 2.495, verb loss : 0.154, verb SR loss : 0.177
+epoch : 27  batch : 3  learning rate : 0.0001, loss : 20.733, obj SR loss : 1.359, verb loss : 0.595, verb SR loss : 0.119
+epoch : 27  batch : 4  learning rate : 0.0001, loss : 22.929, obj SR loss : 1.859, verb loss : 0.303, verb SR loss : 0.130
+epoch : 27  batch : 5  learning rate : 0.0001, loss : 22.295, obj SR loss : 1.563, verb loss : 0.448, verb SR loss : 0.219
+epoch : 27  batch : 6  learning rate : 0.0001, loss : 14.358, obj SR loss : 1.157, verb loss : 0.189, verb SR loss : 0.089
+epoch : 27  batch : 7  learning rate : 0.0001, loss : 25.955, obj SR loss : 1.890, verb loss : 0.312, verb SR loss : 0.394
+epoch : 27  batch : 8  learning rate : 0.0001, loss : 8.280, obj SR loss : 0.754, verb loss : 0.011, verb SR loss : 0.062
+epoch : 27  batch : 9  learning rate : 0.0001, loss : 13.992, obj SR loss : 0.889, verb loss : 0.192, verb SR loss : 0.317
+epoch : 27  batch : 10  learning rate : 0.0001, loss : 26.935, obj SR loss : 1.760, verb loss : 0.577, verb SR loss : 0.357
+epoch : 27  batch : 11  learning rate : 0.0001, loss : 19.218, obj SR loss : 1.563, verb loss : 0.147, verb SR loss : 0.212
+epoch : 27  batch : 12  learning rate : 0.0001, loss : 23.635, obj SR loss : 1.446, verb loss : 0.660, verb SR loss : 0.258
+epoch : 27  batch : 13  learning rate : 0.0001, loss : 19.338, obj SR loss : 1.450, verb loss : 0.311, verb SR loss : 0.173
+epoch : 27  batch : 14  learning rate : 0.0001, loss : 22.499, obj SR loss : 1.220, verb loss : 0.518, verb SR loss : 0.512
+epoch : 27  batch : 15  learning rate : 0.0001, loss : 31.352, obj SR loss : 2.612, verb loss : 0.161, verb SR loss : 0.362
+epoch : 27  batch : 16  learning rate : 0.0001, loss : 22.740, obj SR loss : 1.919, verb loss : 0.102, verb SR loss : 0.253
+epoch : 27  batch : 17  learning rate : 0.0001, loss : 21.971, obj SR loss : 1.911, verb loss : 0.201, verb SR loss : 0.085
+epoch : 27  batch : 18  learning rate : 0.0001, loss : 24.889, obj SR loss : 1.763, verb loss : 0.245, verb SR loss : 0.481
+epoch : 27  batch : 19  learning rate : 0.0001, loss : 30.405, obj SR loss : 2.123, verb loss : 0.635, verb SR loss : 0.283
+epoch : 27  batch : 20  learning rate : 0.0001, loss : 23.155, obj SR loss : 1.896, verb loss : 0.266, verb SR loss : 0.153
+epoch : 27  batch : 21  learning rate : 0.0001, loss : 26.351, obj SR loss : 2.231, verb loss : 0.245, verb SR loss : 0.159
+epoch : 27  batch : 22  learning rate : 0.0001, loss : 20.245, obj SR loss : 1.372, verb loss : 0.302, verb SR loss : 0.350
+epoch : 27  batch : 23  learning rate : 0.0001, loss : 16.697, obj SR loss : 1.497, verb loss : 0.011, verb SR loss : 0.162
+epoch : 27  batch : 24  learning rate : 0.0001, loss : 21.634, obj SR loss : 1.255, verb loss : 0.467, verb SR loss : 0.442
+epoch : 27  batch : 25  learning rate : 0.0001, loss : 22.761, obj SR loss : 1.748, verb loss : 0.298, verb SR loss : 0.230
+epoch : 27  batch : 26  learning rate : 0.0001, loss : 24.304, obj SR loss : 1.887, verb loss : 0.107, verb SR loss : 0.436
+epoch : 27  batch : 27  learning rate : 0.0001, loss : 29.182, obj SR loss : 1.756, verb loss : 0.849, verb SR loss : 0.314
+epoch : 27  batch : 28  learning rate : 0.0001, loss : 15.603, obj SR loss : 1.107, verb loss : 0.058, verb SR loss : 0.395
+epoch : 27  batch : 29  learning rate : 0.0001, loss : 26.641, obj SR loss : 1.955, verb loss : 0.332, verb SR loss : 0.377
+idx:  58 [41, 117, 60] [41, 117, 60]
+idx:  60 [41, 117, 60] [41, 117, 60]
+idx:  61 [41, 117, 60] [41, 117, 60]
+idx:  62 [41, 117, 60] [41, 117, 60]
+idx:  63 [41, 117, 60] [41, 117, 60]
+idx:  64 [41, 117, 60] [41, 117, 60]
+idx:  67 [41, 85] [41, 85]
+idx:  68 [41, 85] [41, 85]
+idx:  69 [41, 85] [41, 85]
+idx:  70 [41, 85] [41, 85]
+
+Object SR result:
+Accuracy: 11.300639658848615
+mR: 8.718704502425844
+mP: 3.4366524052582728
+F1: 4.396733968309332
+Value: 43.15352697095436
+Value-two: 0.8298755186721992
+value-all: 0.0
+role_based_accuracy: 10.696508347369383
+role_based_mP: 9.256505121166775
+role_based_mR: 5.0401510276303565
+role_based_f1: 6.186940293098401
+
+Verb result:
+Accuracy: 29.460580912863072
+mR: 23.100066829900147
+mP: 14.614185586515308
+F1: 14.903147152889154
+
+Verb SR result:
+Accuracy: 51.198871650211565
+mR: 29.592868460515525
+mP: 36.786252359894775
+F1: 25.64555069289376
+Value: 29.460580912863072
+Value-two: 21.57676348547718
+value-all: 4.149377593360995
+role_based_accuracy: 11.473058434647188
+role_based_mP: 6.331836253788438
+role_based_mR: 12.241622574955906
+role_based_f1: 7.261180903318585
+avg epoch performance :  102.0746887966805
+****************************************************************************************************
+epoch : 28  batch : 0  learning rate : 0.0001, loss : 26.296, obj SR loss : 2.312, verb loss : 0.218, verb SR loss : 0.101
+epoch : 28  batch : 1  learning rate : 0.0001, loss : 29.861, obj SR loss : 2.067, verb loss : 0.544, verb SR loss : 0.375
+epoch : 28  batch : 2  learning rate : 0.0001, loss : 28.184, obj SR loss : 2.504, verb loss : 0.134, verb SR loss : 0.180
+epoch : 28  batch : 3  learning rate : 0.0001, loss : 20.744, obj SR loss : 1.354, verb loss : 0.611, verb SR loss : 0.109
+epoch : 28  batch : 4  learning rate : 0.0001, loss : 22.754, obj SR loss : 1.836, verb loss : 0.310, verb SR loss : 0.130
+epoch : 28  batch : 5  learning rate : 0.0001, loss : 22.032, obj SR loss : 1.533, verb loss : 0.459, verb SR loss : 0.211
+epoch : 28  batch : 6  learning rate : 0.0001, loss : 14.044, obj SR loss : 1.139, verb loss : 0.178, verb SR loss : 0.088
+epoch : 28  batch : 7  learning rate : 0.0001, loss : 25.570, obj SR loss : 1.878, verb loss : 0.304, verb SR loss : 0.375
+epoch : 28  batch : 8  learning rate : 0.0001, loss : 8.177, obj SR loss : 0.737, verb loss : 0.015, verb SR loss : 0.066
+epoch : 28  batch : 9  learning rate : 0.0001, loss : 13.489, obj SR loss : 0.863, verb loss : 0.188, verb SR loss : 0.299
+epoch : 28  batch : 10  learning rate : 0.0001, loss : 26.024, obj SR loss : 1.714, verb loss : 0.553, verb SR loss : 0.335
+epoch : 28  batch : 11  learning rate : 0.0001, loss : 18.558, obj SR loss : 1.529, verb loss : 0.137, verb SR loss : 0.190
+epoch : 28  batch : 12  learning rate : 0.0001, loss : 23.583, obj SR loss : 1.434, verb loss : 0.672, verb SR loss : 0.252
+epoch : 28  batch : 13  learning rate : 0.0001, loss : 19.292, obj SR loss : 1.447, verb loss : 0.315, verb SR loss : 0.166
+epoch : 28  batch : 14  learning rate : 0.0001, loss : 21.846, obj SR loss : 1.194, verb loss : 0.483, verb SR loss : 0.508
+epoch : 28  batch : 15  learning rate : 0.0001, loss : 31.381, obj SR loss : 2.602, verb loss : 0.160, verb SR loss : 0.377
+epoch : 28  batch : 16  learning rate : 0.0001, loss : 22.318, obj SR loss : 1.894, verb loss : 0.091, verb SR loss : 0.247
+epoch : 28  batch : 17  learning rate : 0.0001, loss : 22.052, obj SR loss : 1.904, verb loss : 0.210, verb SR loss : 0.091
+epoch : 28  batch : 18  learning rate : 0.0001, loss : 24.614, obj SR loss : 1.755, verb loss : 0.228, verb SR loss : 0.478
+epoch : 28  batch : 19  learning rate : 0.0001, loss : 29.988, obj SR loss : 2.112, verb loss : 0.595, verb SR loss : 0.292
+epoch : 28  batch : 20  learning rate : 0.0001, loss : 22.715, obj SR loss : 1.883, verb loss : 0.254, verb SR loss : 0.135
+epoch : 28  batch : 21  learning rate : 0.0001, loss : 26.391, obj SR loss : 2.227, verb loss : 0.257, verb SR loss : 0.156
+epoch : 28  batch : 22  learning rate : 0.0001, loss : 20.046, obj SR loss : 1.341, verb loss : 0.299, verb SR loss : 0.365
+epoch : 28  batch : 23  learning rate : 0.0001, loss : 16.420, obj SR loss : 1.473, verb loss : 0.011, verb SR loss : 0.158
+epoch : 28  batch : 24  learning rate : 0.0001, loss : 21.310, obj SR loss : 1.266, verb loss : 0.445, verb SR loss : 0.420
+epoch : 28  batch : 25  learning rate : 0.0001, loss : 22.467, obj SR loss : 1.737, verb loss : 0.291, verb SR loss : 0.218
+epoch : 28  batch : 26  learning rate : 0.0001, loss : 24.021, obj SR loss : 1.863, verb loss : 0.117, verb SR loss : 0.422
+epoch : 28  batch : 27  learning rate : 0.0001, loss : 28.255, obj SR loss : 1.684, verb loss : 0.840, verb SR loss : 0.301
+epoch : 28  batch : 28  learning rate : 0.0001, loss : 15.388, obj SR loss : 1.125, verb loss : 0.053, verb SR loss : 0.360
+epoch : 28  batch : 29  learning rate : 0.0001, loss : 26.560, obj SR loss : 1.941, verb loss : 0.335, verb SR loss : 0.380
+idx:  57 [41, 117, 60] [41, 117, 60]
+idx:  59 [41, 117, 60] [41, 117, 60]
+idx:  60 [41, 117, 60] [41, 117, 60]
+idx:  61 [41, 117, 60] [41, 117, 60]
+idx:  62 [41, 117, 60] [41, 117, 60]
+idx:  63 [41, 117, 60] [41, 117, 60]
+idx:  66 [41, 85] [41, 85]
+idx:  67 [41, 85] [41, 85]
+idx:  68 [41, 85] [41, 85]
+idx:  69 [41, 85] [41, 85]
+
+Object SR result:
+Accuracy: 11.40724946695096
+mR: 8.548293117532904
+mP: 3.8692910303826973
+F1: 4.940930397766985
+Value: 43.56846473029046
+Value-two: 0.8298755186721992
+value-all: 0.0
+role_based_accuracy: 11.93107624860395
+role_based_mP: 11.184154873525358
+role_based_mR: 5.694674095567586
+role_based_f1: 7.307022814424905
+
+Verb result:
+Accuracy: 29.045643153526974
+mR: 22.841668897083604
+mP: 13.77484522645813
+F1: 14.62757673127631
+
+Verb SR result:
+Accuracy: 53.032440056417485
+mR: 30.128980094453244
+mP: 35.31477028962895
+F1: 25.726573308774388
+Value: 29.045643153526974
+Value-two: 21.16182572614108
+value-all: 4.149377593360995
+role_based_accuracy: 13.520968797418895
+role_based_mP: 6.605505622411867
+role_based_mR: 12.725889362068223
+role_based_f1: 7.563692091459779
+avg epoch performance :  101.65975103734442
+****************************************************************************************************
+epoch : 29  batch : 0  learning rate : 0.0000, loss : 25.907, obj SR loss : 2.266, verb loss : 0.220, verb SR loss : 0.105
+epoch : 29  batch : 1  learning rate : 0.0000, loss : 29.557, obj SR loss : 2.055, verb loss : 0.539, verb SR loss : 0.361
+epoch : 29  batch : 2  learning rate : 0.0000, loss : 27.660, obj SR loss : 2.471, verb loss : 0.126, verb SR loss : 0.169
+epoch : 29  batch : 3  learning rate : 0.0000, loss : 20.391, obj SR loss : 1.354, verb loss : 0.581, verb SR loss : 0.104
+epoch : 29  batch : 4  learning rate : 0.0000, loss : 22.433, obj SR loss : 1.833, verb loss : 0.291, verb SR loss : 0.119
+epoch : 29  batch : 5  learning rate : 0.0000, loss : 21.746, obj SR loss : 1.529, verb loss : 0.439, verb SR loss : 0.206
+epoch : 29  batch : 6  learning rate : 0.0000, loss : 13.951, obj SR loss : 1.133, verb loss : 0.178, verb SR loss : 0.084
+epoch : 29  batch : 7  learning rate : 0.0000, loss : 25.268, obj SR loss : 1.853, verb loss : 0.291, verb SR loss : 0.383
+epoch : 29  batch : 8  learning rate : 0.0000, loss : 8.085, obj SR loss : 0.739, verb loss : 0.011, verb SR loss : 0.058
+epoch : 29  batch : 9  learning rate : 0.0000, loss : 13.236, obj SR loss : 0.845, verb loss : 0.194, verb SR loss : 0.284
+epoch : 29  batch : 10  learning rate : 0.0000, loss : 25.646, obj SR loss : 1.686, verb loss : 0.551, verb SR loss : 0.328
+epoch : 29  batch : 11  learning rate : 0.0000, loss : 18.012, obj SR loss : 1.486, verb loss : 0.124, verb SR loss : 0.191
+epoch : 29  batch : 12  learning rate : 0.0000, loss : 23.322, obj SR loss : 1.431, verb loss : 0.657, verb SR loss : 0.243
+epoch : 29  batch : 13  learning rate : 0.0000, loss : 18.869, obj SR loss : 1.423, verb loss : 0.299, verb SR loss : 0.165
+epoch : 29  batch : 14  learning rate : 0.0000, loss : 21.795, obj SR loss : 1.206, verb loss : 0.483, verb SR loss : 0.491
+epoch : 29  batch : 15  learning rate : 0.0000, loss : 31.088, obj SR loss : 2.574, verb loss : 0.180, verb SR loss : 0.356
+epoch : 29  batch : 16  learning rate : 0.0000, loss : 21.809, obj SR loss : 1.846, verb loss : 0.086, verb SR loss : 0.249
+epoch : 29  batch : 17  learning rate : 0.0000, loss : 21.610, obj SR loss : 1.884, verb loss : 0.184, verb SR loss : 0.093
+epoch : 29  batch : 18  learning rate : 0.0000, loss : 24.541, obj SR loss : 1.748, verb loss : 0.242, verb SR loss : 0.464
+epoch : 29  batch : 19  learning rate : 0.0000, loss : 29.490, obj SR loss : 2.069, verb loss : 0.598, verb SR loss : 0.283
+epoch : 29  batch : 20  learning rate : 0.0000, loss : 22.206, obj SR loss : 1.861, verb loss : 0.224, verb SR loss : 0.136
+epoch : 29  batch : 21  learning rate : 0.0000, loss : 25.929, obj SR loss : 2.195, verb loss : 0.270, verb SR loss : 0.127
+epoch : 29  batch : 22  learning rate : 0.0000, loss : 19.235, obj SR loss : 1.326, verb loss : 0.265, verb SR loss : 0.333
+epoch : 29  batch : 23  learning rate : 0.0000, loss : 16.124, obj SR loss : 1.462, verb loss : 0.010, verb SR loss : 0.140
+epoch : 29  batch : 24  learning rate : 0.0000, loss : 20.992, obj SR loss : 1.251, verb loss : 0.417, verb SR loss : 0.431
+epoch : 29  batch : 25  learning rate : 0.0000, loss : 22.088, obj SR loss : 1.713, verb loss : 0.288, verb SR loss : 0.208
+epoch : 29  batch : 26  learning rate : 0.0000, loss : 23.829, obj SR loss : 1.845, verb loss : 0.117, verb SR loss : 0.421
+epoch : 29  batch : 27  learning rate : 0.0000, loss : 27.953, obj SR loss : 1.648, verb loss : 0.864, verb SR loss : 0.283
+epoch : 29  batch : 28  learning rate : 0.0000, loss : 15.277, obj SR loss : 1.099, verb loss : 0.052, verb SR loss : 0.377
+epoch : 29  batch : 29  learning rate : 0.0000, loss : 26.020, obj SR loss : 1.913, verb loss : 0.307, verb SR loss : 0.383
+idx:  59 [41, 26] [41, 26]
+idx:  60 [41, 117, 60] [41, 117, 60]
+idx:  62 [41, 117, 60] [41, 117, 60]
+idx:  63 [41, 117, 60] [41, 117, 60]
+idx:  64 [41, 117, 60] [41, 117, 60]
+idx:  65 [41, 117, 60] [41, 117, 60]
+idx:  66 [41, 117, 60] [41, 117, 60]
+idx:  69 [41, 85] [41, 85]
+idx:  70 [41, 85] [41, 85]
+idx:  71 [41, 85] [41, 85]
+idx:  72 [41, 85] [41, 85]
+
+Object SR result:
+Accuracy: 11.620469083155651
+mR: 8.56104477930078
+mP: 3.893095376976115
+F1: 4.931496971649056
+Value: 45.22821576763486
+Value-two: 0.0
+value-all: 0.0
+role_based_accuracy: 6.559937474975551
+role_based_mP: 5.881738751685357
+role_based_mR: 3.0435281671107326
+role_based_f1: 3.7323774407122374
+
+Verb result:
+Accuracy: 30.29045643153527
+mR: 23.36250223041694
+mP: 14.33652003311446
+F1: 15.333245703616075
+
+Verb SR result:
+Accuracy: 52.468265162200275
+mR: 29.410431805572472
+mP: 35.52896339425206
+F1: 25.29487789087917
+Value: 30.29045643153527
+Value-two: 21.57676348547718
+value-all: 4.564315352697095
+role_based_accuracy: 13.142485518231188
+role_based_mP: 6.52232412866791
+role_based_mR: 12.542794895736073
+role_based_f1: 7.4787333608272615
+avg epoch performance :  105.8091286307054
+****************************************************************************************************
